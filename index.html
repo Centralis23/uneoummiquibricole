@@ -43,7 +43,7 @@
   }
 
   * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: 'Cormorant Garamond', Georgia, serif; overflow-x: hidden; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; overflow-x: hidden; }
   .stage { position: relative; width: 100%; min-height: 100vh; }
 
   /* ================= SITE (sous l'animation d'entrée) ================= */
@@ -52,11 +52,12 @@
     position: absolute; top: 0; left: 0; right: 0; z-index: 3;
     display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
     padding: 1.75rem clamp(1.25rem, 4vw, 3.5rem);
-    background: transparent; border-bottom: none; opacity: 0;
+    background: #FFFFFF; border-bottom: 1px solid var(--hairline); opacity: 0;
+    box-shadow: 0 6px 24px -18px rgba(0,0,0,0.3);
   }
-  .brand { font-family: 'Parisienne', cursive; font-size: 1.5rem; color: var(--gold-hi); text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
-  .pillars { display: flex; gap: clamp(1rem, 3vw, 2.25rem); list-style: none; margin: 0; padding: 0; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 85%, transparent); text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
-  .pillars li::before { content: '— '; color: var(--gold-hi); }
+  .brand { font-family: 'Parisienne', cursive; font-size: 1.5rem; color: var(--mauve-deep); }
+  .pillars { display: flex; gap: clamp(1rem, 3vw, 2.25rem); list-style: none; margin: 0; padding: 0; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg); }
+  .pillars li::before { content: '— '; color: var(--gold); }
   .cta-nav { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--espresso); background: var(--gold); border: none; padding: 0.65rem 1.25rem; border-radius: 999px; white-space: nowrap; }
 
   /* la photo ne porte que nav + titre + ligne, comme la référence — le reste passe en dessous, sur fond clair */
