@@ -75,14 +75,12 @@
   @keyframes compare-reveal { to { opacity: 1; } }
   .skip .hero-compare { opacity: 1 !important; animation: none !important; }
   .compare-before {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    background-image: url("salon-arche.jpg");
-    background-size: cover; background-repeat: no-repeat; background-position: center;
-    filter: grayscale(1) brightness(0.92);
+    position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden;
   }
+  .compare-before video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
   .compare-after {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    background-image: url("salon-arche.jpg");
+    background-image: url("chambre-photo.jpg");
     background-size: cover; background-repeat: no-repeat; background-position: center;
     clip-path: inset(0 0 0 var(--pos));
   }
@@ -284,7 +282,7 @@
 
     <div class="hero-main">
       <div class="hero-compare" id="heroCompare">
-        <div class="compare-before"></div>
+        <div class="compare-before"><video autoplay muted loop playsinline preload="auto"><source src="chambre-video.mp4" type="video/mp4"></video></div>
         <div class="compare-after"></div>
         <div class="compare-handle" id="compareHandle"></div>
       </div>
