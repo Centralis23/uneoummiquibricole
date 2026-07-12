@@ -76,14 +76,19 @@
   .skip .hero-compare { opacity: 1 !important; animation: none !important; }
   .compare-before {
     position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden;
-    background: linear-gradient(155deg, var(--paper) 0%, var(--sand) 45%, var(--mauve) 100%);
+    background-image: url("chambre-photo.jpg");
+    background-size: cover; background-repeat: no-repeat; background-position: center;
+    filter: grayscale(1) brightness(0.9);
+    animation: hero-breathe 14s ease-in-out infinite alternate;
   }
   .compare-after {
     position: absolute; inset: 0; width: 100%; height: 100%;
     background-image: url("chambre-photo.jpg");
     background-size: cover; background-repeat: no-repeat; background-position: center;
     clip-path: inset(0 0 0 var(--pos));
+    animation: hero-breathe 14s ease-in-out infinite alternate;
   }
+  @keyframes hero-breathe { from { transform: scale(1); } to { transform: scale(1.045); } }
   .compare-handle {
     position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 5;
     width: 3px; margin-left: -1.5px; background: var(--paper);
@@ -100,8 +105,9 @@
     background: linear-gradient(0deg, color-mix(in srgb, var(--espresso) 55%, transparent) 0%, color-mix(in srgb, var(--espresso) 8%, transparent) 55%, transparent 78%);
   }
   .hero-copy {
-    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 40rem;
-    padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 6vw, 5rem);
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 6vw, 5rem) clamp(3rem, 7vw, 5rem);
+    display: flex; flex-direction: column; align-items: center; text-align: center;
   }
   .hero-quote { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-weight: 400; font-size: clamp(1.05rem, 2vw, 1.3rem); color: var(--paper); margin: 0 0 0.9rem; opacity: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
   .run .hero-quote { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 5.65s forwards; }
@@ -112,8 +118,8 @@
   .hero-title .word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
   .hero-title .word > span { display: inline-block; transform: translateY(115%); }
   .hero-title em { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-weight: 400; color: var(--gold-hi); padding: 0 0.05em; }
-  .hero-rule { border: none; border-top: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); margin: 0; width: min(100%, 22rem); opacity: 0; }
-  .hero-actions-inline { display: flex; gap: 0.85rem; align-items: center; flex-wrap: wrap; margin-top: 1.5rem; opacity: 0; }
+  .hero-rule { border: none; border-top: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); margin: 0 auto; width: min(100%, 22rem); opacity: 0; }
+  .hero-actions-inline { display: flex; gap: 0.85rem; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; opacity: 0; }
   .btn-hero-primary { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--espresso); background: var(--gold); border: none; padding: 0.85rem 1.5rem; border-radius: 2px; cursor: pointer; }
   .btn-hero-ghost { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--paper); background: transparent; border: 1px solid color-mix(in srgb, var(--paper) 55%, transparent); padding: 0.85rem 1.5rem; border-radius: 2px; cursor: pointer; }
   .run .hero-actions-inline { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 6.25s forwards; }
