@@ -67,13 +67,18 @@
 
   /* la photo ne porte que nav + titre + ligne, comme la référence — le reste passe en dessous, sur fond clair */
   .hero-main { position: relative; flex: 1; min-height: 82vh; overflow: hidden; display: flex; }
-  .hero-banner-img {
+  .hero-banner-video { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; background: var(--espresso); }
+  .hero-banner-video video { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; }
+  .hero-banner-photo {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    background-image: url("oummi%20accueil.jpg");
+    background-image: url("salon-arche.jpg");
     background-size: cover; background-repeat: no-repeat; background-position: center top;
-    background-color: var(--sand);
-    transform: scale(1);
+    opacity: 0;
   }
+  .run .hero-banner-photo { animation: photo-reveal 1.3s ease 6.2s forwards; }
+  @keyframes photo-reveal { to { opacity: 1; } }
+  .skip .hero-banner-video { display: none; }
+  .skip .hero-banner-photo { opacity: 1 !important; animation: none !important; }
   .hero-banner-scrim {
     position: absolute; inset: 0;
     background: linear-gradient(0deg, color-mix(in srgb, var(--espresso) 55%, transparent) 0%, color-mix(in srgb, var(--espresso) 8%, transparent) 55%, transparent 78%);
@@ -115,7 +120,6 @@
 
   .run .nav          { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 5.65s forwards; }
   .run .eyebrow      { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 5.75s forwards; }
-  .run .hero-banner-img { animation: banner-settle 1.4s cubic-bezier(0.16, 1, 0.3, 1) 5.6s forwards, banner-breathe 9s ease-in-out 7s infinite alternate; }
   .run .hero-title .word:nth-of-type(1) > span { animation: line-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 5.85s forwards; }
   .run .hero-title .word:nth-of-type(2) > span { animation: line-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 5.94s forwards; }
   .run .hero-title .word:nth-of-type(3) > span { animation: line-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 6.03s forwards; }
@@ -197,7 +201,6 @@
   .skip .entrance { display: none; }
   .skip .nav, .skip .eyebrow, .skip .hero-sub, .skip .hero-actions, .skip .hero-rule { opacity: 1 !important; animation: none !important; }
   .skip .hero-title .word > span { transform: translateY(0) !important; animation: none !important; }
-  .skip .hero-banner-img { transform: scale(1) !important; animation: none !important; }
   .skip-btn {
     position: fixed; top: 1.25rem; right: 1.25rem; z-index: 200;
     font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
@@ -250,7 +253,10 @@
     </nav>
 
     <div class="hero-main">
-      <div class="hero-banner-img"></div>
+      <div class="hero-banner-video">
+        <video autoplay muted playsinline preload="auto"><source src="perceuse-applique.mp4" type="video/mp4"></video>
+      </div>
+      <div class="hero-banner-photo"></div>
       <div class="hero-banner-scrim"></div>
       <div class="hero-copy">
         <p class="eyebrow">Entreprise par des femmes, pour des femmes</p>
