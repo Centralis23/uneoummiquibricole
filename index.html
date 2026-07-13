@@ -93,10 +93,10 @@
   }
   .hero-banner-scrim {
     position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(0deg, color-mix(in srgb, var(--espresso) 88%, black) 0%, color-mix(in srgb, var(--espresso) 78%, transparent) 45%, color-mix(in srgb, var(--espresso) 40%, transparent) 75%, transparent 92%);
+    background: linear-gradient(0deg, color-mix(in srgb, var(--espresso) 60%, transparent) 0%, color-mix(in srgb, var(--espresso) 42%, transparent) 45%, color-mix(in srgb, var(--espresso) 16%, transparent) 75%, transparent 90%);
   }
   .hero-copy {
-    position: absolute; inset: 0; z-index: 2;
+    position: absolute; inset: 0; z-index: 6;
     padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 6vw, 5rem);
     display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   }
@@ -577,9 +577,10 @@
   });
 
   replay.addEventListener('click', function () {
-    stage.classList.remove('run', 'skip');
+    stage.classList.remove('run', 'skip', 'controls-hidden');
     void stage.offsetWidth;
     stage.classList.add('run');
+    setTimeout(hideIntroControls, 7500);
   });
 
   var skipBtn = document.getElementById('skipBtn');
@@ -587,11 +588,13 @@
     stage.classList.add('skip');
   });
 
-  function toggleControlsOnScroll() {
-    stage.classList.toggle('controls-hidden', window.scrollY > 80);
+  function hideIntroControls() {
+    stage.classList.add('controls-hidden');
   }
-  window.addEventListener('scroll', toggleControlsOnScroll, { passive: true });
-  toggleControlsOnScroll();
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 80) hideIntroControls();
+  }, { passive: true });
+  setTimeout(hideIntroControls, 7500);
 
 </script>
 </body>
