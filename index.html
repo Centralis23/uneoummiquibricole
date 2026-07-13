@@ -70,19 +70,24 @@
   .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; }
   .hero-split {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    display: flex; opacity: 0;
+    display: flex; opacity: 1;
   }
-  .run .hero-split { animation: compare-reveal 1s ease 5.8s forwards; }
-  @keyframes compare-reveal { to { opacity: 1; } }
-  .skip .hero-split { opacity: 1 !important; animation: none !important; }
   .hero-split-panel {
     position: relative; flex: 1 1 50%; overflow: hidden;
     background-size: cover; background-repeat: no-repeat; background-position: center;
   }
+  .hero-split-panel:nth-child(1) { transform: translateX(-100%); }
+  .hero-split-panel:nth-child(2) { transform: translateX(100%); }
+  .run .hero-split-panel:nth-child(1) { animation: slide-in-left 1.15s cubic-bezier(0.16, 1, 0.3, 1) 5.55s forwards; }
+  .run .hero-split-panel:nth-child(2) { animation: slide-in-right 1.15s cubic-bezier(0.16, 1, 0.3, 1) 5.55s forwards; }
+  @keyframes slide-in-left { to { transform: translateX(0); } }
+  @keyframes slide-in-right { to { transform: translateX(0); } }
+  .skip .hero-split-panel { transform: translateX(0) !important; animation: none !important; }
   .hero-split-panel img {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
     animation: hero-breathe 14s ease-in-out infinite alternate;
   }
+  .hero-split-panel:nth-child(2) img { filter: brightness(1.22) saturate(1.05); }
   @keyframes hero-breathe { from { transform: scale(1); } to { transform: scale(1.045); } }
   .hero-split-divider {
     position: absolute; top: 0; bottom: 0; left: 50%; z-index: 5;
@@ -297,8 +302,8 @@
         </h1>
         <hr class="hero-rule" />
         <div class="hero-actions-inline">
-          <button class="btn-hero-primary">Devis gratuit</button>
-          <button class="btn-hero-ghost">Découvrir nos univers</button>
+          <button class="btn-hero-primary">Devis personnalisé</button>
+          <button class="btn-hero-ghost">Découvrir nos prestations</button>
         </div>
       </div>
     </div>
