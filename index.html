@@ -67,38 +67,25 @@
 
   /* la photo ne porte que nav + titre + ligne, comme la référence — le reste passe en dessous, sur fond clair */
   .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; }
-  .hero-compare {
+  .hero-split {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    overflow: hidden; opacity: 0; --pos: 50%;
+    display: flex; opacity: 0;
   }
-  .run .hero-compare { animation: compare-reveal 1s ease 5.8s forwards; }
+  .run .hero-split { animation: compare-reveal 1s ease 5.8s forwards; }
   @keyframes compare-reveal { to { opacity: 1; } }
-  .skip .hero-compare { opacity: 1 !important; animation: none !important; }
-  .compare-before {
-    position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden;
-    background-image: url("chambre-photo.jpg");
+  .skip .hero-split { opacity: 1 !important; animation: none !important; }
+  .hero-split-panel {
+    position: relative; flex: 1 1 50%; overflow: hidden;
     background-size: cover; background-repeat: no-repeat; background-position: center;
-    filter: grayscale(1) brightness(0.9);
-    animation: hero-breathe 14s ease-in-out infinite alternate;
   }
-  .compare-after {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    background-image: url("chambre-photo.jpg");
-    background-size: cover; background-repeat: no-repeat; background-position: center;
-    clip-path: inset(0 0 0 var(--pos));
+  .hero-split-panel img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
     animation: hero-breathe 14s ease-in-out infinite alternate;
   }
   @keyframes hero-breathe { from { transform: scale(1); } to { transform: scale(1.045); } }
-  .compare-handle {
-    position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 5;
-    width: 3px; margin-left: -1.5px; background: var(--paper);
-    cursor: ew-resize; touch-action: none;
-  }
-  .compare-handle::after {
-    content: '↔'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--paper);
-    color: var(--espresso); display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; box-shadow: 0 0.6rem 1.4rem -0.6rem rgba(0,0,0,0.45);
+  .hero-split-divider {
+    position: absolute; top: 0; bottom: 0; left: 50%; z-index: 5;
+    width: 1px; margin-left: -0.5px; background: color-mix(in srgb, var(--paper) 55%, transparent);
   }
   .hero-banner-scrim {
     position: absolute; inset: 0; z-index: 1;
@@ -294,10 +281,10 @@
     </nav>
 
     <div class="hero-main">
-      <div class="hero-compare" id="heroCompare">
-        <div class="compare-before"></div>
-        <div class="compare-after"></div>
-        <div class="compare-handle" id="compareHandle"></div>
+      <div class="hero-split">
+        <div class="hero-split-panel"><img src="peinture-photo.jpg" alt="Matériel de peinture" /></div>
+        <div class="hero-split-panel"><img src="salon-photo.jpg" alt="Salon rénové" /></div>
+        <div class="hero-split-divider"></div>
       </div>
       <div class="hero-banner-scrim"></div>
       <div class="hero-copy">
@@ -594,30 +581,6 @@
     stage.classList.add('skip');
   });
 
-  var heroCompare = document.getElementById('heroCompare');
-  var compareHandle = document.getElementById('compareHandle');
-  var compareDragging = false;
-
-  function setComparePos(clientX) {
-    var rect = heroCompare.getBoundingClientRect();
-    var pct = ((clientX - rect.left) / rect.width) * 100;
-    pct = Math.max(0, Math.min(100, pct));
-    heroCompare.style.setProperty('--pos', pct + '%');
-  }
-
-  compareHandle.addEventListener('pointerdown', function (e) {
-    compareDragging = true;
-    compareHandle.setPointerCapture(e.pointerId);
-  });
-  compareHandle.addEventListener('pointermove', function (e) {
-    if (compareDragging) setComparePos(e.clientX);
-  });
-  compareHandle.addEventListener('pointerup', function () { compareDragging = false; });
-  heroCompare.addEventListener('pointerdown', function (e) {
-    setComparePos(e.clientX);
-    compareDragging = true;
-    compareHandle.setPointerCapture(e.pointerId);
-  });
 </script>
 </body>
 </html>
