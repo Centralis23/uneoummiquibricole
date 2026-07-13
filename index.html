@@ -85,10 +85,8 @@
   .skip .hero-split-panel { transform: translateX(0) !important; animation: none !important; }
   .hero-split-panel img {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-    animation: hero-breathe 14s ease-in-out infinite alternate;
   }
   .hero-split-panel:nth-child(2) img { filter: brightness(1.22) saturate(1.05); }
-  @keyframes hero-breathe { from { transform: scale(1); } to { transform: scale(1.045); } }
   .hero-split-divider {
     position: absolute; top: 0; bottom: 0; left: 50%; z-index: 5;
     width: 1px; margin-left: -0.5px; background: color-mix(in srgb, var(--paper) 55%, transparent);
