@@ -102,15 +102,15 @@
     padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 6vw, 5rem);
     display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   }
-  .hero-quote { font-family: 'Cormorant Garamond', ui-sans-serif, system-ui, sans-serif; font-style: italic; font-weight: 400; font-size: clamp(1.05rem, 2vw, 1.3rem); color: var(--paper); margin: 0 0 0.9rem; opacity: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+  .hero-quote { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-weight: 400; font-size: clamp(1.05rem, 2vw, 1.3rem); color: var(--paper); margin: 0 0 0.9rem; opacity: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
   .run .hero-quote { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 5.65s forwards; }
   .skip .hero-quote { opacity: 1 !important; animation: none !important; }
   .eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper); margin: 0 0 1rem; opacity: 0; text-shadow: 0 1px 3px rgba(0,0,0,0.75), 0 2px 12px rgba(0,0,0,0.5); }
-  .hero-title { font-family: 'Cormorant Garamond', ui-sans-serif, system-ui, sans-serif; font-size: clamp(2.5rem, 5.8vw, 4.4rem); line-height: 1.04; margin: 0 0 1.5rem; font-weight: 600; color: var(--paper); text-shadow: 0 4px 22px rgba(0,0,0,0.35); }
+  .hero-title { font-family: ui-sans-serif, system-ui, sans-serif; font-size: clamp(2.5rem, 5.8vw, 4.4rem); line-height: 1.04; margin: 0 0 1.5rem; font-weight: 500; color: var(--paper); text-shadow: 0 4px 22px rgba(0,0,0,0.35); }
   .hero-title .line { display: block; }
   .hero-title .word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
   .hero-title .word > span { display: inline-block; transform: translateY(115%); }
-  .hero-title em { font-family: 'Cormorant Garamond', ui-sans-serif, system-ui, sans-serif; font-style: italic; font-weight: 500; color: var(--gold-hi); padding: 0 0.05em; }
+  .hero-title em { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-weight: 400; color: var(--gold-hi); padding: 0 0.05em; }
   .hero-rule { border: none; border-top: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); margin: 0 auto; width: min(100%, 22rem); opacity: 0; }
   .hero-actions-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; align-items: center; width: min(100%, 30rem); margin: 1.5rem auto 0; opacity: 0; }
   .hero-actions-inline .btn-hero-primary { justify-self: end; }
@@ -151,7 +151,7 @@
     display: flex; flex-direction: column; gap: 0.6rem;
   }
   .univers-panel-name {
-    font-family: 'Cormorant Garamond', ui-sans-serif, system-ui, sans-serif; font-weight: 600; color: var(--paper);
+    font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 500; color: var(--paper);
     font-size: 1.4rem; white-space: nowrap; width: fit-content;
     writing-mode: vertical-rl; transform: rotate(180deg);
   }
@@ -310,8 +310,8 @@
     .hero-quote { font-size: 0.85rem; }
     .eyebrow { font-size: 0.6rem; }
     .hero-title { font-size: clamp(1.4rem, 6.5vw, 2rem); }
-    .hero-actions-inline { grid-template-columns: 1fr; width: 100%; max-width: 16rem; gap: 0.5rem; }
-    .hero-actions-inline .btn-hero-primary, .hero-actions-inline .btn-hero-ghost { justify-self: stretch; text-align: center; padding: 0.65rem 0.9rem; font-size: 0.7rem; }
+    .hero-actions-inline { grid-template-columns: 1fr 1fr; width: 100%; max-width: 18rem; gap: 0.6rem; }
+    .hero-actions-inline .btn-hero-primary, .hero-actions-inline .btn-hero-ghost { justify-self: stretch; text-align: center; padding: 0.7rem 0.5rem; font-size: 0.72rem; }
 
     .univers { padding: 0.5rem 1.1rem 2.5rem; }
     .univers-accordion { flex-direction: column; height: auto; gap: 0.6rem; }
@@ -358,10 +358,9 @@
           <span class="line"><span class="word"><span>L'art</span></span> <span class="word"><span>de</span></span> <span class="word"><span>transformer</span></span></span>
           <span class="line"><span class="word"><span>chaque</span></span> <span class="word"><span><em>intérieur.</em></span></span></span>
         </h1>
-        <hr class="hero-rule" />
         <div class="hero-actions-inline">
-          <button class="btn-hero-primary">Devis personnalisé</button>
-          <button class="btn-hero-ghost">Nos prestations</button>
+          <button class="btn-hero-primary">Devis</button>
+          <button class="btn-hero-ghost">Prestation</button>
         </div>
       </div>
     </div>
