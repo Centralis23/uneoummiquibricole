@@ -124,6 +124,30 @@
   .btn-primary { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); border: none; padding: 0.95rem 1.75rem; border-radius: 2px; cursor: pointer; }
   .btn-ghost { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg); background: transparent; border: 1px solid var(--hairline); padding: 0.95rem 1.75rem; border-radius: 2px; cursor: pointer; }
 
+  .univers { position: relative; padding: clamp(1rem, 3vw, 2rem) clamp(1.25rem, 6vw, 5rem) clamp(3rem, 6vw, 5rem); }
+  .univers-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-muted); margin: 0 0 1.5rem; }
+  .univers-list { display: flex; flex-direction: column; }
+  .univers-row {
+    display: flex; align-items: baseline; gap: 1.5rem; padding: 1.6rem 0;
+    border-top: 1px solid var(--hairline); text-decoration: none; color: var(--fg);
+    transition: opacity 0.35s ease;
+  }
+  .univers-row:last-child { border-bottom: 1px solid var(--hairline); }
+  .univers-list:hover .univers-row { opacity: 0.32; }
+  .univers-list:hover .univers-row:hover, .univers-list .univers-row:focus-visible { opacity: 1; }
+  .univers-index { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; color: var(--gold); min-width: 2.5rem; }
+  .univers-name { font-family: ui-sans-serif, system-ui, sans-serif; font-size: clamp(2rem, 5.5vw, 3.75rem); font-weight: 500; }
+  .univers-desc { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.92rem; line-height: 1.5; color: var(--fg-muted); max-width: 20rem; margin-left: auto; text-align: right; }
+  .univers-preview {
+    position: fixed; top: 0; left: 0; width: 13rem; aspect-ratio: 4 / 5; z-index: 250;
+    pointer-events: none; overflow: hidden; border-radius: 4px;
+    box-shadow: 0 1.5rem 3rem -1rem color-mix(in srgb, var(--espresso) 45%, transparent);
+    opacity: 0; transform: translate(-50%, -50%) scale(0.92);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .univers-preview.is-visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .univers-preview .card { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
+
   .gallery { padding: 0 clamp(1.25rem, 6vw, 5rem) 2.5rem; }
   .gallery-credit { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); margin: 0 0 0.6rem; }
   .gallery-label { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--fg-muted); margin: 0 0 1rem; }
@@ -268,6 +292,13 @@
     .hero-content { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
     .hero-sub { font-size: 0.95rem; max-width: none; }
 
+    .univers { padding: 0.5rem 1.1rem 2.5rem; }
+    .univers-row { flex-wrap: wrap; gap: 0.35rem 1rem; padding: 1.25rem 0; }
+    .univers-name { font-size: 2.1rem; }
+    .univers-desc { margin-left: 0; max-width: none; text-align: left; flex-basis: 100%; }
+    .univers-list:hover .univers-row { opacity: 1; }
+    .univers-preview { display: none; }
+
     .gallery { padding: 0 1.1rem 2rem; }
     .gallery-row { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
 
@@ -317,10 +348,37 @@
     <div class="hero-content">
       <p class="hero-sub">L'excellence au féminin&nbsp;: des travaux de bricolage aux finitions déco, chaque chantier est pensé et mené par des mains expertes. Quatre univers, une même exigence.</p>
       <div class="hero-actions">
-        <button class="btn-primary">Découvrir nos univers</button>
+        <button class="btn-primary" id="btnUnivers">Découvrir nos univers</button>
         <button class="btn-ghost">Nos réalisations</button>
       </div>
     </div>
+
+    <section class="univers" id="univers">
+      <p class="univers-eyebrow">Nos univers</p>
+      <div class="univers-list">
+        <a class="univers-row" href="#" data-img="p-a">
+          <span class="univers-index">01</span>
+          <span class="univers-name">BTP</span>
+          <span class="univers-desc">Rénovation, plomberie, électricité&nbsp;: les travaux structurants menés avec précision.</span>
+        </a>
+        <a class="univers-row" href="#" data-img="p-b">
+          <span class="univers-index">02</span>
+          <span class="univers-name">Déco</span>
+          <span class="univers-desc">Peinture, papier peint, agencement&nbsp;: donnez du caractère à chaque pièce.</span>
+        </a>
+        <a class="univers-row" href="#" data-img="p-c">
+          <span class="univers-index">03</span>
+          <span class="univers-name">Atelier</span>
+          <span class="univers-desc">Petits travaux, meubles sur-mesure, finitions soignées, fait main.</span>
+        </a>
+        <a class="univers-row" href="#" data-img="p-d">
+          <span class="univers-index">04</span>
+          <span class="univers-name">Associatif</span>
+          <span class="univers-desc">Des ateliers solidaires pour transmettre le savoir-faire aux femmes qui se lancent.</span>
+        </a>
+      </div>
+      <div class="univers-preview" id="universPreview"><div class="card"></div></div>
+    </section>
 
     <div class="gallery">
       <p class="gallery-credit">Salon — rénovation complète · Déco</p>
@@ -592,6 +650,37 @@
   skipBtn.addEventListener('click', function () {
     stage.classList.add('skip');
   });
+
+  var btnUnivers = document.getElementById('btnUnivers');
+  if (btnUnivers) {
+    btnUnivers.addEventListener('click', function () {
+      document.getElementById('univers').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  var universList = document.querySelector('.univers-list');
+  var universPreview = document.getElementById('universPreview');
+  if (universList && universPreview) {
+    var universCard = universPreview.querySelector('.card');
+    var universCurrentImg = null;
+    universList.addEventListener('mousemove', function (e) {
+      universPreview.style.left = e.clientX + 'px';
+      universPreview.style.top = e.clientY + 'px';
+    });
+    universList.querySelectorAll('.univers-row').forEach(function (row) {
+      row.addEventListener('mouseenter', function () {
+        var imgClass = row.getAttribute('data-img');
+        if (imgClass !== universCurrentImg) {
+          universCard.className = 'card ' + imgClass;
+          universCurrentImg = imgClass;
+        }
+        universPreview.classList.add('is-visible');
+      });
+      row.addEventListener('mouseleave', function () {
+        universPreview.classList.remove('is-visible');
+      });
+    });
+  }
 
   function hideIntroControls() {
     stage.classList.add('controls-hidden');
