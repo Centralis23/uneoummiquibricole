@@ -132,8 +132,15 @@
     position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; border-radius: 6px;
     border: none; padding: 0; margin: 0; cursor: pointer; background: var(--sand); text-align: left;
     transition: flex-grow 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
   }
   .univers-panel.is-active { flex-grow: 5; }
+  @keyframes univers-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  .univers-accordion.in-view .univers-panel { animation: univers-rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .univers-accordion.in-view .univers-panel:nth-child(1) { animation-delay: 0s; }
+  .univers-accordion.in-view .univers-panel:nth-child(2) { animation-delay: 0.1s; }
+  .univers-accordion.in-view .univers-panel:nth-child(3) { animation-delay: 0.2s; }
+  .univers-accordion.in-view .univers-panel:nth-child(4) { animation-delay: 0.3s; }
   .univers-panel-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
   .univers-panel-scrim {
     position: absolute; inset: 0;
@@ -674,6 +681,21 @@
       panel.classList.add('is-active');
     });
   });
+
+  var universAccordion = document.querySelector('.univers-accordion');
+  if (universAccordion && 'IntersectionObserver' in window) {
+    var universObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          universAccordion.classList.add('in-view');
+          universObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    universObserver.observe(universAccordion);
+  } else if (universAccordion) {
+    universAccordion.classList.add('in-view');
+  }
 
   function hideIntroControls() {
     stage.classList.add('controls-hidden');
