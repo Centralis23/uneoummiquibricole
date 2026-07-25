@@ -68,37 +68,15 @@
 
   /* la photo ne porte que nav + titre + ligne, comme la référence — le reste passe en dessous, sur fond clair */
   .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; }
-  .hero-split {
+  .hero-laptop {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    display: flex; opacity: 1;
+    opacity: 0; transform: scale(1.04); transition: none;
   }
-  .hero-split-panel {
-    position: relative; flex: 1 1 50%; overflow: hidden;
-    background-size: cover; background-repeat: no-repeat; background-position: center;
-  }
-  .hero-split-panel:nth-child(1) {
-    clip-path: polygon(0% 0%, 4% 0%, 0% 10%, 6% 20%, 0% 30%, 5% 40%, 0% 50%, 6% 60%, 0% 70%, 5% 80%, 0% 90%, 4% 100%, 0% 100%);
-  }
-  .hero-split-panel:nth-child(2) {
-    clip-path: polygon(100% 0%, 96% 0%, 100% 10%, 94% 20%, 100% 30%, 95% 40%, 100% 50%, 94% 60%, 100% 70%, 95% 80%, 100% 90%, 96% 100%, 100% 100%);
-  }
-  .run .hero-split-panel:nth-child(1) { animation: brush-reveal-l 1.3s cubic-bezier(0.65, 0, 0.35, 1) 5.4s forwards; }
-  .run .hero-split-panel:nth-child(2) { animation: brush-reveal-r 1.3s cubic-bezier(0.65, 0, 0.35, 1) 5.4s forwards; }
-  @keyframes brush-reveal-l {
-    to { clip-path: polygon(0% 0%, 100% 0%, 100% 10%, 100% 20%, 100% 30%, 100% 40%, 100% 50%, 100% 60%, 100% 70%, 100% 80%, 100% 90%, 100% 100%, 0% 100%); }
-  }
-  @keyframes brush-reveal-r {
-    to { clip-path: polygon(100% 0%, 0% 0%, 0% 10%, 0% 20%, 0% 30%, 0% 40%, 0% 50%, 0% 60%, 0% 70%, 0% 80%, 0% 90%, 0% 100%, 100% 100%); }
-  }
-  .skip .hero-split-panel:nth-child(1) { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%) !important; animation: none !important; }
-  .skip .hero-split-panel:nth-child(2) { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%) !important; animation: none !important; }
-  .hero-split-panel img {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  }
-  .hero-split-panel:nth-child(2) img { filter: brightness(1.22) saturate(1.05); }
-  .hero-split-divider {
-    position: absolute; top: 0; bottom: 0; left: 50%; z-index: 5;
-    width: 1px; margin-left: -0.5px; background: color-mix(in srgb, var(--paper) 55%, transparent);
+  .run .hero-laptop { animation: laptop-in 1.3s cubic-bezier(0.16, 1, 0.3, 1) 5.4s forwards; }
+  .skip .hero-laptop { opacity: 1 !important; transform: scale(1) !important; animation: none !important; }
+  @keyframes laptop-in { to { opacity: 1; transform: scale(1); } }
+  .hero-laptop img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
   }
   .hero-banner-scrim {
     position: absolute; inset: 0; z-index: 1;
@@ -352,10 +330,8 @@
     </nav>
 
     <div class="hero-main">
-      <div class="hero-split">
-        <div class="hero-split-panel"><img src="peinture-photo.jpg" alt="Matériel de peinture" /></div>
-        <div class="hero-split-panel"><img src="chambre-photo.jpg" alt="Alcôve chambre" /></div>
-        <div class="hero-split-divider"></div>
+      <div class="hero-laptop">
+        <img src="laptop-hero.jpg" alt="Ordinateur portable présentant nos réalisations : salon rénové et chambre alcôve" />
       </div>
       <div class="hero-banner-scrim"></div>
       <div class="hero-copy">
