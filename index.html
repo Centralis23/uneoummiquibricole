@@ -67,7 +67,7 @@
   .cta-nav { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--espresso); background: var(--gold); border: none; padding: 0.65rem 1.25rem; border-radius: 2px; white-space: nowrap; }
 
   /* la photo ne porte que nav + titre + ligne, comme la référence — le reste passe en dessous, sur fond clair */
-  .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; }
+  .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; background: var(--sand); }
   .hero-laptop {
     position: absolute; inset: 0; width: 100%; height: 100%;
     opacity: 0; transform: scale(1.04); transition: none;
@@ -76,7 +76,7 @@
   .skip .hero-laptop { opacity: 1 !important; transform: scale(1) !important; animation: none !important; }
   @keyframes laptop-in { to { opacity: 1; transform: scale(1); } }
   .hero-laptop img {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center center;
   }
   .hero-banner-scrim {
     position: absolute; inset: 0; z-index: 1;
