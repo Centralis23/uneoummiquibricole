@@ -67,11 +67,11 @@
   .cta-nav { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--espresso); background: var(--gold); border: none; padding: 0.65rem 1.25rem; border-radius: 2px; white-space: nowrap; }
 
   /* glissière avant / après */
-  .hero-main { position: relative; width: 100%; height: clamp(22rem, 52vw, 36rem); overflow: hidden; background: var(--sand); }
+  .hero-main { position: relative; width: 100%; height: clamp(26rem, 62vw, 44rem); overflow: hidden; background: var(--sand); }
   .ba-slider { position: absolute; inset: 0; cursor: ew-resize; user-select: none; }
   .ba-img { position: absolute; inset: 0; overflow: hidden; }
-  .ba-img img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
-  .ba-before img { filter: grayscale(1); }
+  .ba-img img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
+  .ba-photo-avant { filter: grayscale(1); }
   .ba-after { clip-path: inset(0 50% 0 0); }
   .ba-label {
     position: absolute; bottom: 1.5rem; z-index: 4; pointer-events: none; font-family: ui-sans-serif, system-ui, sans-serif;
@@ -79,8 +79,8 @@
     background: color-mix(in srgb, var(--espresso) 55%, transparent); backdrop-filter: blur(4px);
     padding: 0.55rem 1rem; border-radius: 2px;
   }
-  .ba-label-before { right: 1.5rem; }
-  .ba-label-after { left: 1.5rem; }
+  .ba-label-before { left: 1.5rem; }
+  .ba-label-after { right: 1.5rem; }
   .ba-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 0; z-index: 5; pointer-events: none; }
   .ba-handle::before { content: ''; position: absolute; top: 0; bottom: 0; left: -1px; width: 2px; background: var(--paper); box-shadow: 0 0 12px rgba(0,0,0,0.3); }
   .ba-handle-grip {
@@ -340,10 +340,10 @@
     <div class="hero-main">
       <div class="ba-slider" id="baSlider">
         <div class="ba-img ba-before">
-          <img src="chambre-avant.jpg" alt="Avant rénovation" />
+          <img src="chambre-apres.jpg" class="ba-photo-apres" alt="Après rénovation" />
         </div>
         <div class="ba-img ba-after" id="baAfter">
-          <img src="chambre-apres.jpg" alt="Après rénovation" />
+          <img src="chambre-avant.jpg" class="ba-photo-avant" alt="Avant rénovation" />
         </div>
         <span class="ba-label ba-label-before">Avant</span>
         <span class="ba-label ba-label-after">Après</span>
