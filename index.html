@@ -66,31 +66,34 @@
   .pillars li::before { content: '— '; color: var(--gold); }
   .cta-nav { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--espresso); background: var(--gold); border: none; padding: 0.65rem 1.25rem; border-radius: 2px; white-space: nowrap; }
 
-  /* collage de photos inclinées façon "posées sur une table", inspiré d'une référence Awwwards */
-  .hero-main { position: relative; width: 100%; height: clamp(24rem, 48vw, 34rem); overflow: hidden; background: var(--cream); }
-  .hero-collage { position: relative; width: min(100%, 64rem); height: 100%; margin: 0 auto; }
-  .collage-card {
-    position: absolute; border-radius: 6px; overflow: hidden; aspect-ratio: 3 / 4;
-    box-shadow: 0 1.75rem 3rem -1rem rgba(0,0,0,0.28), 0 0.3rem 0.7rem -0.2rem rgba(0,0,0,0.12);
-    opacity: 0; transform: rotate(var(--r)) scale(0.88);
+  /* glissière avant / après */
+  .hero-main { position: relative; width: 100%; height: clamp(22rem, 52vw, 36rem); overflow: hidden; background: var(--sand); }
+  .ba-slider { position: absolute; inset: 0; cursor: ew-resize; user-select: none; }
+  .ba-img { position: absolute; inset: 0; overflow: hidden; }
+  .ba-img img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+  .ba-before img { filter: grayscale(0.9) brightness(0.66) contrast(1.05); }
+  .ba-after { clip-path: inset(0 50% 0 0); }
+  .ba-label {
+    position: absolute; bottom: 1.5rem; z-index: 4; pointer-events: none; font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper);
+    background: color-mix(in srgb, var(--espresso) 55%, transparent); backdrop-filter: blur(4px);
+    padding: 0.55rem 1rem; border-radius: 2px;
   }
-  .run .collage-card { animation: collage-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .skip .collage-card { opacity: 1 !important; transform: rotate(var(--r)) scale(1) !important; animation: none !important; }
-  .run .collage-card:nth-of-type(1) { animation-delay: 5.4s; }
-  .run .collage-card:nth-of-type(2) { animation-delay: 5.52s; }
-  .run .collage-card:nth-of-type(3) { animation-delay: 5.64s; }
-  .run .collage-card:nth-of-type(4) { animation-delay: 5.76s; }
-  .run .collage-card:nth-of-type(5) { animation-delay: 5.88s; }
-  .run .collage-card:nth-of-type(6) { animation-delay: 6.0s; }
-  @keyframes collage-in { to { opacity: 1; transform: rotate(var(--r)) scale(1); } }
-  .collage-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .collage-accent { display: block; width: 100%; height: 100%; background-size: cover; background-position: center; }
-  .card-brand {
-    background: var(--espresso); color: var(--paper);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 1rem;
+  .ba-label-before { right: 1.5rem; }
+  .ba-label-after { left: 1.5rem; }
+  .ba-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 0; z-index: 5; pointer-events: none; }
+  .ba-handle::before { content: ''; position: absolute; top: 0; bottom: 0; left: -1px; width: 2px; background: var(--paper); box-shadow: 0 0 12px rgba(0,0,0,0.3); }
+  .ba-handle-grip {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 3rem; height: 3rem; border-radius: 50%; background: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0.6rem 1.4rem -0.4rem rgba(0,0,0,0.45);
+    font-size: 1.1rem; color: var(--espresso); pointer-events: auto; cursor: ew-resize;
   }
-  .brand-word { font-family: ui-sans-serif, system-ui, sans-serif; font-size: clamp(1.4rem, 2.6vw, 2.1rem); font-weight: 800; line-height: 1.05; margin: 0; }
-  .brand-sub { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-size: 0.85rem; color: var(--gold-hi); margin: 0.5rem 0 0; }
+  .ba-slider, .ba-handle-grip { opacity: 0; }
+  .skip .ba-slider, .skip .ba-handle-grip { opacity: 1 !important; animation: none !important; }
+  .run .ba-slider { animation: rise-in 0.7s ease-out 5.4s forwards; }
+  .run .ba-handle-grip { animation: rise-in 0.7s ease-out 5.7s forwards; }
   .hero-copy {
     padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(3rem, 6vw, 4rem);
     display: flex; flex-direction: column; align-items: flex-start; text-align: left;
@@ -335,25 +338,17 @@
     </nav>
 
     <div class="hero-main">
-      <div class="hero-collage">
-        <div class="collage-card card-brand" style="--r:-6deg; top:6%; left:4%; width:30%; z-index:5;">
-          <p class="brand-word">Une<br>Oummi</p>
-          <p class="brand-sub">qui bricole</p>
+      <div class="ba-slider" id="baSlider">
+        <div class="ba-img ba-before">
+          <img src="salon-photo.jpg" alt="Avant rénovation" />
         </div>
-        <div class="collage-card" style="--r:7deg; top:2%; left:34%; width:28%; z-index:4;">
-          <img src="peinture-photo.jpg" alt="Matériel de peinture" />
+        <div class="ba-img ba-after" id="baAfter">
+          <img src="salon-photo.jpg" alt="Après rénovation" />
         </div>
-        <div class="collage-card" style="--r:-4deg; top:28%; left:60%; width:32%; z-index:3;">
-          <img src="chambre-photo.jpg" alt="Alcôve chambre" />
-        </div>
-        <div class="collage-card" style="--r:4deg; top:40%; left:6%; width:30%; z-index:2;">
-          <img src="salon-photo.jpg" alt="Salon rénové" />
-        </div>
-        <div class="collage-card small" style="--r:-11deg; top:0%; left:66%; width:16%; z-index:1;">
-          <span class="collage-accent p-a"></span>
-        </div>
-        <div class="collage-card small" style="--r:10deg; top:66%; left:36%; width:17%; z-index:1;">
-          <span class="collage-accent p-b"></span>
+        <span class="ba-label ba-label-before">Avant</span>
+        <span class="ba-label ba-label-after">Après</span>
+        <div class="ba-handle" id="baHandle">
+          <span class="ba-handle-grip">↔</span>
         </div>
       </div>
     </div>
@@ -687,6 +682,31 @@
       panel.classList.add('is-active');
     });
   });
+
+  var baSlider = document.getElementById('baSlider');
+  var baAfter = document.getElementById('baAfter');
+  var baHandle = document.getElementById('baHandle');
+  if (baSlider && baAfter && baHandle) {
+    var baDragging = false;
+    function setBaPosition(clientX) {
+      var rect = baSlider.getBoundingClientRect();
+      var pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      baAfter.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+      baHandle.style.left = pct + '%';
+    }
+    baSlider.addEventListener('pointerdown', function (e) {
+      baDragging = true;
+      setBaPosition(e.clientX);
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (baDragging) setBaPosition(e.clientX);
+    });
+    window.addEventListener('pointerup', function () { baDragging = false; });
+    baSlider.addEventListener('touchmove', function (e) {
+      if (e.touches && e.touches[0]) setBaPosition(e.touches[0].clientX);
+    }, { passive: true });
+  }
 
   var universAccordion = document.querySelector('.univers-accordion');
   if (universAccordion && 'IntersectionObserver' in window) {
