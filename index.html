@@ -66,52 +66,33 @@
   .pillars li::before { content: '— '; color: var(--gold); }
   .cta-nav { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--espresso); background: var(--gold); border: none; padding: 0.65rem 1.25rem; border-radius: 2px; white-space: nowrap; }
 
-  /* glissière avant / après */
-  .hero-main { position: relative; width: 100%; height: clamp(20rem, 42vw, 30rem); overflow: hidden; background: var(--sand); }
-  .ba-slider { position: absolute; inset: 0; cursor: ew-resize; user-select: none; }
-  .ba-img { position: absolute; inset: 0; overflow: hidden; }
-  .ba-img img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; pointer-events: none; }
-  .ba-photo-avant { filter: grayscale(1); }
-  .ba-after { clip-path: inset(0 50% 0 0); }
-  .ba-label {
-    position: absolute; bottom: 1.5rem; z-index: 4; pointer-events: none; font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper);
-    background: color-mix(in srgb, var(--espresso) 55%, transparent); backdrop-filter: blur(4px);
-    padding: 0.55rem 1rem; border-radius: 2px;
+  /* vidéo de fond en bannière, texte centré par-dessus */
+  .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; background: var(--espresso); }
+  .hero-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: none; }
+  .run .hero-bg-video { animation: rise-in 1.4s ease-out 4.8s forwards; }
+  .skip .hero-bg-video { opacity: 1 !important; animation: none !important; }
+  .hero-banner-scrim {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(0deg, color-mix(in srgb, var(--espresso) 65%, transparent) 0%, color-mix(in srgb, var(--espresso) 40%, transparent) 50%, color-mix(in srgb, var(--espresso) 30%, transparent) 100%);
   }
-  .ba-label-before { left: 1.5rem; }
-  .ba-label-after { right: 1.5rem; }
-  .ba-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 0; z-index: 5; pointer-events: none; }
-  .ba-handle::before { content: ''; position: absolute; top: 0; bottom: 0; left: -1px; width: 2px; background: var(--paper); box-shadow: 0 0 12px rgba(0,0,0,0.3); }
-  .ba-handle-grip {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 3rem; height: 3rem; border-radius: 50%; background: var(--paper);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0.6rem 1.4rem -0.4rem rgba(0,0,0,0.45);
-    font-size: 1.1rem; color: var(--espresso); pointer-events: auto; cursor: ew-resize;
-  }
-  .ba-slider, .ba-handle-grip { opacity: 0; }
-  .skip .ba-slider, .skip .ba-handle-grip { opacity: 1 !important; animation: none !important; }
-  .run .ba-slider { animation: rise-in 0.7s ease-out 5.4s forwards; }
-  .run .ba-handle-grip { animation: rise-in 0.7s ease-out 5.7s forwards; }
   .hero-copy {
-    padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(3rem, 6vw, 4rem);
-    display: flex; flex-direction: column; align-items: flex-start; text-align: left;
-    max-width: 46rem;
+    position: absolute; inset: 0; z-index: 2;
+    padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 6vw, 5rem);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   }
-  .eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1.1rem; opacity: 0; }
-  .hero-title { font-family: ui-sans-serif, system-ui, sans-serif; font-size: clamp(2.6rem, 6.4vw, 5rem); line-height: 0.98; letter-spacing: -0.02em; margin: 0 0 1.1rem; font-weight: 800; color: var(--fg); }
+  .eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-hi); margin: 0 0 1.1rem; opacity: 0; }
+  .hero-title { font-family: ui-sans-serif, system-ui, sans-serif; font-size: clamp(2.6rem, 6.4vw, 5rem); line-height: 0.98; letter-spacing: -0.02em; margin: 0 0 1.1rem; font-weight: 800; color: var(--paper); }
   .hero-title .line { display: block; }
   .hero-title .word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
   .hero-title .word > span { display: inline-block; transform: translateY(115%); }
-  .hero-title em { font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal; font-weight: 800; color: var(--mauve-deep); -webkit-text-stroke: 1.5px var(--mauve-deep); color: transparent; padding: 0 0.05em; }
-  .hero-quote { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-weight: 400; font-size: clamp(1rem, 1.6vw, 1.15rem); color: var(--fg-muted); margin: 0 0 1.6rem; opacity: 0; }
-  .run .hero-quote { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 8.0s forwards; }
+  .hero-title em { font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal; font-weight: 800; color: var(--gold-hi); padding: 0 0.05em; }
+  .hero-quote { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-weight: 400; font-size: clamp(1rem, 1.6vw, 1.15rem); color: color-mix(in srgb, var(--paper) 85%, transparent); margin: 0 0 1.6rem; opacity: 0; }
+  .run .hero-quote { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 7.2s forwards; }
   .skip .hero-quote { opacity: 1 !important; animation: none !important; }
   .hero-actions-inline { display: flex; gap: 0.85rem; align-items: center; opacity: 0; }
-  .btn-hero-primary { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); border: none; padding: 0.9rem 1.75rem; border-radius: 2px; cursor: pointer; }
-  .btn-hero-ghost { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg); background: transparent; border: 1px solid var(--hairline); padding: 0.9rem 1.75rem; border-radius: 2px; cursor: pointer; }
-  .run .hero-actions-inline { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 8.2s forwards; }
+  .btn-hero-primary { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--espresso); background: var(--gold); border: none; padding: 0.9rem 1.75rem; border-radius: 2px; cursor: pointer; }
+  .btn-hero-ghost { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--paper); background: transparent; border: 1px solid color-mix(in srgb, var(--paper) 55%, transparent); padding: 0.9rem 1.75rem; border-radius: 2px; cursor: pointer; }
+  .run .hero-actions-inline { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 7.4s forwards; }
 
   /* bloc de contenu sous la photo, sur fond clair */
   .hero-content { padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(1.5rem, 4vw, 2.5rem); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
@@ -338,32 +319,22 @@
     </nav>
 
     <div class="hero-main">
-      <div class="ba-slider" id="baSlider">
-        <div class="ba-img ba-before">
-          <img src="chambre-apres.jpg" class="ba-photo-apres" alt="Après rénovation" />
+      <video class="hero-bg-video" autoplay muted loop playsinline>
+        <source src="hero-video.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-banner-scrim"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">Entreprise par des femmes, pour des femmes</p>
+        <h1 class="hero-title">
+          <span class="line"><span class="word"><span>L'art</span></span> <span class="word"><span>de</span></span></span>
+          <span class="line"><span class="word"><span>transformer</span></span></span>
+          <span class="line"><span class="word"><span>chaque</span></span> <span class="word"><span><em>intérieur.</em></span></span></span>
+        </h1>
+        <p class="hero-quote">L'excellence au féminin</p>
+        <div class="hero-actions-inline">
+          <button class="btn-hero-primary">Devis</button>
+          <button class="btn-hero-ghost">Prestation</button>
         </div>
-        <div class="ba-img ba-after" id="baAfter">
-          <img src="chambre-avant.jpg" class="ba-photo-avant" alt="Avant rénovation" />
-        </div>
-        <span class="ba-label ba-label-before">Avant</span>
-        <span class="ba-label ba-label-after">Après</span>
-        <div class="ba-handle" id="baHandle">
-          <span class="ba-handle-grip">↔</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-copy">
-      <p class="eyebrow">Entreprise par des femmes, pour des femmes</p>
-      <h1 class="hero-title">
-        <span class="line"><span class="word"><span>L'art</span></span> <span class="word"><span>de</span></span></span>
-        <span class="line"><span class="word"><span>transformer</span></span></span>
-        <span class="line"><span class="word"><span>chaque</span></span> <span class="word"><span><em>intérieur.</em></span></span></span>
-      </h1>
-      <p class="hero-quote">L'excellence au féminin</p>
-      <div class="hero-actions-inline">
-        <button class="btn-hero-primary">Devis</button>
-        <button class="btn-hero-ghost">Prestation</button>
       </div>
     </div>
 
@@ -683,30 +654,6 @@
     });
   });
 
-  var baSlider = document.getElementById('baSlider');
-  var baAfter = document.getElementById('baAfter');
-  var baHandle = document.getElementById('baHandle');
-  if (baSlider && baAfter && baHandle) {
-    var baDragging = false;
-    function setBaPosition(clientX) {
-      var rect = baSlider.getBoundingClientRect();
-      var pct = ((clientX - rect.left) / rect.width) * 100;
-      pct = Math.max(0, Math.min(100, pct));
-      baAfter.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
-      baHandle.style.left = pct + '%';
-    }
-    baSlider.addEventListener('pointerdown', function (e) {
-      baDragging = true;
-      setBaPosition(e.clientX);
-    });
-    window.addEventListener('pointermove', function (e) {
-      if (baDragging) setBaPosition(e.clientX);
-    });
-    window.addEventListener('pointerup', function () { baDragging = false; });
-    baSlider.addEventListener('touchmove', function (e) {
-      if (e.touches && e.touches[0]) setBaPosition(e.touches[0].clientX);
-    }, { passive: true });
-  }
 
   var universAccordion = document.querySelector('.univers-accordion');
   if (universAccordion && 'IntersectionObserver' in window) {
