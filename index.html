@@ -85,21 +85,25 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   }
   .eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-hi); margin: 0 0 1.1rem; opacity: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
-  .hero-title { position: relative; font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-size: clamp(2.8rem, 6.4vw, 5.2rem); line-height: 1.05; margin: 0 0 1.1rem; font-weight: 600; color: var(--paper); max-width: 34rem; text-shadow: 0 2px 16px rgba(0,0,0,0.45); }
-  .hero-title::after {
-    content: ''; position: absolute; inset: -10% -5%; pointer-events: none;
-    background: linear-gradient(100deg, transparent 42%, rgba(255, 226, 170, 0.6) 50%, transparent 58%);
-    background-size: 260% 100%; background-position: -120% 0; mix-blend-mode: screen;
+  .hero-title {
+    position: relative; font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic;
+    font-size: clamp(2.8rem, 6.4vw, 5.2rem); line-height: 1.05; margin: 0 0 1.1rem; font-weight: 600;
+    max-width: 34rem; text-shadow: 0 2px 16px rgba(0,0,0,0.45);
+    color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--paper) 80%, transparent);
   }
-  .run .hero-title::after { animation: title-sweep 5.5s ease-in-out 8.5s infinite; }
-  @keyframes title-sweep {
-    0%, 20% { background-position: -120% 0; }
-    45%, 100% { background-position: 180% 0; }
-  }
+  .run .hero-title { animation: title-fill 1s ease-out 8.0s forwards; }
+  .skip .hero-title { color: var(--paper) !important; -webkit-text-stroke: 0 !important; animation: none !important; }
+  @keyframes title-fill { to { color: var(--paper); -webkit-text-stroke: 0 transparent; } }
   .hero-title .line { display: block; }
   .hero-title .word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
   .hero-title .word > span { display: inline-block; transform: translateY(115%); }
-  .hero-title em { font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 500; color: var(--gold-hi); padding: 0 0.05em; }
+  .hero-title em {
+    font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 500; padding: 0 0.05em;
+    color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--gold-hi) 80%, transparent);
+  }
+  .run .hero-title em { animation: em-fill 1s ease-out 8.0s forwards; }
+  .skip .hero-title em { color: var(--gold-hi) !important; -webkit-text-stroke: 0 !important; animation: none !important; }
+  @keyframes em-fill { to { color: var(--gold-hi); -webkit-text-stroke: 0 transparent; } }
   .hero-quote { font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(1.1rem, 1.8vw, 1.3rem); color: color-mix(in srgb, var(--paper) 85%, transparent); margin: 0 0 1.6rem; opacity: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
   .run .hero-quote { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 7.2s forwards; }
   .skip .hero-quote { opacity: 1 !important; animation: none !important; }
