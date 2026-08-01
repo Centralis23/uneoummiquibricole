@@ -114,16 +114,31 @@
   }
   .btn-hero-ghost {
     font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--paper); background: none; border: none; padding: 0; cursor: pointer;
-    position: relative;
+    color: var(--paper); background: transparent; border: 1px solid color-mix(in srgb, var(--paper) 55%, transparent);
+    padding: 0.9rem 1.75rem; border-radius: 999px; cursor: pointer;
+    position: relative; transition: border-color 0.25s ease, background 0.25s ease;
   }
   .btn-hero-ghost::after { content: '→'; margin-left: 0.5rem; transition: margin-left 0.25s ease; display: inline-block; }
+  .btn-hero-ghost:hover { border-color: var(--paper); background: color-mix(in srgb, var(--paper) 12%, transparent); }
   .btn-hero-ghost:hover::after { margin-left: 0.9rem; }
-  .btn-hero-ghost::before {
-    content: ''; position: absolute; left: 0; right: 0; bottom: -0.3rem; height: 1px;
-    background: color-mix(in srgb, var(--paper) 55%, transparent);
-  }
   .run .hero-actions-inline { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 7.4s forwards; }
+  .hero-scroll-cue {
+    position: absolute; left: 50%; bottom: 1.75rem; z-index: 3; transform: translateX(-50%);
+    width: 1px; height: 2.75rem; background: none; border: none; padding: 0; cursor: pointer;
+    opacity: 0; overflow: hidden;
+  }
+  .run .hero-scroll-cue { animation: rise-in 0.6s ease-out 8.6s forwards; }
+  .skip .hero-scroll-cue { opacity: 0.7 !important; animation: none !important; }
+  .hero-scroll-cue-line {
+    position: absolute; left: 0; top: -100%; width: 1px; height: 100%;
+    background: color-mix(in srgb, var(--paper) 75%, transparent);
+    animation: scroll-cue-drop 1.8s ease-in-out infinite;
+  }
+  @keyframes scroll-cue-drop {
+    0% { top: -100%; }
+    60% { top: 100%; }
+    100% { top: 100%; }
+  }
 
   /* bloc de contenu sous la photo, sur fond clair */
   .hero-content { padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(1.5rem, 4vw, 2.5rem); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
@@ -362,12 +377,15 @@
           <span class="line"><span class="word"><span>transformer</span></span></span>
           <span class="line"><span class="word"><span>chaque</span></span> <span class="word"><span><em>intérieur.</em></span></span></span>
         </h1>
-        <p class="hero-quote">L'excellence au féminin</p>
+        <p class="hero-quote">L'excellence au féminin, à chaque étape de votre projet.</p>
         <div class="hero-actions-inline">
           <button class="btn-hero-primary">Devis</button>
           <button class="btn-hero-ghost">Prestation</button>
         </div>
       </div>
+      <button class="hero-scroll-cue" id="heroScrollCue" aria-label="Découvrir la suite">
+        <span class="hero-scroll-cue-line"></span>
+      </button>
     </div>
 
     <section class="univers" id="univers">
@@ -700,6 +718,31 @@
     universObserver.observe(universAccordion);
   } else if (universAccordion) {
     universAccordion.classList.add('in-view');
+  }
+
+  var heroVideoForScroll = document.querySelector('.hero-bg-video');
+  var heroMainForScroll = document.querySelector('.hero-main');
+  if (heroVideoForScroll && heroMainForScroll) {
+    heroVideoForScroll.addEventListener('animationend', function () {
+      heroVideoForScroll.style.opacity = '1';
+      heroVideoForScroll.style.transform = 'scale(1)';
+      heroVideoForScroll.style.animation = 'none';
+    });
+    window.addEventListener('scroll', function () {
+      var heroHeight = heroMainForScroll.offsetHeight || 1;
+      var progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
+      var scale = 1 + progress * 0.08;
+      heroVideoForScroll.style.opacity = 1;
+      heroVideoForScroll.style.transform = 'scale(' + scale + ')';
+    }, { passive: true });
+  }
+
+  var heroScrollCue = document.getElementById('heroScrollCue');
+  if (heroScrollCue) {
+    heroScrollCue.addEventListener('click', function () {
+      var next = document.getElementById('univers');
+      if (next) next.scrollIntoView({ behavior: 'smooth' });
+    });
   }
 
   function hideIntroControls() {
