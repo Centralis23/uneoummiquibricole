@@ -68,9 +68,13 @@
 
   /* vidéo de fond en bannière, texte centré par-dessus */
   .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; background: var(--espresso); }
-  .hero-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(1.28) saturate(1.15) sepia(0.4) hue-rotate(-12deg) contrast(1.05); opacity: 0; transition: none; }
+  .hero-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(1.15); opacity: 0; transition: none; }
   .run .hero-bg-video { animation: rise-in 1.4s ease-out 4.8s forwards; }
   .skip .hero-bg-video { opacity: 1 !important; animation: none !important; }
+  .hero-video-tint {
+    position: absolute; inset: 0; z-index: 1;
+    background: var(--gold); mix-blend-mode: multiply; opacity: 0.28;
+  }
   .hero-banner-scrim {
     position: absolute; inset: 0; z-index: 1;
     background: radial-gradient(ellipse at center, color-mix(in srgb, var(--espresso) 32%, transparent) 0%, color-mix(in srgb, var(--espresso) 50%, transparent) 100%);
@@ -335,6 +339,7 @@
       <video class="hero-bg-video" autoplay muted loop playsinline>
         <source src="hero-video.mp4" type="video/mp4" />
       </video>
+      <div class="hero-video-tint"></div>
       <div class="hero-banner-scrim"></div>
       <div class="hero-copy">
         <p class="eyebrow">Entreprise par des femmes, pour des femmes</p>
