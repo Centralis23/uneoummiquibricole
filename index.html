@@ -132,23 +132,6 @@
   .btn-hero-ghost:hover { border-color: var(--paper); background: color-mix(in srgb, var(--paper) 12%, transparent); }
   .btn-hero-ghost:hover::after { margin-left: 0.9rem; }
   .run .hero-actions-inline { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 7.4s forwards; }
-  .hero-scroll-cue {
-    position: absolute; left: 50%; bottom: 1.75rem; z-index: 3; transform: translateX(-50%);
-    width: 1px; height: 2.75rem; background: none; border: none; padding: 0; cursor: pointer;
-    opacity: 0; overflow: hidden;
-  }
-  .run .hero-scroll-cue { animation: rise-in 0.6s ease-out 8.6s forwards; }
-  .skip .hero-scroll-cue { opacity: 0.7 !important; animation: none !important; }
-  .hero-scroll-cue-line {
-    position: absolute; left: 0; top: -100%; width: 1px; height: 100%;
-    background: color-mix(in srgb, var(--paper) 75%, transparent);
-    animation: scroll-cue-drop 1.8s ease-in-out infinite;
-  }
-  @keyframes scroll-cue-drop {
-    0% { top: -100%; }
-    60% { top: 100%; }
-    100% { top: 100%; }
-  }
 
   /* bloc de contenu sous la photo, sur fond clair */
   .hero-content { padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(1.5rem, 4vw, 2.5rem); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
@@ -393,9 +376,6 @@
           <button class="btn-hero-ghost">Prestation</button>
         </div>
       </div>
-      <button class="hero-scroll-cue" id="heroScrollCue" aria-label="Découvrir la suite">
-        <span class="hero-scroll-cue-line"></span>
-      </button>
     </div>
 
     <section class="univers" id="univers">
@@ -745,14 +725,6 @@
       heroVideoForScroll.style.opacity = 1;
       heroVideoForScroll.style.transform = 'scale(' + scale + ')';
     }, { passive: true });
-  }
-
-  var heroScrollCue = document.getElementById('heroScrollCue');
-  if (heroScrollCue) {
-    heroScrollCue.addEventListener('click', function () {
-      var next = document.getElementById('univers');
-      if (next) next.scrollIntoView({ behavior: 'smooth' });
-    });
   }
 
   function hideIntroControls() {
