@@ -133,6 +133,21 @@
   .btn-hero-ghost:hover::after { margin-left: 0.9rem; }
   .run .hero-actions-inline { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 7.4s forwards; }
 
+  /* section histoire / présentation, entre la bannière et les univers */
+  .story { background: var(--cream); padding: clamp(3rem, 6vw, 6rem) clamp(1.25rem, 6vw, 5rem); }
+  .story-inner { max-width: 46rem; margin: 0 auto; }
+  .story-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); text-align: center; margin: 0 0 1rem; }
+  .story-title { font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: clamp(2rem, 4.2vw, 3.1rem); text-align: center; color: var(--fg); margin: 0 0 3rem; }
+  .story-timeline {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    margin: 0 0 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--hairline);
+  }
+  .story-milestone { text-align: center; }
+  .story-year { display: block; font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.8rem; color: var(--gold); margin: 0 0 0.6rem; }
+  .story-milestone p { font-size: 0.92rem; line-height: 1.55; color: var(--fg-muted); margin: 0; }
+  .story-text p { font-size: 1.05rem; line-height: 1.8; color: var(--fg); margin: 0 0 1.4rem; }
+  .story-text p:last-child { margin-bottom: 0; }
+
   /* bloc de contenu sous la photo, sur fond clair */
   .hero-content { padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(1.5rem, 4vw, 2.5rem); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
   .hero-sub { font-size: 1.1rem; line-height: 1.6; color: var(--fg-muted); max-width: 30rem; margin: 0; opacity: 0; }
@@ -318,6 +333,7 @@
     .brand { font-size: 1.2rem; }
     .pillars { display: none; }
     .cta-nav { padding: 0.55rem 1rem; font-size: 0.66rem; }
+    .story-timeline { grid-template-columns: 1fr; gap: 1.75rem; }
 
     .hero-copy { padding: 1.75rem 1.25rem 2rem; max-width: none; }
     .hero-quote { font-size: 0.85rem; }
@@ -376,6 +392,47 @@
         </div>
       </div>
     </div>
+
+    <section class="story" id="histoire">
+      <div class="story-inner">
+        <p class="story-eyebrow">Notre histoire</p>
+        <h2 class="story-title">De la passion à la profession</h2>
+
+        <div class="story-timeline">
+          <div class="story-milestone">
+            <span class="story-year">2019</span>
+            <p>Le déclic : rénover mon propre appartement m'a poussée à apprendre le bricolage par moi-même.</p>
+          </div>
+          <div class="story-milestone">
+            <span class="story-year">2023–2024</span>
+            <p>Formation en maintenance des bâtiments au CFA BTP, pour professionnaliser mon savoir-faire.</p>
+          </div>
+          <div class="story-milestone">
+            <span class="story-year">Août 2024</span>
+            <p>Création de la micro-entreprise « Une Oummi qui bricole », par une femme, pour les femmes.</p>
+          </div>
+        </div>
+
+        <div class="story-text">
+          <p>L'histoire de « Une Oummi qui bricole » commence en 2019, lorsque j'ai commencé à réaliser mes premiers travaux dans mon propre intérieur.</p>
+          <p>Étant naturellement manuelle, curieuse et passionnée par la création, j'ai toujours aimé apprendre et réaliser des choses par moi-même. Avant même de créer mon entreprise, je me débrouillais déjà dans différents domaines, notamment la peinture, l'aménagement et les travaux du quotidien. J'ai également appris la couture en autodidacte, puis approfondi cette compétence à travers des cours, ce qui reflète mon envie constante d'apprendre et de développer mon savoir-faire.</p>
+          <p>Le véritable déclic pour le bricolage est venu lorsque j'ai souhaité rénover mon propre appartement d'environ 96&nbsp;m². J'avais demandé un devis pour réaliser la peinture des murs ainsi que la pose du parquet, mais le montant de la main-d'œuvre dépassait largement mon budget.</p>
+          <p>J'ai alors dû faire un choix : abandonner mon projet ou apprendre moi-même et me retrousser les manches.</p>
+          <p>C'est comme ça que j'ai commencé à me former seule. J'ai acheté mes premiers outils, appris à les utiliser, découvert les techniques petit à petit et réalisé mes premiers travaux. Les débuts n'ont pas toujours été simples&nbsp;: j'ai dû apprendre par la pratique, chercher des solutions, faire des erreurs et recommencer. Mais au fil du temps, j'ai gagné en confiance, amélioré mes gestes, appris à réaliser de belles finitions et développé une véritable passion pour la rénovation.</p>
+          <p>J'ai ensuite commencé à partager mes réalisations, mes avant/après et l'évolution de mes travaux sur mes réseaux sociaux. Les retours positifs de mon entourage et des personnes qui me suivaient m'ont encouragée à aller plus loin. Beaucoup de personnes m'ont dit que mon travail méritait d'être proposé à d'autres, ce qui a progressivement fait naître l'envie de transformer cette passion en véritable activité professionnelle.</p>
+          <p>En 2023, j'ai souhaité approfondir mes connaissances et professionnaliser davantage mon parcours. J'ai d'abord découvert le domaine de la menuiserie pendant quelques mois, puis j'ai intégré une formation en maintenance des bâtiments au CFA BTP en novembre 2023, que j'ai terminée en juillet 2024.</p>
+          <p>Cette formation m'a permis d'acquérir des compétences complémentaires dans différents domaines du bâtiment&nbsp;: peinture, enduits, revêtements muraux et sols, pose de carrelage, électricité, installation de supports muraux, création de cloisons, mise en place de bâtis de portes, travaux de plomberie avec notamment la pose d'équipements sanitaires comme les WC, ainsi que des techniques de soudure.</p>
+          <p>Cette formation m'a permis de consolider mes connaissances techniques et d'avoir une vision plus globale des différents corps de métier nécessaires à la rénovation et à l'entretien d'un bâtiment.</p>
+          <p>Après cette évolution personnelle et professionnelle, j'ai décidé de franchir une nouvelle étape en créant ma micro-entreprise « Une Oummi qui bricole » en août 2024.</p>
+          <p>Cette entreprise est née avec une vision particulière&nbsp;: une entreprise créée par une femme, pour accompagner les femmes dans leurs projets de rénovation, d'aménagement et de transformation de leur intérieur.</p>
+          <p>À travers mon activité, je souhaite montrer que les travaux et le bricolage ne sont pas réservés à un seul public. Une femme peut apprendre, comprendre, créer et réaliser des projets qui lui ressemblent, tout en étant accompagnée par une professionnelle à l'écoute de ses besoins.</p>
+          <p>En parallèle de la création de ma micro-entreprise, j'ai également créé mon association afin de transmettre mes connaissances et permettre aux femmes de gagner en autonomie dans les petits travaux du quotidien.</p>
+          <p>L'objectif de cette association est de proposer des ateliers accessibles à toutes, dans un cadre convivial, afin d'apprendre les bases du bricolage&nbsp;: poser une étagère, installer une tringle, fixer un miroir, réaliser de petites réparations, apprendre les bases de la peinture ou mieux comprendre les outils et les techniques du bricolage.</p>
+          <p>À travers cette démarche, je souhaite transmettre, donner confiance et montrer que le bricolage est accessible à toutes lorsqu'on possède les bonnes bases et un accompagnement adapté.</p>
+          <p>Aujourd'hui, « Une Oummi qui bricole » accompagne ses clients dans leurs projets de rénovation et d'amélioration de leur intérieur, avec une approche basée sur la qualité, le soin des finitions et l'écoute des besoins de chacun.</p>
+        </div>
+      </div>
+    </section>
 
     <section class="univers" id="univers">
       <div class="univers-accordion">
