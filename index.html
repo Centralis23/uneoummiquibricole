@@ -91,7 +91,7 @@
     max-width: 44rem; text-shadow: 0 2px 16px rgba(0,0,0,0.45); transform: skewX(-7deg);
     color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--paper) 80%, transparent);
   }
-  .run .hero-title { animation: title-fill 1s ease-out 8.0s forwards, title-refill-loop 6.36s ease-in-out 9.0s infinite; }
+  .run .hero-title { animation: title-fill 1s ease-out 9.0s forwards, title-refill-loop 6.36s ease-in-out 10.0s infinite; }
   .skip .hero-title { color: var(--paper) !important; -webkit-text-stroke: 0 !important; animation: none !important; }
   @keyframes title-fill { to { color: var(--paper); -webkit-text-stroke: 0 transparent; } }
   @keyframes title-refill-loop {
@@ -100,13 +100,14 @@
     35%, 100% { color: var(--paper); -webkit-text-stroke: 0 transparent; }
   }
   .hero-title .line { display: block; }
-  .hero-title .word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
-  .hero-title .word > span { display: inline-block; transform: translateY(115%); }
+  .hero-title .word { display: inline-flex; }
+  .hero-title .letter { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+  .hero-title .letter > span { display: inline-block; transform: translateY(115%); }
   .hero-title em {
     font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 500; padding: 0 0.05em;
     color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--gold-hi) 80%, transparent);
   }
-  .run .hero-title em { animation: em-fill 1s ease-out 8.0s forwards, em-refill-loop 6.36s ease-in-out 9.0s infinite; }
+  .run .hero-title em { animation: em-fill 1s ease-out 9.0s forwards, em-refill-loop 6.36s ease-in-out 10.0s infinite; }
   .skip .hero-title em { color: var(--gold-hi) !important; -webkit-text-stroke: 0 !important; animation: none !important; }
   @keyframes em-fill { to { color: var(--gold-hi); -webkit-text-stroke: 0 transparent; } }
   @keyframes em-refill-loop {
@@ -115,7 +116,7 @@
     35%, 100% { color: var(--gold-hi); -webkit-text-stroke: 0 transparent; }
   }
   .hero-quote { font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(1.1rem, 1.8vw, 1.3rem); color: color-mix(in srgb, var(--paper) 85%, transparent); margin: 0 0 1.6rem; opacity: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
-  .run .hero-quote { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 7.2s forwards; }
+  .run .hero-quote { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 8.7s forwards; }
   .skip .hero-quote { opacity: 1 !important; animation: none !important; }
   .hero-actions-inline { display: flex; gap: 1.75rem; align-items: center; opacity: 0; }
   .btn-hero-primary {
@@ -131,20 +132,36 @@
   .btn-hero-ghost::after { content: '→'; margin-left: 0.5rem; transition: margin-left 0.25s ease; display: inline-block; }
   .btn-hero-ghost:hover { border-color: var(--paper); background: color-mix(in srgb, var(--paper) 12%, transparent); }
   .btn-hero-ghost:hover::after { margin-left: 0.9rem; }
-  .run .hero-actions-inline { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 7.4s forwards; }
+  .run .hero-actions-inline { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 8.9s forwards; }
 
   /* section histoire / présentation, entre la bannière et les univers */
-  .story { background: var(--cream); padding: clamp(3rem, 6vw, 6rem) clamp(1.25rem, 6vw, 5rem); }
-  .story-inner { max-width: 46rem; margin: 0 auto; }
-  .story-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); text-align: center; margin: 0 0 1rem; }
-  .story-title { font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: clamp(2rem, 4.2vw, 3.1rem); text-align: center; color: var(--fg); margin: 0 0 3rem; }
-  .story-timeline {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
-    margin: 0 0 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--hairline);
+  .story { background: var(--cream); padding: clamp(3rem, 6vw, 6rem) clamp(1.25rem, 6vw, 5rem); overflow: hidden; }
+  .story-grid { max-width: 72rem; margin: 0 auto; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .story-media { position: relative; }
+  .story-photo {
+    width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 4px; display: block;
+    box-shadow: 0 2.5rem 4rem -1.5rem rgba(0,0,0,0.35);
   }
-  .story-milestone { text-align: center; }
-  .story-year { display: block; font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.8rem; color: var(--gold); margin: 0 0 0.6rem; }
-  .story-milestone p { font-size: 0.92rem; line-height: 1.55; color: var(--fg-muted); margin: 0; }
+  .story-media-frame {
+    position: absolute; top: 1.25rem; left: -1.25rem; right: 1.25rem; bottom: -1.25rem;
+    border: 1.5px solid var(--gold); border-radius: 4px; z-index: -1;
+  }
+  .story-media-badge {
+    position: absolute; right: -1rem; bottom: -1.5rem; z-index: 2;
+    width: 6.5rem; height: 6.5rem; border-radius: 50%; background: var(--espresso);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 1.25rem 2.5rem -1rem rgba(0,0,0,0.45);
+  }
+  .story-media-badge-word { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-hi); }
+  .story-media-badge-year { font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--paper); }
+  .story-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
+  .story-title { font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: clamp(2rem, 3.6vw, 2.9rem); color: var(--fg); margin: 0 0 2rem; }
+  .story-timeline-v { margin: 0 0 2.25rem; padding-left: 0.15rem; border-left: 1.5px solid var(--hairline); }
+  .story-milestone-v { position: relative; padding: 0 0 1.5rem 1.75rem; }
+  .story-milestone-v:last-child { padding-bottom: 0; }
+  .story-dot { position: absolute; left: -0.4rem; top: 0.3rem; width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px var(--cream); }
+  .story-year { display: block; font-family: 'Cormorant Garamond', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--gold); margin: 0 0 0.25rem; }
+  .story-milestone-v p { font-size: 0.9rem; line-height: 1.5; color: var(--fg-muted); margin: 0; }
   .story-text p { font-size: 1.05rem; line-height: 1.8; color: var(--fg); margin: 0 0 1.4rem; }
   .story-text p:last-child { margin-bottom: 0; }
   .story-more-btn {
@@ -225,12 +242,6 @@
 
   .run .nav          { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 5.65s forwards; }
   .run .eyebrow      { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 6.8s forwards; }
-  .run .hero-title .word:nth-of-type(1) > span { animation: line-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 6.9s forwards; }
-  .run .hero-title .word:nth-of-type(2) > span { animation: line-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 6.97s forwards; }
-  .run .hero-title .word:nth-of-type(3) > span { animation: line-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 7.04s forwards; }
-  .run .hero-title .word:nth-of-type(4) > span { animation: line-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 7.11s forwards; }
-  .run .hero-title .word:nth-of-type(5) > span { animation: line-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 7.18s forwards; }
-  .run .hero-title .word:nth-of-type(6) > span { animation: line-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 7.25s forwards; }
   .run .hero-rule { animation: rise-in 0.6s ease-out 6.3s forwards; }
   .run .hero-sub     { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 6.45s forwards; }
   .run .hero-actions { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 6.6s forwards; }
@@ -315,13 +326,13 @@
   @media (prefers-reduced-motion: reduce) {
     .entrance { display: none; }
     .nav, .eyebrow, .hero-quote, .hero-sub, .hero-actions, .hero-actions-inline, .hero-rule { opacity: 1 !important; }
-    .hero-title .word > span { transform: translateY(0) !important; }
+    .hero-title .letter > span { transform: translateY(0) !important; }
   }
 
   /* bouton "Passer" : affiche le site immédiatement, sans attendre l'animation d'entrée */
   .skip .entrance { display: none; }
   .skip .nav, .skip .eyebrow, .skip .hero-quote, .skip .hero-sub, .skip .hero-actions, .skip .hero-actions-inline, .skip .hero-rule { opacity: 1 !important; animation: none !important; }
-  .skip .hero-title .word > span { transform: translateY(0) !important; animation: none !important; }
+  .skip .hero-title .letter > span { transform: translateY(0) !important; animation: none !important; }
   .skip-btn {
     position: fixed; top: 1.25rem; right: 1.25rem; z-index: 200;
     font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
@@ -347,7 +358,10 @@
     .pillars { display: none; }
     .cta-nav { padding: 0.55rem 1rem; font-size: 0.66rem; }
     .hero-main { min-height: auto; height: 56vh; }
-    .story-timeline { grid-template-columns: 1fr; gap: 1.75rem; }
+    .story-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .story-media { max-width: 20rem; margin: 0 auto; }
+    .story-eyebrow, .story-title { text-align: center; }
+    .story-media-frame { display: none; }
 
     .hero-copy { padding: 1.75rem 1.25rem 2rem; max-width: none; }
     .hero-quote { font-size: 0.85rem; }
@@ -396,8 +410,8 @@
       <div class="hero-copy">
         <p class="eyebrow">Entreprise par des femmes, pour des femmes</p>
         <h1 class="hero-title">
-          <span class="line"><span class="word"><span>L'art</span></span> <span class="word"><span>de</span></span> <span class="word"><span>transformer</span></span></span>
-          <span class="line"><span class="word"><span>chaque</span></span> <span class="word"><span><em>intérieur.</em></span></span></span>
+          <span class="line"><span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 6.900s forwards;">L</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 6.945s forwards;">'</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 6.990s forwards;">a</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.035s forwards;">r</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.080s forwards;">t</span></span></span> <span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.125s forwards;">d</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.170s forwards;">e</span></span></span> <span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.215s forwards;">t</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.260s forwards;">r</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.305s forwards;">a</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.350s forwards;">n</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.395s forwards;">s</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.440s forwards;">f</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.485s forwards;">o</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.530s forwards;">r</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.575s forwards;">m</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.620s forwards;">e</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.665s forwards;">r</span></span></span></span>
+          <span class="line"><span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.710s forwards;">c</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.755s forwards;">h</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.800s forwards;">a</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.845s forwards;">q</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.890s forwards;">u</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.935s forwards;">e</span></span></span> <span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.980s forwards;"><em>i</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.025s forwards;"><em>n</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.070s forwards;"><em>t</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.115s forwards;"><em>é</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.160s forwards;"><em>r</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.205s forwards;"><em>i</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.250s forwards;"><em>e</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.295s forwards;"><em>u</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.340s forwards;"><em>r</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.385s forwards;"><em>.</em></span></span></span></span>
         </h1>
         <p class="hero-quote">L'excellence au féminin, à chaque étape de votre projet.</p>
         <div class="hero-actions-inline">
@@ -408,36 +422,56 @@
     </div>
 
     <section class="story" id="histoire">
-      <div class="story-inner">
-        <p class="story-eyebrow">Notre histoire</p>
-        <h2 class="story-title">De la passion à la profession</h2>
-
-        <div class="story-timeline">
-          <div class="story-milestone">
-            <span class="story-year">2019</span>
-            <p>Le déclic : rénover mon propre appartement m'a poussée à apprendre le bricolage par moi-même.</p>
-          </div>
-          <div class="story-milestone">
-            <span class="story-year">2023–2024</span>
-            <p>Formation en maintenance des bâtiments au CFA BTP, pour professionnaliser mon savoir-faire.</p>
-          </div>
-          <div class="story-milestone">
-            <span class="story-year">Août 2024</span>
-            <p>Création de la micro-entreprise « Une Oummi qui bricole », par une femme, pour les femmes.</p>
+      <div class="story-grid">
+        <div class="story-media">
+          <img src="chambre-apres.jpg" alt="Réalisation Une Oummi qui bricole" class="story-photo" />
+          <div class="story-media-frame"></div>
+          <div class="story-media-badge">
+            <span class="story-media-badge-word">Depuis</span>
+            <span class="story-media-badge-year">2019</span>
           </div>
         </div>
 
-        <div class="story-text">
-          <p>Tout commence en 2019, quand je veux rénover mon appartement de 96&nbsp;m². Le devis pour la peinture et le parquet dépasse largement mon budget&nbsp;: il faut choisir entre abandonner le projet ou apprendre à le faire moi-même. Je choisis d'apprendre.</p>
-          <p>Naturellement manuelle et curieuse, je me forme seule&nbsp;: premiers outils, premières techniques, premières erreurs aussi. Mes gestes s'affinent, ma passion pour la rénovation devient une évidence — et mes avant/après partagés en ligne convainquent mon entourage que ce savoir-faire mérite d'être proposé à d'autres.</p>
+        <div class="story-content">
+          <p class="story-eyebrow">Notre histoire</p>
+          <h2 class="story-title">De la passion à la profession</h2>
+
+          <div class="story-timeline-v">
+            <div class="story-milestone-v">
+              <span class="story-dot"></span>
+              <div>
+                <span class="story-year">2019</span>
+                <p>Le déclic : rénover mon propre appartement m'a poussée à apprendre le bricolage par moi-même.</p>
+              </div>
+            </div>
+            <div class="story-milestone-v">
+              <span class="story-dot"></span>
+              <div>
+                <span class="story-year">2023–2024</span>
+                <p>Formation en maintenance des bâtiments au CFA BTP, pour professionnaliser mon savoir-faire.</p>
+              </div>
+            </div>
+            <div class="story-milestone-v">
+              <span class="story-dot"></span>
+              <div>
+                <span class="story-year">Août 2024</span>
+                <p>Création de la micro-entreprise « Une Oummi qui bricole », par une femme, pour les femmes.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-text">
+            <p>Tout commence en 2019, quand je veux rénover mon appartement de 96&nbsp;m². Le devis pour la peinture et le parquet dépasse largement mon budget&nbsp;: il faut choisir entre abandonner le projet ou apprendre à le faire moi-même. Je choisis d'apprendre.</p>
+            <p>Naturellement manuelle et curieuse, je me forme seule&nbsp;: premiers outils, premières techniques, premières erreurs aussi. Mes gestes s'affinent, ma passion pour la rénovation devient une évidence — et mes avant/après partagés en ligne convainquent mon entourage que ce savoir-faire mérite d'être proposé à d'autres.</p>
+          </div>
+          <button class="story-more-btn" id="storyMoreBtn">Lire la suite <span>→</span></button>
+          <div class="story-text-more" id="storyMore"><div class="story-text">
+            <p>En 2023, je professionnalise ce parcours&nbsp;: découverte de la menuiserie, puis une formation en maintenance des bâtiments au CFA BTP (novembre 2023 – juillet 2024), couvrant peinture, enduits, carrelage, électricité, plomberie, soudure et bien plus — une vision globale des métiers du bâtiment.</p>
+            <p>En août 2024 naît la micro-entreprise « Une Oummi qui bricole », avec une conviction simple&nbsp;: une femme peut apprendre, comprendre et réaliser des projets qui lui ressemblent, accompagnée par une professionnelle à l'écoute.</p>
+            <p>En parallèle, je crée une association pour transmettre ces bases à d'autres femmes — poser une étagère, fixer un miroir, peindre un mur — dans des ateliers accessibles et conviviaux, pour donner confiance et autonomie.</p>
+            <p>Aujourd'hui, « Une Oummi qui bricole » accompagne ses clients avec la même exigence&nbsp;: qualité, soin des finitions, et écoute des besoins de chacun.</p>
+          </div></div>
         </div>
-        <button class="story-more-btn" id="storyMoreBtn">Lire la suite <span>→</span></button>
-        <div class="story-text-more" id="storyMore"><div class="story-text">
-          <p>En 2023, je professionnalise ce parcours&nbsp;: découverte de la menuiserie, puis une formation en maintenance des bâtiments au CFA BTP (novembre 2023 – juillet 2024), couvrant peinture, enduits, carrelage, électricité, plomberie, soudure et bien plus — une vision globale des métiers du bâtiment.</p>
-          <p>En août 2024 naît la micro-entreprise « Une Oummi qui bricole », avec une conviction simple&nbsp;: une femme peut apprendre, comprendre et réaliser des projets qui lui ressemblent, accompagnée par une professionnelle à l'écoute.</p>
-          <p>En parallèle, je crée une association pour transmettre ces bases à d'autres femmes — poser une étagère, fixer un miroir, peindre un mur — dans des ateliers accessibles et conviviaux, pour donner confiance et autonomie.</p>
-          <p>Aujourd'hui, « Une Oummi qui bricole » accompagne ses clients avec la même exigence&nbsp;: qualité, soin des finitions, et écoute des besoins de chacun.</p>
-        </div></div>
       </div>
     </section>
 
@@ -741,7 +775,7 @@
     stage.classList.remove('run', 'skip', 'controls-hidden');
     void stage.offsetWidth;
     stage.classList.add('run');
-    setTimeout(hideIntroControls, 9200);
+    setTimeout(hideIntroControls, 9800);
   });
 
   var skipBtn = document.getElementById('skipBtn');
@@ -806,7 +840,7 @@
   window.addEventListener('scroll', function () {
     if (window.scrollY > 80) hideIntroControls();
   }, { passive: true });
-  setTimeout(hideIntroControls, 9200);
+  setTimeout(hideIntroControls, 9800);
 
 </script>
 </body>
