@@ -83,7 +83,11 @@
   .tool-tile-center { z-index: 2; }
   .tool-tile-1 { --r: -20deg; --tx: -42vw; --ty: 6vh; width: 11vw; }
   .tool-tile-2 { --r: -11deg; --tx: -24vw; --ty: -1vh; width: 13vw; }
-  .tool-tile-3 { --r: 0deg; --tx: 0vw; --ty: -6vh; width: 17vw; }
+  .tool-tile-3 { --r: 0deg; --tx: 0vw; --ty: -6vh; width: 21vw; }
+  .tool-tile-video {
+    border-radius: 12px; object-fit: cover; aspect-ratio: 1 / 1;
+    filter: drop-shadow(0 2rem 2rem rgba(0,0,0,0.55)) sepia(0.25) saturate(1.3) brightness(1.05) hue-rotate(-8deg);
+  }
   .tool-tile-4 { --r: 11deg; --tx: 24vw; --ty: -1vh; width: 13vw; }
   .tool-tile-5 { --r: 20deg; --tx: 42vw; --ty: 6vh; width: 11vw; }
   .run .tool-tile { animation: tool-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -94,6 +98,13 @@
   .run .tool-tile:nth-of-type(5) { animation-delay: 4.8s; }
   .skip .tool-tile { opacity: 1 !important; transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--r)) scale(1) !important; animation: none !important; }
   @keyframes tool-in { to { opacity: 1; transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--r)) scale(1); } }
+  .tool-tile.is-idle { animation: tool-float 4.5s ease-in-out infinite; animation-delay: var(--float-delay, 0s); }
+  @keyframes tool-float {
+    0%, 100% { transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--r)) scale(1); }
+    50% { transform: translate(-50%, -50%) translate(var(--tx), calc(var(--ty) - 10px)) rotate(var(--r)) scale(1.015); }
+  }
+  .tool-showcase { perspective: 1400px; }
+  .tool-showcase-inner { position: relative; width: 100%; height: 100%; transition: transform 0.4s ease-out; }
   .hero-puck { position: relative; width: 5.5rem; margin-bottom: 1.5rem; opacity: 0; }
   .run .hero-puck { animation: rise-in 0.7s ease-out 5.6s forwards; }
   .skip .hero-puck { opacity: 1 !important; animation: none !important; }
@@ -449,12 +460,16 @@
     </nav>
 
     <div class="hero-main">
-      <div class="tool-showcase">
-        <img class="tool-tile tool-tile-1" src="tool-tray.png" alt="" />
-        <img class="tool-tile tool-tile-2" src="tool-brush.png" alt="" />
-        <img class="tool-tile tool-tile-3 tool-tile-center" src="tool-can.png" alt="" />
-        <img class="tool-tile tool-tile-4" src="tool-roller2.png" alt="" />
-        <img class="tool-tile tool-tile-5" src="tool-tray.png" alt="" />
+      <div class="tool-showcase" id="toolShowcase">
+        <div class="tool-showcase-inner" id="toolShowcaseInner">
+          <img class="tool-tile tool-tile-1" src="tool-tray.png" alt="" />
+          <img class="tool-tile tool-tile-2" src="tool-brush.png" alt="" />
+          <video class="tool-tile tool-tile-3 tool-tile-center tool-tile-video" autoplay muted loop playsinline>
+            <source src="hero-video.mp4" type="video/mp4" />
+          </video>
+          <img class="tool-tile tool-tile-4" src="tool-roller2.png" alt="" />
+          <img class="tool-tile tool-tile-5" src="tool-tray.png" alt="" />
+        </div>
       </div>
       <div class="hero-puck">
         <div class="hero-puck-disc"></div>
@@ -855,6 +870,29 @@
       var open = storyMore.classList.toggle('is-open');
       storyMoreBtn.classList.toggle('is-open', open);
       storyMoreBtn.firstChild.textContent = open ? 'Lire moins ' : 'Lire la suite ';
+    });
+  }
+
+  var toolTiles = document.querySelectorAll('.tool-tile');
+  toolTiles.forEach(function (tile, i) {
+    tile.addEventListener('animationend', function (e) {
+      if (e.animationName !== 'tool-in') return;
+      tile.style.setProperty('--float-delay', (i * 0.3) + 's');
+      tile.classList.add('is-idle');
+    });
+  });
+
+  var toolShowcase = document.getElementById('toolShowcase');
+  var toolShowcaseInner = document.getElementById('toolShowcaseInner');
+  if (toolShowcase && toolShowcaseInner && window.matchMedia('(hover: hover)').matches) {
+    toolShowcase.addEventListener('mousemove', function (e) {
+      var rect = toolShowcase.getBoundingClientRect();
+      var px = (e.clientX - rect.left) / rect.width - 0.5;
+      var py = (e.clientY - rect.top) / rect.height - 0.5;
+      toolShowcaseInner.style.transform = 'rotateX(' + (py * -8) + 'deg) rotateY(' + (px * 10) + 'deg)';
+    });
+    toolShowcase.addEventListener('mouseleave', function () {
+      toolShowcaseInner.style.transform = 'rotateX(0deg) rotateY(0deg)';
     });
   }
 
