@@ -74,16 +74,25 @@
 
   /* vidéo de fond en bannière, texte centré par-dessus */
   .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; background: var(--espresso); }
-  .hero-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.92); opacity: 0; transition: none; }
-  .run .hero-bg-video { animation: rise-in 1.4s ease-out 4.8s forwards; }
-  .skip .hero-bg-video { opacity: 1 !important; animation: none !important; }
+  .hero-split { position: absolute; inset: 0; display: flex; }
+  .hero-split-half { position: relative; flex: 1; overflow: hidden; opacity: 0; }
+  .run .hero-split-half { animation: rise-in 1.4s ease-out 4.8s forwards; }
+  .skip .hero-split-half { opacity: 1 !important; animation: none !important; }
+  .hero-split-half img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.8); }
+  .hero-split-half::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.15); }
+  .hero-split-half + .hero-split-half { border-left: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); }
+  .hero-split-label {
+    position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 2;
+    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--paper); text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  }
   .hero-video-tint {
     position: absolute; inset: 0; z-index: 1;
     background: var(--gold); mix-blend-mode: soft-light; opacity: 0.35;
   }
   .hero-banner-scrim {
     position: absolute; inset: 0; z-index: 1;
-    background: radial-gradient(ellipse at center, color-mix(in srgb, var(--espresso) 20%, transparent) 0%, color-mix(in srgb, var(--espresso) 38%, transparent) 100%);
+    background: radial-gradient(ellipse at center, color-mix(in srgb, var(--espresso) 25%, transparent) 0%, color-mix(in srgb, var(--espresso) 48%, transparent) 100%);
   }
   .hero-copy {
     position: absolute; inset: 0; z-index: 2;
@@ -358,6 +367,11 @@
     .pillars li { width: 100%; padding: 0.75rem 0; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); font-size: 0.85rem; }
     .pillars li:last-child { border-bottom: none; }
     .hero-main { min-height: auto; height: 78vh; }
+    .hero-split { flex-direction: column; }
+    .hero-split-half + .hero-split-half { border-left: none; border-top: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); }
+    .hero-split-label { font-size: 0.64rem; }
+    .hero-split-half:first-child .hero-split-label { top: 5.5rem; bottom: auto; }
+    .hero-split-half:last-child .hero-split-label { bottom: 0.85rem; }
     .story { padding-left: 1.5rem; padding-right: 1.5rem; }
     .story-hook { max-width: none; margin-left: auto; margin-right: auto; }
     .story-cards { grid-template-columns: 1fr; gap: 1.1rem; }
@@ -404,9 +418,16 @@
     </nav>
 
     <div class="hero-main">
-      <video class="hero-bg-video" autoplay muted loop playsinline>
-        <source src="hero-video.mp4" type="video/mp4" />
-      </video>
+      <div class="hero-split">
+        <div class="hero-split-half">
+          <img src="chambre-avant.jpg" alt="Chambre avant rénovation" />
+          <span class="hero-split-label">Avant</span>
+        </div>
+        <div class="hero-split-half">
+          <img src="chambre-apres.jpg" alt="Chambre après rénovation" />
+          <span class="hero-split-label">Après</span>
+        </div>
+      </div>
       <div class="hero-video-tint"></div>
       <div class="hero-banner-scrim"></div>
       <div class="hero-copy">
@@ -800,20 +821,14 @@
     universAccordion.classList.add('in-view');
   }
 
-  var heroVideoForScroll = document.querySelector('.hero-bg-video');
+  var heroSplitForScroll = document.querySelector('.hero-split');
   var heroMainForScroll = document.querySelector('.hero-main');
-  if (heroVideoForScroll && heroMainForScroll) {
-    heroVideoForScroll.addEventListener('animationend', function () {
-      heroVideoForScroll.style.opacity = '1';
-      heroVideoForScroll.style.transform = 'scale(1)';
-      heroVideoForScroll.style.animation = 'none';
-    });
+  if (heroSplitForScroll && heroMainForScroll) {
     window.addEventListener('scroll', function () {
       var heroHeight = heroMainForScroll.offsetHeight || 1;
       var progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
       var scale = 1 + progress * 0.08;
-      heroVideoForScroll.style.opacity = 1;
-      heroVideoForScroll.style.transform = 'scale(' + scale + ')';
+      heroSplitForScroll.style.transform = 'scale(' + scale + ')';
     }, { passive: true });
   }
 
