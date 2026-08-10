@@ -56,14 +56,14 @@
   /* ================= SITE (sous l'animation d'entrée) ================= */
   .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; background: var(--bg); }
   .nav {
-    position: relative; z-index: 3;
+    position: absolute; top: 0; left: 0; right: 0; z-index: 5;
     display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
     padding: 1.25rem clamp(1.25rem, 4vw, 3.5rem);
-    background: #FFFFFF; border-bottom: 1px solid var(--hairline); opacity: 0;
+    background: transparent; border-bottom: none; opacity: 0;
   }
   .brand { display: flex; align-items: center; }
-  .brand img { height: 4.25rem; width: auto; display: block; }
-  .pillars { display: flex; gap: clamp(1rem, 3vw, 2.25rem); list-style: none; margin: 0; padding: 0; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg); }
+  .brand img { height: 4.25rem; width: auto; display: block; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.35)); }
+  .pillars { display: flex; gap: clamp(1rem, 3vw, 2.25rem); list-style: none; margin: 0; padding: 0; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--paper); text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
   .pillars li::before { content: '— '; color: var(--gold); }
   .cta-nav { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--espresso); background: var(--gold); border: none; padding: 0.65rem 1.25rem; border-radius: 2px; white-space: nowrap; }
 
@@ -90,31 +90,20 @@
     position: relative; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic;
     font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 1.05; margin: 0 0 1.1rem; font-weight: 600;
     max-width: 44rem; text-shadow: 0 2px 16px rgba(0,0,0,0.45); transform: skewX(-7deg);
-    color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--paper) 80%, transparent);
-  }
-  .run .hero-title { animation: title-fill 1s ease-out 9.0s forwards, title-refill-loop 6.36s ease-in-out 10.0s infinite; }
-  .skip .hero-title { color: var(--paper) !important; -webkit-text-stroke: 0 !important; animation: none !important; }
-  @keyframes title-fill { to { color: var(--paper); -webkit-text-stroke: 0 transparent; } }
-  @keyframes title-refill-loop {
-    0% { color: var(--paper); -webkit-text-stroke: 0 transparent; }
-    8% { color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--paper) 80%, transparent); }
-    35%, 100% { color: var(--paper); -webkit-text-stroke: 0 transparent; }
+    color: var(--paper);
   }
   .hero-title .line { display: block; }
   .hero-title .word { display: inline-flex; }
-  .hero-title .letter { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
-  .hero-title .letter > span { display: inline-block; transform: translateY(115%); }
+  .hero-title .letter {
+    display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em;
+  }
+  .hero-title .letter > span {
+    display: inline-block; transform: translateY(115%);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
   .hero-title em {
     font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 500; padding: 0 0.05em;
-    color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--gold-hi) 80%, transparent);
-  }
-  .run .hero-title em { animation: em-fill 1s ease-out 9.0s forwards, em-refill-loop 6.36s ease-in-out 10.0s infinite; }
-  .skip .hero-title em { color: var(--gold-hi) !important; -webkit-text-stroke: 0 !important; animation: none !important; }
-  @keyframes em-fill { to { color: var(--gold-hi); -webkit-text-stroke: 0 transparent; } }
-  @keyframes em-refill-loop {
-    0% { color: var(--gold-hi); -webkit-text-stroke: 0 transparent; }
-    8% { color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--gold-hi) 80%, transparent); }
-    35%, 100% { color: var(--gold-hi); -webkit-text-stroke: 0 transparent; }
+    color: var(--gold-hi);
   }
   .hero-quote { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(1.1rem, 1.8vw, 1.3rem); color: color-mix(in srgb, var(--paper) 85%, transparent); margin: 0 0 1.6rem; opacity: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
   .run .hero-quote { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 8.7s forwards; }
@@ -839,6 +828,44 @@
           milestone.classList.add('is-open');
           head.setAttribute('aria-expanded', 'true');
         }
+      });
+    });
+  }
+
+  var heroTitleLetters = document.querySelectorAll('.hero-title .letter > span');
+  heroTitleLetters.forEach(function (span) {
+    span.addEventListener('animationend', function (e) {
+      if (e.animationName !== 'line-up') return;
+      span.style.transform = 'translateY(0)';
+      span.style.animation = 'none';
+    });
+  });
+  if (heroTitleLetters.length && window.matchMedia('(hover: hover)').matches) {
+    var magnetX = -999, magnetY = -999, magnetTicking = false;
+    var MAGNET_RADIUS = 85;
+    document.addEventListener('mousemove', function (e) {
+      magnetX = e.clientX;
+      magnetY = e.clientY;
+      if (magnetTicking) return;
+      magnetTicking = true;
+      requestAnimationFrame(function () {
+        heroTitleLetters.forEach(function (span) {
+          var rect = span.getBoundingClientRect();
+          var cx = rect.left + rect.width / 2;
+          var cy = rect.top + rect.height / 2;
+          var dx = magnetX - cx;
+          var dy = magnetY - cy;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MAGNET_RADIUS) {
+            var strength = 1 - dist / MAGNET_RADIUS;
+            var pushX = -dx * 0.4 * strength;
+            var pushY = -dy * 0.4 * strength;
+            span.style.transform = 'translate(' + pushX.toFixed(1) + 'px,' + pushY.toFixed(1) + 'px)';
+          } else {
+            span.style.transform = 'translateY(0)';
+          }
+        });
+        magnetTicking = false;
       });
     });
   }
