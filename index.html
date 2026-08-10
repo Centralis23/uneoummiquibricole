@@ -75,18 +75,34 @@
 
   /* vidéo de fond en bannière, texte centré par-dessus */
   .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; background: var(--espresso); }
-  .hero-split { position: absolute; inset: 0; display: flex; }
-  .hero-split-half { position: relative; flex: 1; overflow: hidden; opacity: 0; }
-  .run .hero-split-half { animation: rise-in 1.4s ease-out 4.8s forwards; }
-  .skip .hero-split-half { opacity: 1 !important; animation: none !important; }
-  .hero-split-half img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.8); }
-  .hero-split-half::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.15); }
-  .hero-split-half + .hero-split-half { border-left: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); }
+  .hero-split { position: absolute; inset: 0; opacity: 0; }
+  .run .hero-split { animation: rise-in 1.4s ease-out 4.8s forwards; }
+  .skip .hero-split { opacity: 1 !important; animation: none !important; }
+  .hero-split-img { position: absolute; inset: 0; overflow: hidden; }
+  .hero-split-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 32%; display: block; filter: brightness(0.8); }
+  .hero-split-after { z-index: 1; }
+  .hero-split-before { z-index: 2; clip-path: inset(0 50% 0 0); }
   .hero-split-label {
-    position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 2;
+    position: absolute; bottom: 1.5rem; z-index: 3;
     font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--paper); text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+    color: var(--paper); text-shadow: 0 1px 6px rgba(0,0,0,0.5); pointer-events: none;
   }
+  .hero-split-label-before { left: 1.5rem; }
+  .hero-split-label-after { right: 1.5rem; }
+  .hero-split-handle {
+    position: absolute; top: 0; bottom: 0; left: 50%; z-index: 4; width: 2px;
+    background: var(--gold); transform: translateX(-50%); cursor: ew-resize; touch-action: none;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+  }
+  .hero-split-grip {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--paper);
+    display: flex; align-items: center; justify-content: center; gap: 0.2rem;
+    box-shadow: 0 0.5rem 1.5rem -0.25rem rgba(0,0,0,0.45); pointer-events: none;
+  }
+  .hero-split-grip span { width: 0; height: 0; border-top: 0.35rem solid transparent; border-bottom: 0.35rem solid transparent; }
+  .hero-split-grip span:first-child { border-right: 0.45rem solid var(--espresso); }
+  .hero-split-grip span:last-child { border-left: 0.45rem solid var(--espresso); }
   .hero-video-tint {
     position: absolute; inset: 0; z-index: 1;
     background: var(--gold); mix-blend-mode: soft-light; opacity: 0.35;
@@ -359,17 +375,21 @@
     .pillars {
       position: absolute; top: 100%; left: 0; right: 0; z-index: 4;
       flex-direction: column; align-items: stretch; gap: 0;
-      background: color-mix(in srgb, var(--espresso) 96%, black);
+      background: #FFFFFF; color: var(--fg); text-shadow: none;
+      box-shadow: 0 1.25rem 2.5rem -1rem rgba(0,0,0,0.25);
       max-height: 0; opacity: 0; overflow: hidden; pointer-events: none;
-      padding: 0 1.1rem; transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      padding: 0 1.25rem; transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
     }
-    .nav.is-open .pillars { max-height: 22rem; opacity: 1; pointer-events: auto; padding: 0.5rem 1.1rem 1.25rem; }
-    .pillars li { width: 100%; padding: 0.75rem 0; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); font-size: 0.85rem; }
-    .pillars-cta { border-bottom: none !important; padding: 1rem 0 0 !important; }
+    .nav.is-open .pillars { max-height: 22rem; opacity: 1; pointer-events: auto; padding: 0.75rem 1.25rem 1.35rem; }
+    .pillars li { width: 100%; padding: 0.9rem 0; border-bottom: 1px solid var(--hairline); font-size: 0.85rem; }
+    .pillars-cta { border-bottom: none !important; padding: 1.1rem 0 0 !important; }
     .pillars-cta .cta-nav { width: 100%; padding: 0.85rem 1rem; font-size: 0.75rem; text-align: center; }
     .pillars li:last-child { border-bottom: none; }
     .hero-main { min-height: auto; height: 78vh; }
     .hero-split-label { font-size: 0.6rem; bottom: 0.75rem; letter-spacing: 0.16em; }
+    .hero-split-label-before { left: 0.9rem; }
+    .hero-split-label-after { right: 0.9rem; }
+    .hero-split-grip { width: 2.25rem; height: 2.25rem; }
     .story { padding-left: 1.5rem; padding-right: 1.5rem; }
     .story-hook { max-width: none; margin-left: auto; margin-right: auto; }
     .story-cards { grid-template-columns: 1fr; gap: 1.1rem; }
@@ -415,14 +435,17 @@
     </nav>
 
     <div class="hero-main">
-      <div class="hero-split">
-        <div class="hero-split-half">
-          <img src="chambre-avant.jpg" alt="Chambre avant rénovation" />
-          <span class="hero-split-label">Avant</span>
-        </div>
-        <div class="hero-split-half">
+      <div class="hero-split" id="heroSplit">
+        <div class="hero-split-img hero-split-after">
           <img src="chambre-apres.jpg" alt="Chambre après rénovation" />
-          <span class="hero-split-label">Après</span>
+        </div>
+        <div class="hero-split-img hero-split-before" id="heroSplitBefore">
+          <img src="chambre-avant.jpg" alt="Chambre avant rénovation" />
+        </div>
+        <span class="hero-split-label hero-split-label-before">Avant</span>
+        <span class="hero-split-label hero-split-label-after">Après</span>
+        <div class="hero-split-handle" id="heroSplitHandle">
+          <div class="hero-split-grip"><span></span><span></span></div>
         </div>
       </div>
       <div class="hero-video-tint"></div>
@@ -827,6 +850,33 @@
       var scale = 1 + progress * 0.08;
       heroSplitForScroll.style.transform = 'scale(' + scale + ')';
     }, { passive: true });
+  }
+
+  var heroSplit = document.getElementById('heroSplit');
+  var heroSplitBefore = document.getElementById('heroSplitBefore');
+  var heroSplitHandle = document.getElementById('heroSplitHandle');
+  if (heroSplit && heroSplitBefore && heroSplitHandle) {
+    var dragging = false;
+    function setSplit(percent) {
+      percent = Math.min(Math.max(percent, 0), 100);
+      heroSplitBefore.style.clipPath = 'inset(0 ' + (100 - percent) + '% 0 0)';
+      heroSplitHandle.style.left = percent + '%';
+    }
+    function moveFromEvent(e) {
+      var rect = heroSplit.getBoundingClientRect();
+      var x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      setSplit((x / rect.width) * 100);
+    }
+    heroSplitHandle.addEventListener('mousedown', function (e) { dragging = true; e.preventDefault(); });
+    heroSplitHandle.addEventListener('touchstart', function () { dragging = true; }, { passive: true });
+    window.addEventListener('mousemove', function (e) { if (dragging) moveFromEvent(e); });
+    window.addEventListener('touchmove', function (e) { if (dragging) moveFromEvent(e); }, { passive: true });
+    window.addEventListener('mouseup', function () { dragging = false; });
+    window.addEventListener('touchend', function () { dragging = false; });
+    heroSplit.addEventListener('click', function (e) {
+      if (e.target === heroSplitHandle || heroSplitHandle.contains(e.target)) return;
+      moveFromEvent(e);
+    });
   }
 
   function hideIntroControls() {
