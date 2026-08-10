@@ -99,6 +99,15 @@
   }
   .hero-title .line { display: block; }
   .hero-title .word { display: inline-flex; }
+  .hero-title .word-accent { position: relative; }
+  .hero-title .word-accent::after {
+    content: ''; position: absolute; left: 0.1em; right: 0.5em; bottom: -0.08em; height: 2px;
+    background: var(--gold); transform-origin: left; transform: scaleX(0);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--gold) 60%, transparent);
+  }
+  .run .hero-title .word-accent::after { animation: underline-draw 0.7s cubic-bezier(0.65, 0, 0.35, 1) 9.0s forwards; }
+  .skip .hero-title .word-accent::after { transform: scaleX(1) !important; }
+  @keyframes underline-draw { to { transform: scaleX(1); } }
   .hero-title .letter {
     display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em;
   }
@@ -130,41 +139,32 @@
   .run .hero-actions-inline { animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 8.9s forwards; }
 
   /* section histoire / présentation, entre la bannière et les univers */
-  .story { background: var(--cream); padding: clamp(3rem, 6vw, 6rem) clamp(1.25rem, 6vw, 5rem); overflow: hidden; }
-  .story-grid { max-width: 72rem; margin: 0 auto; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
-  .story-media { position: relative; }
-  .story-photo {
-    width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block;
-    -webkit-mask-image: radial-gradient(ellipse 70% 72% at 50% 45%, black 50%, transparent 96%);
-    mask-image: radial-gradient(ellipse 70% 72% at 50% 45%, black 50%, transparent 96%);
+  .story { position: relative; padding: clamp(3rem, 6vw, 6rem) clamp(1.25rem, 6vw, 5rem); overflow: hidden; background: var(--espresso); }
+  .story-bg-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .story-scrim {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(160deg, color-mix(in srgb, var(--espresso) 92%, transparent) 0%, color-mix(in srgb, var(--espresso) 80%, transparent) 100%);
   }
-  .story-media-badge {
-    position: absolute; left: 50%; bottom: -1rem; z-index: 2; transform: translateX(-50%);
-    width: 6.5rem; height: 6.5rem; border-radius: 50%; background: var(--espresso);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    box-shadow: 0 1.25rem 2.5rem -1rem rgba(0,0,0,0.45);
-  }
-  .story-media-badge-word { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-hi); }
-  .story-media-badge-year { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--paper); }
-  .story-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
-  .story-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: clamp(2rem, 3.6vw, 2.9rem); color: var(--fg); margin: 0 0 2rem; }
-  .story-hook { font-size: 1.05rem; line-height: 1.7; color: var(--fg); margin: 0 0 1.75rem; max-width: 34rem; }
-  .story-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 0; }
+  .story-inner { position: relative; z-index: 2; max-width: 56rem; margin: 0 auto; text-align: center; }
+  .story-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-hi); margin: 0 0 1rem; }
+  .story-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: clamp(2rem, 3.6vw, 2.9rem); color: var(--paper); margin: 0 0 1.25rem; }
+  .story-hook { font-size: 1.05rem; line-height: 1.7; color: color-mix(in srgb, var(--paper) 85%, transparent); margin: 0 auto 2.25rem; max-width: 34rem; }
+  .story-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 0; text-align: left; }
   .story-card {
-    box-sizing: border-box; background: #FFFFFF; border: 1px solid var(--hairline); border-radius: 10px;
-    padding: 1.35rem 1.4rem; box-shadow: 0 1.25rem 2.5rem -1.5rem rgba(0,0,0,0.2);
+    box-sizing: border-box; background: color-mix(in srgb, var(--cream) 96%, transparent); border-radius: 10px;
+    padding: 1.35rem 1.4rem; box-shadow: 0 1.5rem 3rem -1.5rem rgba(0,0,0,0.5);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   }
-  .story-card:hover { transform: translateY(-0.3rem); box-shadow: 0 1.75rem 3rem -1.5rem rgba(0,0,0,0.28); }
+  .story-card:hover { transform: translateY(-0.3rem); box-shadow: 0 2rem 3.5rem -1.5rem rgba(0,0,0,0.55); }
   .story-card-year {
     display: block; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600;
     font-size: 1rem; color: var(--gold); margin-bottom: 0.3rem;
   }
   .story-card h3 {
     font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600;
-    font-size: 1.15rem; color: var(--fg); margin: 0 0 0.5rem;
+    font-size: 1.15rem; color: var(--espresso); margin: 0 0 0.5rem;
   }
-  .story-card p { font-size: 0.85rem; line-height: 1.55; color: var(--fg-muted); margin: 0; }
+  .story-card p { font-size: 0.85rem; line-height: 1.55; color: color-mix(in srgb, var(--espresso) 75%, transparent); margin: 0; }
 
   /* bloc de contenu sous la photo, sur fond clair */
   .hero-content { padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(1.5rem, 4vw, 2.5rem); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
@@ -238,7 +238,6 @@
   @keyframes banner-breathe { to { transform: scale(1.02); } }
   @keyframes rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes line-up { to { transform: translateY(0); } }
-  @keyframes letter-wave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.14em); } }
 
   /* ================= ENTRÉE : mur de chantiers (photos + vidéos) ================= */
   .entrance {
@@ -317,6 +316,7 @@
     .nav, .eyebrow, .hero-quote, .hero-sub, .hero-actions, .hero-actions-inline, .hero-rule { opacity: 1 !important; }
     .hero-title .letter > span { transform: translateY(0) !important; }
     .hero-title .letter { overflow: visible !important; }
+    .hero-title .word-accent::after { transform: scaleX(1) !important; }
   }
 
   /* bouton "Passer" : affiche le site immédiatement, sans attendre l'animation d'entrée */
@@ -359,9 +359,6 @@
     .pillars li { width: 100%; padding: 0.75rem 0; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); font-size: 0.85rem; }
     .pillars li:last-child { border-bottom: none; }
     .hero-main { min-height: auto; height: 78vh; }
-    .story-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .story-media { max-width: 20rem; margin: 0 auto; }
-    .story-eyebrow, .story-title, .story-hook { text-align: center; }
     .story-hook { max-width: none; margin-left: auto; margin-right: auto; }
     .story-cards { grid-template-columns: 1fr; }
 
@@ -414,7 +411,7 @@
         <p class="eyebrow">Entreprise par des femmes, pour des femmes</p>
         <h1 class="hero-title">
           <span class="line"><span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 6.900s forwards;">L</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 6.945s forwards;">'</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 6.990s forwards;">a</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.035s forwards;">r</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.080s forwards;">t</span></span></span> <span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.125s forwards;">d</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.170s forwards;">e</span></span></span> <span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.215s forwards;">t</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.260s forwards;">r</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.305s forwards;">a</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.350s forwards;">n</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.395s forwards;">s</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.440s forwards;">f</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.485s forwards;">o</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.530s forwards;">r</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.575s forwards;">m</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.620s forwards;">e</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.665s forwards;">r</span></span></span></span>
-          <span class="line"><span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.710s forwards;">c</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.755s forwards;">h</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.800s forwards;">a</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.845s forwards;">q</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.890s forwards;">u</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.935s forwards;">e</span></span></span> <span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.980s forwards;"><em>i</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.025s forwards;"><em>n</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.070s forwards;"><em>t</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.115s forwards;"><em>é</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.160s forwards;"><em>r</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.205s forwards;"><em>i</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.250s forwards;"><em>e</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.295s forwards;"><em>u</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.340s forwards;"><em>r</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.385s forwards;"><em>.</em></span></span></span></span>
+          <span class="line"><span class="word"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.710s forwards;">c</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.755s forwards;">h</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.800s forwards;">a</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.845s forwards;">q</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.890s forwards;">u</span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.935s forwards;">e</span></span></span> <span class="word word-accent"><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 7.980s forwards;"><em>i</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.025s forwards;"><em>n</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.070s forwards;"><em>t</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.115s forwards;"><em>é</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.160s forwards;"><em>r</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.205s forwards;"><em>i</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.250s forwards;"><em>e</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.295s forwards;"><em>u</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.340s forwards;"><em>r</em></span></span><span class="letter"><span style="animation: line-up 0.55s cubic-bezier(0.16,1,0.3,1) 8.385s forwards;"><em>.</em></span></span></span></span>
         </h1>
         <p class="hero-quote">L'excellence au féminin, à chaque étape de votre projet.</p>
         <div class="hero-actions-inline">
@@ -425,41 +422,33 @@
     </div>
 
     <section class="story" id="histoire">
-      <div class="story-grid">
-        <div class="story-media">
-          <img src="chambre-apres.jpg" alt="Réalisation Une Oummi qui bricole" class="story-photo" />
-          <div class="story-media-badge">
-            <span class="story-media-badge-word">Depuis</span>
-            <span class="story-media-badge-year">2019</span>
+      <img src="chambre-apres.jpg" alt="" class="story-bg-photo" />
+      <div class="story-scrim"></div>
+      <div class="story-inner">
+        <p class="story-eyebrow">Notre histoire</p>
+        <h2 class="story-title">De la passion à la profession</h2>
+        <p class="story-hook">Depuis 2019, un parcours en 4 étapes&nbsp;: de la première rénovation à la transmission du savoir-faire.</p>
+
+        <div class="story-cards">
+          <div class="story-card">
+            <span class="story-card-year">2019</span>
+            <h3>Le déclic</h3>
+            <p>Face au coût d'une rénovation complète, elle choisit d'apprendre elle-même la peinture, la pose de parquet et les finitions.</p>
           </div>
-        </div>
-
-        <div class="story-content">
-          <p class="story-eyebrow">Notre histoire</p>
-          <h2 class="story-title">De la passion à la profession</h2>
-          <p class="story-hook">Un parcours en 4 étapes.</p>
-
-          <div class="story-cards">
-            <div class="story-card">
-              <span class="story-card-year">2019</span>
-              <h3>Le déclic</h3>
-              <p>Le devis pour rénover son appartement dépasse son budget&nbsp;: elle décide d'apprendre elle-même la peinture, le parquet et les finitions.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-card-year">2023–24</span>
-              <h3>Une formation pro</h3>
-              <p>Direction le CFA BTP pour se former à la maintenance des bâtiments&nbsp;: peinture, enduits, carrelage, électricité, plomberie, soudure.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-card-year">Août 24</span>
-              <h3>La micro-entreprise</h3>
-              <p>Naissance d'« Une Oummi qui bricole », une entreprise fondée par une femme, pensée pour les femmes.</p>
-            </div>
-            <div class="story-card">
-              <span class="story-card-year">Aujourd'hui</span>
-              <h3>Transmettre</h3>
-              <p>Elle accompagne ses clientes avec exigence et anime une association qui apprend les bases du bricolage à d'autres femmes.</p>
-            </div>
+          <div class="story-card">
+            <span class="story-card-year">2023–24</span>
+            <h3>Une formation qualifiante</h3>
+            <p>Elle intègre le CFA BTP pour une formation en maintenance des bâtiments&nbsp;: peinture, enduits, carrelage, électricité, plomberie, soudure.</p>
+          </div>
+          <div class="story-card">
+            <span class="story-card-year">Août 24</span>
+            <h3>La création de l'entreprise</h3>
+            <p>Naissance d'« Une Oummi qui bricole », une micro-entreprise fondée par une femme et pensée pour les femmes.</p>
+          </div>
+          <div class="story-card">
+            <span class="story-card-year">Aujourd'hui</span>
+            <h3>La transmission</h3>
+            <p>Elle accompagne sa clientèle avec exigence et anime une association qui initie d'autres femmes aux bases du bricolage.</p>
           </div>
         </div>
       </div>
@@ -797,48 +786,14 @@
   });
 
   var heroTitleLetters = document.querySelectorAll('.hero-title .letter > span');
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  heroTitleLetters.forEach(function (span, i) {
+  heroTitleLetters.forEach(function (span) {
     span.addEventListener('animationend', function (e) {
       if (e.animationName !== 'line-up') return;
       span.style.transform = 'translateY(0)';
       span.style.animation = 'none';
-      var letter = span.parentElement;
-      letter.style.overflow = 'visible';
-      if (!reducedMotion) {
-        letter.style.animation = 'letter-wave ' + (2.6 + (i % 5) * 0.15) + 's ease-in-out ' + (i * 0.05) + 's infinite';
-      }
+      span.parentElement.style.overflow = 'visible';
     });
   });
-  if (heroTitleLetters.length && window.matchMedia('(hover: hover)').matches) {
-    var magnetX = -999, magnetY = -999, magnetTicking = false;
-    var MAGNET_RADIUS = 85;
-    document.addEventListener('mousemove', function (e) {
-      magnetX = e.clientX;
-      magnetY = e.clientY;
-      if (magnetTicking) return;
-      magnetTicking = true;
-      requestAnimationFrame(function () {
-        heroTitleLetters.forEach(function (span) {
-          var rect = span.getBoundingClientRect();
-          var cx = rect.left + rect.width / 2;
-          var cy = rect.top + rect.height / 2;
-          var dx = magnetX - cx;
-          var dy = magnetY - cy;
-          var dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < MAGNET_RADIUS) {
-            var strength = 1 - dist / MAGNET_RADIUS;
-            var pushX = -dx * 0.4 * strength;
-            var pushY = -dy * 0.4 * strength;
-            span.style.transform = 'translate(' + pushX.toFixed(1) + 'px,' + pushY.toFixed(1) + 'px)';
-          } else {
-            span.style.transform = 'translateY(0)';
-          }
-        });
-        magnetTicking = false;
-      });
-    });
-  }
 
   var universAccordion = document.querySelector('.univers-accordion');
   if (universAccordion && 'IntersectionObserver' in window) {
