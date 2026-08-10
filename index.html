@@ -134,15 +134,12 @@
   .story-grid { max-width: 72rem; margin: 0 auto; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
   .story-media { position: relative; }
   .story-photo {
-    width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 4px; display: block;
-    box-shadow: 0 2.5rem 4rem -1.5rem rgba(0,0,0,0.35);
-  }
-  .story-media-frame {
-    position: absolute; top: 1.25rem; left: -1.25rem; right: 1.25rem; bottom: -1.25rem;
-    border: 1.5px solid var(--gold); border-radius: 4px; z-index: -1;
+    width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block;
+    -webkit-mask-image: radial-gradient(ellipse 70% 72% at 50% 45%, black 50%, transparent 96%);
+    mask-image: radial-gradient(ellipse 70% 72% at 50% 45%, black 50%, transparent 96%);
   }
   .story-media-badge {
-    position: absolute; right: -1rem; bottom: -1.5rem; z-index: 2;
+    position: absolute; left: 50%; bottom: -1rem; z-index: 2; transform: translateX(-50%);
     width: 6.5rem; height: 6.5rem; border-radius: 50%; background: var(--espresso);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     box-shadow: 0 1.25rem 2.5rem -1rem rgba(0,0,0,0.45);
@@ -152,42 +149,22 @@
   .story-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .story-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: clamp(2rem, 3.6vw, 2.9rem); color: var(--fg); margin: 0 0 2rem; }
   .story-hook { font-size: 1.05rem; line-height: 1.7; color: var(--fg); margin: 0 0 1.75rem; max-width: 34rem; }
-  .story-deck { position: relative; height: clamp(15rem, 22vw, 17rem); margin: 0 0 1.25rem; }
+  .story-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 0; }
   .story-card {
-    position: absolute; inset: 0; box-sizing: border-box;
-    background: linear-gradient(155deg, var(--espresso), #2f2013);
-    border-radius: 14px; padding: 1.75rem 2rem;
-    box-shadow: 0 2rem 3.5rem -1.5rem rgba(0,0,0,0.45);
-    display: flex; flex-direction: column; justify-content: center; gap: 0.5rem;
-    cursor: pointer; user-select: none;
-    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box; background: #FFFFFF; border: 1px solid var(--hairline); border-radius: 10px;
+    padding: 1.35rem 1.4rem; box-shadow: 0 1.25rem 2.5rem -1.5rem rgba(0,0,0,0.2);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   }
-  .story-card[data-stack="0"] { transform: translateY(0) rotate(0deg) scale(1); z-index: 4; }
-  .story-card[data-stack="1"] { transform: translateY(0.6rem) rotate(var(--rot, 0deg)) scale(0.95); z-index: 3; }
-  .story-card[data-stack="2"] { transform: translateY(1.1rem) rotate(calc(var(--rot, 0deg) * -1.2)) scale(0.9); z-index: 2; }
-  .story-card[data-stack="3"] { transform: translateY(1.5rem) rotate(calc(var(--rot, 0deg) * 1.4)) scale(0.85); z-index: 1; }
-  .story-card:not([data-stack="0"]) { pointer-events: none; }
+  .story-card:hover { transform: translateY(-0.3rem); box-shadow: 0 1.75rem 3rem -1.5rem rgba(0,0,0,0.28); }
   .story-card-year {
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600;
-    font-size: 1.05rem; color: var(--gold-hi);
+    display: block; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600;
+    font-size: 1rem; color: var(--gold); margin-bottom: 0.3rem;
   }
   .story-card h3 {
     font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600;
-    font-size: clamp(1.3rem, 2.4vw, 1.6rem); color: var(--paper); margin: 0.15rem 0 0.35rem;
+    font-size: 1.15rem; color: var(--fg); margin: 0 0 0.5rem;
   }
-  .story-card p { font-size: 0.92rem; line-height: 1.6; color: color-mix(in srgb, var(--paper) 78%, transparent); margin: 0; max-width: 30rem; }
-  .story-card-index {
-    position: absolute; right: 1.5rem; bottom: 1.35rem;
-    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.68rem; letter-spacing: 0.14em;
-    color: color-mix(in srgb, var(--paper) 45%, transparent);
-  }
-  .story-deck-next {
-    display: flex; align-items: center; gap: 0.5rem; margin: 0;
-    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--gold); background: none; border: none; padding: 0; cursor: pointer;
-  }
-  .story-deck-next span:last-child { transition: transform 0.25s ease; display: inline-block; }
-  .story-deck-next:hover span:last-child { transform: translateX(0.3rem); }
+  .story-card p { font-size: 0.85rem; line-height: 1.55; color: var(--fg-muted); margin: 0; }
 
   /* bloc de contenu sous la photo, sur fond clair */
   .hero-content { padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(1.5rem, 4vw, 2.5rem); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
@@ -386,10 +363,7 @@
     .story-media { max-width: 20rem; margin: 0 auto; }
     .story-eyebrow, .story-title, .story-hook { text-align: center; }
     .story-hook { max-width: none; margin-left: auto; margin-right: auto; }
-    .story-media-frame { display: none; }
-    .story-deck { height: clamp(14rem, 60vw, 16rem); }
-    .story-card { padding: 1.4rem 1.5rem; }
-    .story-card p { font-size: 0.88rem; }
+    .story-cards { grid-template-columns: 1fr; }
 
     .hero-copy { padding: 1.75rem 1.25rem 2rem; max-width: none; }
     .hero-quote { font-size: 0.85rem; }
@@ -454,7 +428,6 @@
       <div class="story-grid">
         <div class="story-media">
           <img src="chambre-apres.jpg" alt="Réalisation Une Oummi qui bricole" class="story-photo" />
-          <div class="story-media-frame"></div>
           <div class="story-media-badge">
             <span class="story-media-badge-word">Depuis</span>
             <span class="story-media-badge-year">2019</span>
@@ -464,35 +437,30 @@
         <div class="story-content">
           <p class="story-eyebrow">Notre histoire</p>
           <h2 class="story-title">De la passion à la profession</h2>
-          <p class="story-hook">Un parcours en 4 étapes. Touchez la carte pour la suivante.</p>
+          <p class="story-hook">Un parcours en 4 étapes.</p>
 
-          <div class="story-deck" id="storyDeck">
-            <div class="story-card" style="--rot: -3deg;">
+          <div class="story-cards">
+            <div class="story-card">
               <span class="story-card-year">2019</span>
               <h3>Le déclic</h3>
               <p>Le devis pour rénover son appartement dépasse son budget&nbsp;: elle décide d'apprendre elle-même la peinture, le parquet et les finitions.</p>
-              <span class="story-card-index">1 / 4</span>
             </div>
-            <div class="story-card" style="--rot: 2.5deg;">
+            <div class="story-card">
               <span class="story-card-year">2023–24</span>
               <h3>Une formation pro</h3>
               <p>Direction le CFA BTP pour se former à la maintenance des bâtiments&nbsp;: peinture, enduits, carrelage, électricité, plomberie, soudure.</p>
-              <span class="story-card-index">2 / 4</span>
             </div>
-            <div class="story-card" style="--rot: -2deg;">
+            <div class="story-card">
               <span class="story-card-year">Août 24</span>
               <h3>La micro-entreprise</h3>
               <p>Naissance d'« Une Oummi qui bricole », une entreprise fondée par une femme, pensée pour les femmes.</p>
-              <span class="story-card-index">3 / 4</span>
             </div>
-            <div class="story-card" style="--rot: 3.5deg;">
+            <div class="story-card">
               <span class="story-card-year">Aujourd'hui</span>
               <h3>Transmettre</h3>
               <p>Elle accompagne ses clientes avec exigence et anime une association qui apprend les bases du bricolage à d'autres femmes.</p>
-              <span class="story-card-index">4 / 4</span>
             </div>
           </div>
-          <button class="story-deck-next" id="storyDeckNext"><span>Carte suivante</span><span aria-hidden="true">→</span></button>
         </div>
       </div>
     </section>
@@ -827,30 +795,6 @@
       panel.classList.add('is-active');
     });
   });
-
-  var storyDeck = document.getElementById('storyDeck');
-  if (storyDeck) {
-    var deckCards = Array.prototype.slice.call(storyDeck.querySelectorAll('.story-card'));
-    var deckOrder = deckCards.map(function (_, i) { return i; });
-    function renderDeck() {
-      deckOrder.forEach(function (cardIndex, stackPos) {
-        deckCards[cardIndex].setAttribute('data-stack', stackPos);
-      });
-    }
-    function advanceDeck() {
-      deckOrder.push(deckOrder.shift());
-      renderDeck();
-    }
-    renderDeck();
-    storyDeck.addEventListener('click', advanceDeck);
-    storyDeck.setAttribute('role', 'button');
-    storyDeck.setAttribute('tabindex', '0');
-    storyDeck.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); advanceDeck(); }
-    });
-    var storyDeckNext = document.getElementById('storyDeckNext');
-    if (storyDeckNext) storyDeckNext.addEventListener('click', advanceDeck);
-  }
 
   var heroTitleLetters = document.querySelectorAll('.hero-title .letter > span');
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
