@@ -79,7 +79,7 @@
   .run .hero-split { animation: rise-in 1.4s ease-out 4.8s forwards; }
   .skip .hero-split { opacity: 1 !important; animation: none !important; }
   .hero-split-img { position: absolute; inset: 0; overflow: hidden; }
-  .hero-split-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 32%; display: block; filter: brightness(0.8); }
+  .hero-split-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; display: block; filter: brightness(0.8); }
   .hero-split-after { z-index: 1; }
   .hero-split-before { z-index: 2; clip-path: inset(0 50% 0 0); }
   .hero-split-label {
@@ -90,13 +90,16 @@
   .hero-split-label-before { left: 1.5rem; }
   .hero-split-label-after { right: 1.5rem; }
   .hero-split-handle {
-    position: absolute; top: 0; bottom: 0; left: 50%; z-index: 4; width: 2px;
-    background: var(--gold); transform: translateX(-50%); cursor: ew-resize; touch-action: none;
-    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    position: absolute; top: 0; bottom: 0; left: 50%; z-index: 4; width: 3rem;
+    transform: translateX(-50%); cursor: ew-resize; touch-action: none;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-split-handle::before {
+    content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+    background: var(--gold); transform: translateX(-50%); box-shadow: 0 0 12px rgba(0,0,0,0.4);
   }
   .hero-split-grip {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--paper);
+    position: relative; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--paper);
     display: flex; align-items: center; justify-content: center; gap: 0.2rem;
     box-shadow: 0 0.5rem 1.5rem -0.25rem rgba(0,0,0,0.45); pointer-events: none;
   }
@@ -867,12 +870,15 @@
       var x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
       setSplit((x / rect.width) * 100);
     }
-    heroSplitHandle.addEventListener('mousedown', function (e) { dragging = true; e.preventDefault(); });
-    heroSplitHandle.addEventListener('touchstart', function () { dragging = true; }, { passive: true });
-    window.addEventListener('mousemove', function (e) { if (dragging) moveFromEvent(e); });
-    window.addEventListener('touchmove', function (e) { if (dragging) moveFromEvent(e); }, { passive: true });
-    window.addEventListener('mouseup', function () { dragging = false; });
-    window.addEventListener('touchend', function () { dragging = false; });
+    heroSplitHandle.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      heroSplitHandle.setPointerCapture(e.pointerId);
+      moveFromEvent(e);
+      e.preventDefault();
+    });
+    heroSplitHandle.addEventListener('pointermove', function (e) { if (dragging) moveFromEvent(e); });
+    heroSplitHandle.addEventListener('pointerup', function () { dragging = false; });
+    heroSplitHandle.addEventListener('pointercancel', function () { dragging = false; });
     heroSplit.addEventListener('click', function (e) {
       if (e.target === heroSplitHandle || heroSplitHandle.contains(e.target)) return;
       moveFromEvent(e);
