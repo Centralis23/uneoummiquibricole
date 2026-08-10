@@ -157,27 +157,43 @@
   .story-media-badge-year { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--paper); }
   .story-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .story-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: clamp(2rem, 3.6vw, 2.9rem); color: var(--fg); margin: 0 0 2rem; }
-  .story-timeline-v { margin: 0 0 2.25rem; padding-left: 0.15rem; border-left: 1.5px solid var(--hairline); }
-  .story-milestone-v { position: relative; padding: 0 0 1.5rem 1.75rem; }
-  .story-milestone-v:last-child { padding-bottom: 0; }
-  .story-dot { position: absolute; left: -0.4rem; top: 0.3rem; width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px var(--cream); }
-  .story-year { display: block; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--gold); margin: 0 0 0.25rem; }
-  .story-milestone-v p { font-size: 0.9rem; line-height: 1.5; color: var(--fg-muted); margin: 0; }
-  .story-text p { font-size: 1.05rem; line-height: 1.8; color: var(--fg); margin: 0 0 1.4rem; }
-  .story-text p:last-child { margin-bottom: 0; }
-  .story-more-btn {
-    display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0 0;
-    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--gold); background: none; border: none; padding: 0; cursor: pointer;
+  .story-hook { font-size: 1.05rem; line-height: 1.7; color: var(--fg); margin: 0 0 2rem; max-width: 34rem; }
+  .story-timeline-v { border-top: 1px solid var(--hairline); }
+  .story-milestone-v { position: relative; border-bottom: 1px solid var(--hairline); }
+  .story-milestone-head {
+    all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; gap: 1rem;
+    width: 100%; padding: 1.1rem 0.25rem; -webkit-tap-highlight-color: transparent;
   }
-  .story-more-btn span { transition: transform 0.25s ease; display: inline-block; }
-  .story-more-btn.is-open span { transform: rotate(90deg); }
-  .story-text-more {
+  .story-dot {
+    flex: none; width: 0.65rem; height: 0.65rem; border-radius: 50%;
+    background: color-mix(in srgb, var(--espresso) 22%, transparent);
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .story-milestone-v.is-open .story-dot, .story-milestone-head:hover .story-dot {
+    background: var(--gold); transform: scale(1.3); box-shadow: 0 0 0 5px color-mix(in srgb, var(--gold) 16%, transparent);
+  }
+  .story-year {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600;
+    font-size: 1.05rem; color: var(--gold); flex: none; width: 5.5rem;
+  }
+  .story-milestone-label {
+    flex: 1; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.95rem; color: var(--fg);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+  }
+  .story-milestone-head:hover .story-milestone-label { transform: translateX(0.35rem); color: var(--mauve-deep); }
+  .story-milestone-plus {
+    flex: none; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 1.1rem; color: var(--gold);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .story-milestone-v.is-open .story-milestone-plus { transform: rotate(135deg); }
+  .story-milestone-detail {
     display: grid; grid-template-rows: 0fr; opacity: 0; overflow: hidden;
-    transition: grid-template-rows 0.5s ease, opacity 0.4s ease;
+    padding-left: calc(0.65rem + 1rem + 5.5rem);
+    transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
   }
-  .story-text-more > div { min-height: 0; }
-  .story-text-more.is-open { grid-template-rows: 1fr; opacity: 1; margin-top: 1.4rem; }
+  .story-milestone-detail > div { min-height: 0; }
+  .story-milestone-v.is-open .story-milestone-detail { grid-template-rows: 1fr; opacity: 1; }
+  .story-milestone-detail p { font-size: 0.92rem; line-height: 1.6; color: var(--fg-muted); margin: 0 0 1.1rem; padding-right: 1rem; }
 
   /* bloc de contenu sous la photo, sur fond clair */
   .hero-content { padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(1.5rem, 4vw, 2.5rem); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
@@ -361,8 +377,13 @@
     .hero-main { min-height: auto; height: 56vh; }
     .story-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .story-media { max-width: 20rem; margin: 0 auto; }
-    .story-eyebrow, .story-title { text-align: center; }
+    .story-eyebrow, .story-title, .story-hook { text-align: center; }
+    .story-hook { max-width: none; margin-left: auto; margin-right: auto; }
     .story-media-frame { display: none; }
+    .story-milestone-head { gap: 0.7rem; }
+    .story-year { width: auto; white-space: nowrap; font-size: 0.82rem; }
+    .story-milestone-label { font-size: 0.85rem; }
+    .story-milestone-detail { padding-left: 2.5rem; }
 
     .hero-copy { padding: 1.75rem 1.25rem 2rem; max-width: none; }
     .hero-quote { font-size: 0.85rem; }
@@ -436,42 +457,54 @@
         <div class="story-content">
           <p class="story-eyebrow">Notre histoire</p>
           <h2 class="story-title">De la passion à la profession</h2>
+          <p class="story-hook">Rénover son propre appartement, apprendre seule, se former, puis transmettre&nbsp;: un parcours d'artisane devenue entrepreneure — et formatrice pour d'autres femmes. Touchez une étape pour en savoir plus.</p>
 
-          <div class="story-timeline-v">
-            <div class="story-milestone-v">
-              <span class="story-dot"></span>
-              <div>
+          <div class="story-timeline-v" id="storyTimeline">
+            <div class="story-milestone-v is-open">
+              <button class="story-milestone-head" aria-expanded="true">
+                <span class="story-dot"></span>
                 <span class="story-year">2019</span>
-                <p>Le déclic : rénover mon propre appartement m'a poussée à apprendre le bricolage par moi-même.</p>
-              </div>
+                <span class="story-milestone-label">Le déclic</span>
+                <span class="story-milestone-plus">+</span>
+              </button>
+              <div class="story-milestone-detail"><div>
+                <p>Le devis pour rénover son appartement dépasse son budget&nbsp;: elle décide d'apprendre elle-même la peinture, le parquet et les finitions.</p>
+              </div></div>
             </div>
             <div class="story-milestone-v">
-              <span class="story-dot"></span>
-              <div>
-                <span class="story-year">2023–2024</span>
-                <p>Formation en maintenance des bâtiments au CFA BTP, pour professionnaliser mon savoir-faire.</p>
-              </div>
+              <button class="story-milestone-head" aria-expanded="false">
+                <span class="story-dot"></span>
+                <span class="story-year">2023–24</span>
+                <span class="story-milestone-label">Une formation pro</span>
+                <span class="story-milestone-plus">+</span>
+              </button>
+              <div class="story-milestone-detail"><div>
+                <p>Direction le CFA BTP pour se former à la maintenance des bâtiments&nbsp;: peinture, enduits, carrelage, électricité, plomberie, soudure.</p>
+              </div></div>
             </div>
             <div class="story-milestone-v">
-              <span class="story-dot"></span>
-              <div>
-                <span class="story-year">Août 2024</span>
-                <p>Création de la micro-entreprise « Une Oummi qui bricole », par une femme, pour les femmes.</p>
-              </div>
+              <button class="story-milestone-head" aria-expanded="false">
+                <span class="story-dot"></span>
+                <span class="story-year">Août 24</span>
+                <span class="story-milestone-label">La micro-entreprise</span>
+                <span class="story-milestone-plus">+</span>
+              </button>
+              <div class="story-milestone-detail"><div>
+                <p>Naissance d'« Une Oummi qui bricole », une entreprise fondée par une femme, pensée pour les femmes.</p>
+              </div></div>
+            </div>
+            <div class="story-milestone-v">
+              <button class="story-milestone-head" aria-expanded="false">
+                <span class="story-dot"></span>
+                <span class="story-year">Aujourd'hui</span>
+                <span class="story-milestone-label">Transmettre</span>
+                <span class="story-milestone-plus">+</span>
+              </button>
+              <div class="story-milestone-detail"><div>
+                <p>Elle accompagne ses clientes avec exigence et anime une association qui apprend les bases du bricolage à d'autres femmes.</p>
+              </div></div>
             </div>
           </div>
-
-          <div class="story-text">
-            <p>Tout commence en 2019, quand je veux rénover mon appartement de 96&nbsp;m². Le devis pour la peinture et le parquet dépasse largement mon budget&nbsp;: il faut choisir entre abandonner le projet ou apprendre à le faire moi-même. Je choisis d'apprendre.</p>
-            <p>Naturellement manuelle et curieuse, je me forme seule&nbsp;: premiers outils, premières techniques, premières erreurs aussi. Mes gestes s'affinent, ma passion pour la rénovation devient une évidence — et mes avant/après partagés en ligne convainquent mon entourage que ce savoir-faire mérite d'être proposé à d'autres.</p>
-          </div>
-          <button class="story-more-btn" id="storyMoreBtn">Lire la suite <span>→</span></button>
-          <div class="story-text-more" id="storyMore"><div class="story-text">
-            <p>En 2023, je professionnalise ce parcours&nbsp;: découverte de la menuiserie, puis une formation en maintenance des bâtiments au CFA BTP (novembre 2023 – juillet 2024), couvrant peinture, enduits, carrelage, électricité, plomberie, soudure et bien plus — une vision globale des métiers du bâtiment.</p>
-            <p>En août 2024 naît la micro-entreprise « Une Oummi qui bricole », avec une conviction simple&nbsp;: une femme peut apprendre, comprendre et réaliser des projets qui lui ressemblent, accompagnée par une professionnelle à l'écoute.</p>
-            <p>En parallèle, je crée une association pour transmettre ces bases à d'autres femmes — poser une étagère, fixer un miroir, peindre un mur — dans des ateliers accessibles et conviviaux, pour donner confiance et autonomie.</p>
-            <p>Aujourd'hui, « Une Oummi qui bricole » accompagne ses clients avec la même exigence&nbsp;: qualité, soin des finitions, et écoute des besoins de chacun.</p>
-          </div></div>
         </div>
       </div>
     </section>
@@ -792,13 +825,21 @@
     });
   });
 
-  var storyMoreBtn = document.getElementById('storyMoreBtn');
-  var storyMore = document.getElementById('storyMore');
-  if (storyMoreBtn && storyMore) {
-    storyMoreBtn.addEventListener('click', function () {
-      var open = storyMore.classList.toggle('is-open');
-      storyMoreBtn.classList.toggle('is-open', open);
-      storyMoreBtn.firstChild.textContent = open ? 'Lire moins ' : 'Lire la suite ';
+  var storyTimeline = document.getElementById('storyTimeline');
+  if (storyTimeline) {
+    storyTimeline.querySelectorAll('.story-milestone-head').forEach(function (head) {
+      head.addEventListener('click', function () {
+        var milestone = head.parentElement;
+        var willOpen = !milestone.classList.contains('is-open');
+        storyTimeline.querySelectorAll('.story-milestone-v').forEach(function (m) {
+          m.classList.remove('is-open');
+          m.querySelector('.story-milestone-head').setAttribute('aria-expanded', 'false');
+        });
+        if (willOpen) {
+          milestone.classList.add('is-open');
+          head.setAttribute('aria-expanded', 'true');
+        }
+      });
     });
   }
 
