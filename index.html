@@ -103,6 +103,11 @@
       display: block; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.78);
     }
     .hero-photo img { display: none; }
+    /* Cormorant ne rend pas bien a la taille du titre sur grand ecran : on revient a Playfair Display */
+    .hero-title, .hero-title em, .hero-quote, .manifesto-text { font-family: 'Playfair Display', ui-serif, Georgia, serif; }
+    .hero-title { font-weight: 400; letter-spacing: normal; }
+    .hero-quote { font-weight: 400; letter-spacing: normal; }
+    .manifesto-text { font-weight: 400; }
   }
   .hero-video-tint {
     position: absolute; inset: 0; z-index: 1;
@@ -119,8 +124,7 @@
   }
   .eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-hi); margin: 0 0 1.1rem; opacity: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
   .hero-title {
-    /* test : meme police que le texte-manifeste (Playfair Display italique) */
-    position: relative; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic;
+    position: relative; font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-style: normal;
     font-size: clamp(2.7rem, 6.2vw, 4.7rem); line-height: 1.08; margin: 0 0 1.1rem; font-weight: 500;
     letter-spacing: 0.01em;
     max-width: 44rem; text-shadow: 0 2px 16px rgba(0,0,0,0.45);
@@ -157,7 +161,7 @@
   .run .type-cursor { animation: cursor-blink 0.5s steps(1) 2.85s 3 forwards; }
   .skip .type-cursor { display: none; }
   .hero-title em {
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 500; padding: 0 0.05em;
+    font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-style: normal; font-weight: 500; padding: 0 0.05em;
     color: var(--gold-hi);
   }
   .hero-quote { font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-style: normal; font-weight: 500; font-size: clamp(1.15rem, 1.9vw, 1.4rem); color: color-mix(in srgb, var(--paper) 85%, transparent); margin: 0 0 1.6rem; opacity: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.4); letter-spacing: 0.015em; }
@@ -218,7 +222,7 @@
   .manifesto { background: var(--cream); padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 6vw, 5rem); }
   .manifesto-inner { max-width: 56rem; margin: 0 auto; }
   .manifesto-text {
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 500;
+    font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-style: normal; font-weight: 500;
     font-size: clamp(1.6rem, 3.6vw, 2.75rem); line-height: 1.5; text-align: center; margin: 0;
   }
   .mf-word { color: color-mix(in srgb, var(--fg) 18%, transparent); transition: color 0.5s ease; }
@@ -494,13 +498,14 @@
     <section class="manifesto" id="manifeste">
       <div class="manifesto-inner">
         <p class="manifesto-text" id="manifestoText">
-          <span class="mf-word">Rénover</span> <span class="mf-word">un</span> <span class="mf-word">intérieur,</span>
-          <span class="mf-word">c'est</span> <span class="mf-word">un</span> <span class="mf-word">métier</span> <span class="mf-word">de</span>
-          <span class="mf-word mf-accent">précision</span> <span class="mf-word">et</span> <span class="mf-word mf-accent">d'écoute.</span>
-          <span class="mf-word">Nous</span> <span class="mf-word">apportons</span> <span class="mf-word">la</span> <span class="mf-word">même</span>
-          <span class="mf-word mf-accent">exigence</span> <span class="mf-word">à</span> <span class="mf-word">chaque</span> <span class="mf-word">projet,</span>
-          <span class="mf-word">du</span> <span class="mf-word">premier</span> <span class="mf-word">échange</span>
-          <span class="mf-word">jusqu'à</span> <span class="mf-word">la</span> <span class="mf-word">dernière</span> <span class="mf-word">finition.</span>
+          <span class="mf-word">Une</span> <span class="mf-word">équipe</span> <span class="mf-word">de</span> <span class="mf-word">femmes</span>
+          <span class="mf-word">formées</span> <span class="mf-word">aux</span> <span class="mf-word">métiers</span> <span class="mf-word">du</span> <span class="mf-word">bâtiment,</span>
+          <span class="mf-word">alliant</span> <span class="mf-word mf-accent">savoir-faire</span> <span class="mf-word mf-accent">technique</span>
+          <span class="mf-word">et</span> <span class="mf-word">sens</span> <span class="mf-word">du</span> <span class="mf-word">détail</span> —
+          <span class="mf-word">pour</span> <span class="mf-word">des</span> <span class="mf-word">travaux</span> <span class="mf-word">menés</span>
+          <span class="mf-word mf-accent">avec</span> <span class="mf-word mf-accent">sérieux,</span>
+          <span class="mf-word">du</span> <span class="mf-word">premier</span> <span class="mf-word">échange</span> <span class="mf-word">à</span>
+          <span class="mf-word">la</span> <span class="mf-word">remise</span> <span class="mf-word">des</span> <span class="mf-word">clés.</span>
         </p>
       </div>
     </section>
