@@ -216,38 +216,8 @@
   .mf-word.is-lit { color: var(--fg); }
   .mf-word.mf-accent.is-lit { color: var(--gold); }
 
-  /* ================= COMMENT CA MARCHE (etapes interactives) ================= */
-  .process { background: var(--cream); padding: 0 clamp(1.25rem, 6vw, 5rem) clamp(4rem, 8vw, 6rem); }
-  .process-inner { max-width: 52rem; margin: 0 auto; }
-  .process-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 0.9rem; text-align: center; }
-  .process-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: normal; font-weight: 500; font-size: clamp(1.6rem, 3vw, 2.3rem); text-align: center; margin: 0 0 3rem; color: var(--fg); }
-  .process-steps { border-top: 1px solid var(--hairline); }
-  .process-step { border-bottom: 1px solid var(--hairline); }
-  .process-step-head {
-    display: flex; align-items: baseline; gap: 1.5rem; width: 100%; text-align: left;
-    background: none; border: none; cursor: pointer; padding: 1.5rem 0; font: inherit; color: inherit;
-  }
-  .process-step-num {
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 500;
-    font-size: 1.4rem; color: var(--gold); flex: none; width: 2.5rem;
-  }
-  .process-step-name {
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-weight: 500; font-size: clamp(1.1rem, 2vw, 1.4rem);
-    color: var(--fg); flex: 1;
-  }
-  .process-step-icon { flex: none; width: 1.1rem; height: 1.1rem; position: relative; opacity: 0.6; }
-  .process-step-icon::before, .process-step-icon::after { content: ''; position: absolute; background: var(--fg); border-radius: 1px; transition: transform 0.35s ease; }
-  .process-step-icon::before { left: 0; top: 50%; width: 100%; height: 1.5px; transform: translateY(-50%); }
-  .process-step-icon::after { top: 0; left: 50%; width: 1.5px; height: 100%; transform: translateX(-50%); }
-  .process-step.is-active .process-step-icon::after { transform: translateX(-50%) scaleY(0); }
-  .process-step-body-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-  .process-step.is-active .process-step-body-wrap { grid-template-rows: 1fr; }
-  .process-step-body { overflow: hidden; }
-  .process-step-body p { margin: 0 0 1.5rem; padding-left: calc(2.5rem + 1.5rem); max-width: 34rem; color: var(--fg-muted); line-height: 1.6; }
   @media (max-width: 720px) {
-    .process-step-body p { padding-left: 0; }
     .manifesto { padding: 3rem 1.25rem 3.5rem; }
-    .process { padding: 0 1.25rem 3.5rem; }
   }
 
   .univers { position: relative; padding: clamp(1rem, 3vw, 2rem) clamp(1.25rem, 6vw, 5rem) clamp(3rem, 6vw, 5rem); }
@@ -521,63 +491,6 @@
           <span class="mf-word">qui</span> <span class="mf-word">ont</span> <span class="mf-word">fait</span> <span class="mf-word">de</span> <span class="mf-word">leur</span>
           <span class="mf-word">passion</span> <span class="mf-word">un</span> <span class="mf-word">métier.</span>
         </p>
-      </div>
-    </section>
-
-    <section class="process" id="process">
-      <div class="process-inner">
-        <p class="process-eyebrow">Comment ça marche</p>
-        <h2 class="process-title">De la prise de contact à la remise des clés</h2>
-        <div class="process-steps" id="processSteps">
-          <div class="process-step is-active" data-step="1">
-            <button class="process-step-head" aria-expanded="true">
-              <span class="process-step-num">01</span>
-              <span class="process-step-name">Prise de contact</span>
-              <span class="process-step-icon"></span>
-            </button>
-            <div class="process-step-body-wrap">
-              <div class="process-step-body">
-                <p>Vous nous présentez votre projet par téléphone, message ou formulaire. On échange sur vos besoins et vos contraintes.</p>
-              </div>
-            </div>
-          </div>
-          <div class="process-step" data-step="2">
-            <button class="process-step-head" aria-expanded="false">
-              <span class="process-step-num">02</span>
-              <span class="process-step-name">Devis &amp; visite</span>
-              <span class="process-step-icon"></span>
-            </button>
-            <div class="process-step-body-wrap">
-              <div class="process-step-body">
-                <p>Visite sur place si nécessaire, puis un devis détaillé et transparent, sans surprise à la fin.</p>
-              </div>
-            </div>
-          </div>
-          <div class="process-step" data-step="3">
-            <button class="process-step-head" aria-expanded="false">
-              <span class="process-step-num">03</span>
-              <span class="process-step-name">Réalisation</span>
-              <span class="process-step-icon"></span>
-            </button>
-            <div class="process-step-body-wrap">
-              <div class="process-step-body">
-                <p>Les travaux sont menés avec précision, dans le respect des délais annoncés et de votre quotidien.</p>
-              </div>
-            </div>
-          </div>
-          <div class="process-step" data-step="4">
-            <button class="process-step-head" aria-expanded="false">
-              <span class="process-step-num">04</span>
-              <span class="process-step-name">Suivi &amp; finitions</span>
-              <span class="process-step-icon"></span>
-            </button>
-            <div class="process-step-body-wrap">
-              <div class="process-step-body">
-                <p>Un dernier passage pour peaufiner les détails et s'assurer que tout vous convient parfaitement.</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -969,22 +882,6 @@
   } else {
     mfWords.forEach(function (w) { w.classList.add('is-lit'); });
   }
-
-  var processSteps = document.querySelectorAll('.process-step');
-  processSteps.forEach(function (step) {
-    var head = step.querySelector('.process-step-head');
-    head.addEventListener('click', function () {
-      var wasActive = step.classList.contains('is-active');
-      processSteps.forEach(function (s) {
-        s.classList.remove('is-active');
-        s.querySelector('.process-step-head').setAttribute('aria-expanded', 'false');
-      });
-      if (!wasActive) {
-        step.classList.add('is-active');
-        head.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
 
   var heroPhotoForScroll = document.querySelector('.hero-photo');
   var heroMainForScroll = document.querySelector('.hero-main');
