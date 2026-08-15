@@ -112,6 +112,9 @@
     .hero-photo img { display: none; }
     .manifesto-inner { max-width: 66rem; }
     .manifesto-text { font-size: clamp(2.6rem, 4vw, 3.4rem); line-height: 1.4; }
+    /* a cette taille le texte tient dans l'ecran d'un coup : l'effet mot-par-mot au scroll ne fonctionne plus, on l'enleve */
+    .mf-word { color: var(--fg) !important; }
+    .mf-word.mf-accent { color: var(--gold) !important; }
   }
   .hero-video-tint {
     position: absolute; inset: 0; z-index: 1;
