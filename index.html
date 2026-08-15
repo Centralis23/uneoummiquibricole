@@ -97,8 +97,8 @@
     filter: brightness(0.78);
   }
   @media (min-width: 721px) {
-    /* sur les grands ecrans, photo dediee (mains qui peignent) avec de l'espace de part et d'autre : se pretente mieux a un cadrage large */
-    .hero-photo img { object-position: 50% 38%; }
+    /* sur les grands ecrans, photo dediee (salon renove) : cadrage centre sur le meuble tv */
+    .hero-photo img { object-position: 50% 46%; }
   }
   .hero-video-tint {
     position: absolute; inset: 0; z-index: 1;
@@ -116,7 +116,7 @@
   .eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-hi); margin: 0 0 1.1rem; opacity: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
   .hero-title {
     position: relative; font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-style: normal;
-    font-size: clamp(2.8rem, 6.4vw, 4.9rem); line-height: 1.08; margin: 0 0 1.1rem; font-weight: 300;
+    font-size: clamp(2.7rem, 6.2vw, 4.7rem); line-height: 1.08; margin: 0 0 1.1rem; font-weight: 500;
     letter-spacing: 0.01em;
     max-width: 44rem; text-shadow: 0 2px 16px rgba(0,0,0,0.45);
     color: var(--paper);
@@ -431,7 +431,7 @@
     <div class="hero-main">
       <div class="hero-photo">
         <picture>
-          <source media="(min-width: 721px)" srcset="hero-photo.jpg">
+          <source media="(min-width: 721px)" srcset="salon-photo.jpg">
           <img src="chambre-apres.jpg" alt="Une Oummi qui bricole, entreprise de rénovation par des femmes" />
         </picture>
       </div>
