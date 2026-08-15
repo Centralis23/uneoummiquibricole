@@ -73,39 +73,15 @@
   .nav.is-open .nav-burger span:nth-child(2) { opacity: 0; }
   .nav.is-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* vidéo de fond en bannière, texte centré par-dessus */
+  /* photo de fond en bannière, texte centré par-dessus */
   .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; background: var(--espresso); }
-  .hero-split { position: absolute; inset: 0; opacity: 0; }
-  .run .hero-split { animation: rise-in 1.4s ease-out 4.8s forwards; }
-  .skip .hero-split { opacity: 1 !important; animation: none !important; }
-  .hero-split-img { position: absolute; inset: 0; overflow: hidden; }
-  .hero-split-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; display: block; filter: brightness(0.8); }
-  .hero-split-after { z-index: 1; }
-  .hero-split-before { z-index: 2; clip-path: inset(0 50% 0 0); }
-  .hero-split-label {
-    position: absolute; bottom: 1.5rem; z-index: 3;
-    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--paper); text-shadow: 0 1px 6px rgba(0,0,0,0.5); pointer-events: none;
+  .hero-photo { position: absolute; inset: 0; opacity: 0; }
+  .run .hero-photo { animation: rise-in 1.4s ease-out 4.8s forwards; }
+  .skip .hero-photo { opacity: 1 !important; animation: none !important; }
+  .hero-photo img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block;
+    filter: brightness(0.78);
   }
-  .hero-split-label-before { left: 1.5rem; }
-  .hero-split-label-after { right: 1.5rem; }
-  .hero-split-handle {
-    position: absolute; top: 0; bottom: 0; left: 50%; z-index: 4; width: 3rem;
-    transform: translateX(-50%); cursor: ew-resize; touch-action: none;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-split-handle::before {
-    content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
-    background: var(--gold); transform: translateX(-50%); box-shadow: 0 0 12px rgba(0,0,0,0.4);
-  }
-  .hero-split-grip {
-    position: relative; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--paper);
-    display: flex; align-items: center; justify-content: center; gap: 0.2rem;
-    box-shadow: 0 0.5rem 1.5rem -0.25rem rgba(0,0,0,0.45); pointer-events: none;
-  }
-  .hero-split-grip span { width: 0; height: 0; border-top: 0.35rem solid transparent; border-bottom: 0.35rem solid transparent; }
-  .hero-split-grip span:first-child { border-right: 0.45rem solid var(--espresso); }
-  .hero-split-grip span:last-child { border-left: 0.45rem solid var(--espresso); }
   .hero-video-tint {
     position: absolute; inset: 0; z-index: 1;
     background: var(--gold); mix-blend-mode: soft-light; opacity: 0.35;
@@ -389,10 +365,6 @@
     .pillars-cta .cta-nav { width: 100%; padding: 0.85rem 1rem; font-size: 0.75rem; text-align: center; }
     .pillars li:last-child { border-bottom: none; }
     .hero-main { min-height: auto; height: 78vh; }
-    .hero-split-label { font-size: 0.6rem; bottom: 0.75rem; letter-spacing: 0.16em; }
-    .hero-split-label-before { left: 0.9rem; }
-    .hero-split-label-after { right: 0.9rem; }
-    .hero-split-grip { width: 2.25rem; height: 2.25rem; }
     .story { padding-left: 1.5rem; padding-right: 1.5rem; }
     .story-hook { max-width: none; margin-left: auto; margin-right: auto; }
     .story-cards { grid-template-columns: 1fr; gap: 1.1rem; }
@@ -438,18 +410,8 @@
     </nav>
 
     <div class="hero-main">
-      <div class="hero-split" id="heroSplit">
-        <div class="hero-split-img hero-split-after">
-          <img src="chambre-apres.jpg" alt="Chambre après rénovation" />
-        </div>
-        <div class="hero-split-img hero-split-before" id="heroSplitBefore">
-          <img src="chambre-avant.jpg" alt="Chambre avant rénovation" />
-        </div>
-        <span class="hero-split-label hero-split-label-before">Avant</span>
-        <span class="hero-split-label hero-split-label-after">Après</span>
-        <div class="hero-split-handle" id="heroSplitHandle">
-          <div class="hero-split-grip"><span></span><span></span></div>
-        </div>
+      <div class="hero-photo">
+        <img src="chambre-apres.jpg" alt="Réalisation Une Oummi qui bricole" />
       </div>
       <div class="hero-video-tint"></div>
       <div class="hero-banner-scrim"></div>
@@ -844,45 +806,15 @@
     universAccordion.classList.add('in-view');
   }
 
-  var heroSplitForScroll = document.querySelector('.hero-split');
+  var heroPhotoForScroll = document.querySelector('.hero-photo');
   var heroMainForScroll = document.querySelector('.hero-main');
-  if (heroSplitForScroll && heroMainForScroll) {
+  if (heroPhotoForScroll && heroMainForScroll) {
     window.addEventListener('scroll', function () {
       var heroHeight = heroMainForScroll.offsetHeight || 1;
       var progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
       var scale = 1 + progress * 0.08;
-      heroSplitForScroll.style.transform = 'scale(' + scale + ')';
+      heroPhotoForScroll.style.transform = 'scale(' + scale + ')';
     }, { passive: true });
-  }
-
-  var heroSplit = document.getElementById('heroSplit');
-  var heroSplitBefore = document.getElementById('heroSplitBefore');
-  var heroSplitHandle = document.getElementById('heroSplitHandle');
-  if (heroSplit && heroSplitBefore && heroSplitHandle) {
-    var dragging = false;
-    function setSplit(percent) {
-      percent = Math.min(Math.max(percent, 0), 100);
-      heroSplitBefore.style.clipPath = 'inset(0 ' + (100 - percent) + '% 0 0)';
-      heroSplitHandle.style.left = percent + '%';
-    }
-    function moveFromEvent(e) {
-      var rect = heroSplit.getBoundingClientRect();
-      var x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
-      setSplit((x / rect.width) * 100);
-    }
-    heroSplitHandle.addEventListener('pointerdown', function (e) {
-      dragging = true;
-      heroSplitHandle.setPointerCapture(e.pointerId);
-      moveFromEvent(e);
-      e.preventDefault();
-    });
-    heroSplitHandle.addEventListener('pointermove', function (e) { if (dragging) moveFromEvent(e); });
-    heroSplitHandle.addEventListener('pointerup', function () { dragging = false; });
-    heroSplitHandle.addEventListener('pointercancel', function () { dragging = false; });
-    heroSplit.addEventListener('click', function (e) {
-      if (e.target === heroSplitHandle || heroSplitHandle.contains(e.target)) return;
-      moveFromEvent(e);
-    });
   }
 
   function hideIntroControls() {
