@@ -100,16 +100,10 @@
   .run .hero-photo { animation: rise-in 0.55s ease-out 1.9s forwards; }
   .skip .hero-photo { opacity: 1 !important; animation: none !important; }
   .hero-photo img {
-    width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block;
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block;
     filter: brightness(0.78);
   }
-  .hero-photo-video { display: none; }
   @media (min-width: 721px) {
-    /* sur les grands ecrans : la video du rouleau qui peint, deja cadree en large */
-    .hero-photo-video {
-      display: block; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.78);
-    }
-    .hero-photo img { display: none; }
     .manifesto-inner { max-width: 66rem; }
     .manifesto-text { font-size: clamp(2.6rem, 4vw, 3.4rem); line-height: 1.4; }
     /* a cette taille le texte tient dans l'ecran d'un coup : l'effet mot-par-mot au scroll ne fonctionne plus, on l'enleve */
@@ -467,10 +461,7 @@
 
     <div class="hero-main">
       <div class="hero-photo">
-        <video class="hero-photo-video" autoplay muted loop playsinline>
-          <source src="hero-video.mp4" type="video/mp4" />
-        </video>
-        <img src="chambre-apres.jpg" alt="Une Oummi qui bricole, entreprise de rénovation par des femmes" />
+        <img src="chambre-hero.jpg" alt="Une Oummi qui bricole, entreprise de rénovation par des femmes" />
       </div>
       <div class="hero-video-tint"></div>
       <div class="hero-banner-scrim"></div>
