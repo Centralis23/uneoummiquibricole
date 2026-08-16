@@ -103,9 +103,6 @@
     width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block;
     filter: brightness(0.78);
   }
-  @media (min-width: 721px) {
-    .manifesto-title { font-size: clamp(2.2rem, 3vw, 2.8rem); }
-  }
   .hero-video-tint {
     position: absolute; inset: 0; z-index: 1;
     background: var(--gold); mix-blend-mode: soft-light; opacity: 0.35;
@@ -213,15 +210,16 @@
   .btn-ghost { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg); background: transparent; border: 1px solid var(--hairline); padding: 0.95rem 1.75rem; border-radius: 2px; cursor: pointer; }
 
   /* ================= MANIFESTE (texte interactif au scroll) ================= */
-  .manifesto { background: var(--cream); padding: clamp(2.5rem, 6vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) 0; }
-  .manifesto-inner { max-width: 42rem; margin: 0 auto; }
+  .manifesto { background: var(--cream); padding: clamp(3.5rem, 8vw, 5.5rem) clamp(1.25rem, 6vw, 5rem) clamp(1rem, 3vw, 1.5rem); }
+  .manifesto-inner { max-width: 42rem; margin: 0 auto; text-align: center; }
+  .manifesto-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .manifesto-title {
-    font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 500;
-    font-size: clamp(1.8rem, 4vw, 2.2rem); text-align: center; margin: 0; color: var(--fg);
+    font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 3.2rem); margin: 0; color: var(--fg);
   }
 
   @media (max-width: 720px) {
-    .manifesto { padding: 2rem 1.25rem 0; }
+    .manifesto { padding: 3rem 1.25rem 1.5rem; }
   }
 
   .univers { position: relative; padding: clamp(1rem, 3vw, 2rem) clamp(1.25rem, 6vw, 5rem) clamp(3rem, 6vw, 5rem); }
@@ -477,6 +475,7 @@
 
     <section class="manifesto" id="manifeste">
       <div class="manifesto-inner">
+        <p class="manifesto-eyebrow">Ce que nous faisons</p>
         <h2 class="manifesto-title">Nos activités</h2>
       </div>
     </section>
