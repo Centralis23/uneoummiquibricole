@@ -97,8 +97,8 @@
     color: var(--paper);
   }
   @media (min-width: 721px) {
-    /* sur ordinateur : plus petit et assez large pour tenir sur deux lignes exactement */
-    .hero-title { font-size: clamp(2.4rem, 3.6vw, 3.2rem); max-width: 56rem; }
+    /* sur ordinateur : assez large pour tenir sur deux lignes exactement, mais pas trop petit */
+    .hero-title { font-size: clamp(2.8rem, 4.6vw, 4rem); max-width: 62rem; }
   }
   .hero-title .line { display: block; }
   .hero-title .word { display: inline-flex; }
@@ -229,8 +229,17 @@
     writing-mode: vertical-rl; transform: rotate(180deg);
   }
   .univers-panel.is-active .univers-panel-name { writing-mode: horizontal-tb; transform: none; font-size: clamp(1.8rem, 3vw, 2.6rem); }
-  @media (hover: hover) {
+  @media (hover: hover) and (max-width: 720px) {
     .univers-panel:not(.is-active):hover { flex-grow: 1.6; }
+  }
+  @media (min-width: 721px) {
+    /* option C : quatre cartes de meme largeur, toujours lisibles, leger zoom au survol */
+    .univers-panel, .univers-panel.is-active { flex: 1 1 0; }
+    .univers-panel-name, .univers-panel.is-active .univers-panel-name {
+      writing-mode: horizontal-tb; transform: none; font-size: 1.4rem;
+    }
+    .univers-panel-bg { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    .univers-panel:hover .univers-panel-bg { transform: scale(1.05); }
   }
 
   .gallery { padding: 0 clamp(1.25rem, 6vw, 5rem) 2.5rem; }
