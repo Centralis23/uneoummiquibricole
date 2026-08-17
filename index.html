@@ -96,6 +96,10 @@
     max-width: 44rem; text-shadow: 0 2px 16px rgba(0,0,0,0.45);
     color: var(--paper);
   }
+  @media (min-width: 721px) {
+    /* sur ordinateur : plus petit et assez large pour tenir sur deux lignes exactement */
+    .hero-title { font-size: clamp(2.4rem, 3.6vw, 3.2rem); max-width: 56rem; }
+  }
   .hero-title .line { display: block; }
   .hero-title .word { display: inline-flex; }
   .hero-title .word-accent { position: relative; }
@@ -225,12 +229,6 @@
     writing-mode: vertical-rl; transform: rotate(180deg);
   }
   .univers-panel.is-active .univers-panel-name { writing-mode: horizontal-tb; transform: none; font-size: clamp(1.8rem, 3vw, 2.6rem); }
-  .univers-panel-desc {
-    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.95rem; line-height: 1.5;
-    color: color-mix(in srgb, var(--paper) 92%, transparent); max-width: 26rem;
-    opacity: 0; max-height: 0; overflow: hidden; transition: opacity 0.4s ease 0.15s;
-  }
-  .univers-panel.is-active .univers-panel-desc { opacity: 1; max-height: 6rem; }
   @media (hover: hover) {
     .univers-panel:not(.is-active):hover { flex-grow: 1.6; }
   }
@@ -461,7 +459,6 @@
           <span class="univers-panel-scrim"></span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Peinture &amp; finitions</span>
-            <span class="univers-panel-desc">Peinture classique, décors muraux, installation&nbsp;: des finitions soignées à chaque étape.</span>
           </span>
         </button>
         <button class="univers-panel" data-panel="2">
@@ -469,7 +466,6 @@
           <span class="univers-panel-scrim"></span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Déco</span>
-            <span class="univers-panel-desc">Peinture, papier peint, agencement&nbsp;: donnez du caractère à chaque pièce.</span>
           </span>
         </button>
         <button class="univers-panel" data-panel="3">
@@ -477,7 +473,6 @@
           <span class="univers-panel-scrim"></span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Atelier</span>
-            <span class="univers-panel-desc">Petits travaux, meubles sur-mesure, finitions soignées, fait main.</span>
           </span>
         </button>
         <button class="univers-panel" data-panel="4">
@@ -485,7 +480,6 @@
           <span class="univers-panel-scrim"></span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Associatif</span>
-            <span class="univers-panel-desc">Des ateliers solidaires pour transmettre le savoir-faire aux femmes qui se lancent.</span>
           </span>
         </button>
       </div>
