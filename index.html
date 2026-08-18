@@ -202,9 +202,9 @@
   .univers { position: relative; padding: clamp(1rem, 3vw, 2rem) clamp(1.25rem, 6vw, 5rem) clamp(3rem, 6vw, 5rem); }
   .univers-accordion { display: flex; gap: 0.5rem; height: clamp(20rem, 42vw, 30rem); }
   .univers-panel {
-    position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; border-radius: 6px;
+    position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; border-radius: 20px;
     border: none; padding: 0; margin: 0; cursor: pointer; background: var(--sand); text-align: left;
-    transition: flex-grow 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: flex-grow 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s ease, box-shadow 0.4s ease;
     opacity: 0;
   }
   .univers-panel.is-active { flex-grow: 5; }
@@ -238,8 +238,11 @@
     .univers-panel-name, .univers-panel.is-active .univers-panel-name {
       writing-mode: horizontal-tb; transform: none; font-size: 1.4rem;
     }
-    .univers-panel-bg { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-    .univers-panel:hover .univers-panel-bg { transform: scale(1.05); }
+    .univers-panel-bg { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .univers-panel-name { display: inline-block; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .univers-panel:hover { transform: translateY(-10px); box-shadow: 0 24px 44px -16px color-mix(in srgb, var(--espresso) 45%, transparent); }
+    .univers-panel:hover .univers-panel-bg { transform: scale(1.1); }
+    .univers-panel:hover .univers-panel-name { transform: translateY(-4px); }
   }
 
   .gallery { padding: 0 clamp(1.25rem, 6vw, 5rem) 2.5rem; }
