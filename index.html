@@ -153,26 +153,25 @@
   /* section histoire — bandeau sombre "manifeste", portrait medaillon + citation */
   .story {
     position: relative; overflow: hidden; text-align: center; background: var(--espresso);
-    padding: clamp(4.5rem, 10vw, 7.5rem) clamp(1.5rem, 6vw, 5rem);
+    padding: clamp(3rem, 6vw, 4.5rem) clamp(1.5rem, 6vw, 5rem);
   }
   .story-quote-mark {
-    position: absolute; top: -3rem; left: 50%; transform: translateX(-50%); z-index: 0; pointer-events: none;
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; line-height: 1;
-    font-size: clamp(11rem, 24vw, 19rem); color: color-mix(in srgb, var(--gold) 16%, transparent);
+    display: block; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; line-height: 1;
+    font-size: clamp(2.5rem, 5vw, 3.25rem); color: var(--gold); opacity: 0.85; margin: 0 0 0.5rem;
   }
   .story-eyebrow {
     position: relative; z-index: 1; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem;
-    letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-hi); margin: 0 0 1.75rem;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-hi); margin: 0 0 1.5rem;
   }
   .story-photo {
-    position: relative; z-index: 1; width: clamp(6.5rem, 9vw, 8.5rem); height: clamp(6.5rem, 9vw, 8.5rem);
-    border-radius: 50%; overflow: hidden; border: 3px solid var(--gold); margin: 0 auto 2rem;
+    position: relative; z-index: 1; width: clamp(6rem, 8vw, 7.5rem); height: clamp(6rem, 8vw, 7.5rem);
+    border-radius: 50%; overflow: hidden; border: 3px solid var(--gold); margin: 0 auto 1.5rem;
     box-shadow: 0 1rem 2.5rem -1rem rgba(0,0,0,0.6);
   }
   .story-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .story-title {
     position: relative; z-index: 1; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 600;
-    font-size: clamp(1.9rem, 4.2vw, 3rem); line-height: 1.25; color: var(--paper); margin: 0 auto clamp(1.75rem, 4vw, 2.5rem); max-width: 38rem;
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.25; color: var(--paper); margin: 0 auto 1.5rem; max-width: 38rem;
   }
   .story-text { position: relative; z-index: 1; max-width: 32rem; margin: 0 auto; }
   .story-summary {
@@ -237,7 +236,7 @@
   .manifesto-inner { max-width: 42rem; margin: 0 auto; text-align: center; }
   .manifesto-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .manifesto-title {
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 500;
+    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
     font-size: clamp(2.4rem, 6vw, 3.2rem); margin: 0 0 0.85rem; color: var(--fg);
   }
   .manifesto-hook { font-size: 1.05rem; line-height: 1.6; color: var(--fg-muted); margin: 0 auto; max-width: 28rem; }
@@ -563,8 +562,7 @@
       </div>
       <h2 class="story-title">De la passion à la profession</h2>
       <div class="story-text">
-        <p class="story-summary">Tout a commencé par une rénovation qu'elle a menée elle-même, sans formation, juste avec l'envie de bien faire chez elle. De projet en projet, cette passion s'est transformée en un vrai métier.</p>
-        <p class="story-summary">Aujourd'hui, Une Oummi qui bricole est une entreprise pensée par et pour les femmes : transmettre ce savoir-faire, accompagner celles qui veulent se lancer, et prouver que la rénovation n'est pas qu'une affaire d'hommes.</p>
+        <p class="story-summary">Tout a commencé par une rénovation qu'elle a menée elle-même, sans formation, juste avec l'envie de bien faire chez elle — une passion devenue un métier, puis une entreprise pensée par et pour les femmes, pour transmettre ce savoir-faire à celles qui veulent se lancer.</p>
       </div>
     </section>
 
