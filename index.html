@@ -175,10 +175,10 @@
   /* ================= AVIS / VIDEOS TIKTOK ================= */
   .social-proof { background: var(--cream); padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 6vw, 5rem); text-align: center; }
   .social-proof-stat {
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-weight: 700; font-style: italic;
-    font-size: clamp(1.6rem, 3.4vw, 2.4rem); color: var(--fg); margin: 0 0 clamp(2rem, 5vw, 3rem);
+    font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 700; font-style: normal; text-transform: uppercase; letter-spacing: 0.02em;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem); color: var(--fg); margin: 0 0 clamp(2rem, 5vw, 3rem);
   }
-  .social-proof-number { color: var(--gold); font-size: 1.3em; margin-right: 0.15em; }
+  .social-proof-number { color: var(--gold); font-size: 1.5em; margin-right: 0.2em; }
   .social-proof-videos { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; }
   .social-proof-card {
     position: relative; display: block; flex: 1 1 14rem; max-width: 16rem; aspect-ratio: 9 / 14;
@@ -192,10 +192,13 @@
     color: var(--paper); font-size: 1.6rem; background: color-mix(in srgb, var(--espresso) 22%, transparent);
   }
   .social-proof-link {
-    display: inline-block; margin-top: clamp(1.5rem, 4vw, 2.25rem); font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: 0.85rem; letter-spacing: 0.04em; color: var(--gold); text-decoration: underline;
-    text-underline-offset: 0.25em;
+    display: inline-flex; align-items: center; gap: 0.6rem; margin-top: clamp(1.5rem, 4vw, 2.25rem);
+    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--espresso); background: var(--gold); border: none; padding: 0.9rem 1.75rem; border-radius: 999px;
+    text-decoration: none; transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
+  .social-proof-link:hover { transform: translateY(-0.15rem); box-shadow: 0 0.75rem 1.5rem -0.75rem rgba(0,0,0,0.4); }
+  .social-proof-link svg { width: 1.1rem; height: 1.1rem; fill: currentColor; flex: none; }
 
   /* ================= MARQUEE (bande de photos qui defile) ================= */
   .marquee { overflow: hidden; background: var(--cream); padding: clamp(1.25rem, 3vw, 1.75rem) 0; }
@@ -573,7 +576,10 @@
           <span class="social-proof-play">▶</span>
         </a>
       </div>
-      <a class="social-proof-link" href="https://www.tiktok.com/@une.oummi.qui.bricole" target="_blank" rel="noopener">Voir plus sur TikTok @une.oummi.qui.bricole</a>
+      <a class="social-proof-link" href="https://www.tiktok.com/@une.oummi.qui.bricole" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82c-1.1-1.02-1.72-2.45-1.72-3.97h-3.35v14.6c0 1.7-1.38 3.08-3.08 3.08a3.08 3.08 0 0 1 0-6.16c.28 0 .55.04.8.11V10.2a6.44 6.44 0 0 0-.8-.05A6.43 6.43 0 0 0 2 16.58 6.43 6.43 0 0 0 8.43 23a6.43 6.43 0 0 0 6.43-6.42V9.4a9.03 9.03 0 0 0 5.14 1.6V7.66c-1.19 0-2.29-.38-3.4-1.84z"/></svg>
+        Suivez-nous sur nos réseaux
+      </a>
     </section>
 
     <div class="gallery">
