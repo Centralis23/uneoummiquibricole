@@ -179,7 +179,23 @@
     font-size: clamp(1.6rem, 3.4vw, 2.4rem); color: var(--fg); margin: 0 0 clamp(2rem, 5vw, 3rem);
   }
   .social-proof-number { color: var(--gold); font-size: 1.3em; margin-right: 0.15em; }
-  .social-proof-videos { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+  .social-proof-videos { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; }
+  .social-proof-card {
+    position: relative; display: block; flex: 1 1 14rem; max-width: 16rem; aspect-ratio: 9 / 14;
+    border-radius: 16px; overflow: hidden; box-shadow: 0 1.5rem 3rem -1.5rem rgba(0,0,0,0.4);
+    transition: transform 0.35s ease;
+  }
+  .social-proof-card:hover { transform: translateY(-0.4rem); }
+  .social-proof-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .social-proof-play {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: var(--paper); font-size: 1.6rem; background: color-mix(in srgb, var(--espresso) 22%, transparent);
+  }
+  .social-proof-link {
+    display: inline-block; margin-top: clamp(1.5rem, 4vw, 2.25rem); font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.04em; color: var(--gold); text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
 
   /* ================= MARQUEE (bande de photos qui defile) ================= */
   .marquee { overflow: hidden; background: var(--cream); padding: clamp(1.25rem, 3vw, 1.75rem) 0; }
@@ -404,8 +420,9 @@
     .pillars-cta .cta-nav { width: 100%; padding: 0.85rem 1rem; font-size: 0.75rem; text-align: center; }
     .pillars li:last-child { border-bottom: none; }
     .hero-main { min-height: auto; height: 78vh; }
-    .story { flex-direction: column; min-height: auto; }
-    .story-photo { flex-basis: auto; height: 16rem; }
+    .story { flex-direction: column; align-items: stretch; min-height: auto; }
+    .story-photo { flex-basis: auto; width: 100%; height: 14rem; }
+    .story-title { font-size: 1.55rem; white-space: nowrap; }
     .story-summary { max-width: none; }
 
     .hero-copy { padding: 1.75rem 1.25rem 2rem; max-width: none; }
@@ -468,24 +485,16 @@
 
     <div class="marquee">
       <div class="marquee-track">
-        <span class="marquee-item"><img src="peinture-photo.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="salon-photo.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="atelier-bureau.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="associatif-photo.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="chambre-photo.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="collage-photo-1.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="collage-photo-2.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="collage-photo-3.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="chambre-hero.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="peinture-photo.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="salon-photo.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="atelier-bureau.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="associatif-photo.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="chambre-photo.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="collage-photo-1.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="collage-photo-2.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="collage-photo-3.jpg" alt="" /></span>
-        <span class="marquee-item"><img src="chambre-hero.jpg" alt="" /></span>
+        <span class="marquee-item"><img src="projet-toilettes.jpg" alt="" /></span>
+        <span class="marquee-item"><img src="projet-chambre-enfants.jpg" alt="" /></span>
+        <span class="marquee-item"><img src="projet-salon-mur-tv.jpg" alt="" /></span>
+        <span class="marquee-item"><img src="projet-tete-de-lit.jpg" alt="" /></span>
+        <span class="marquee-item"><img src="projet-salle-de-bain.jpg" alt="" /></span>
+        <span class="marquee-item"><img src="projet-toilettes.jpg" alt="" /></span>
+        <span class="marquee-item"><img src="projet-chambre-enfants.jpg" alt="" /></span>
+        <span class="marquee-item"><img src="projet-salon-mur-tv.jpg" alt="" /></span>
+        <span class="marquee-item"><img src="projet-tete-de-lit.jpg" alt="" /></span>
+        <span class="marquee-item"><img src="projet-salle-de-bain.jpg" alt="" /></span>
       </div>
     </div>
 
@@ -544,29 +553,27 @@
       <div class="story-text">
         <p class="story-eyebrow">Notre histoire</p>
         <h2 class="story-title">De la passion à la profession</h2>
-        <p class="story-summary">Tout a commencé par une rénovation qu'elle a choisi de faire elle-même — une passion devenue un métier, puis une entreprise pensée pour transmettre ce savoir-faire aux femmes qui veulent se lancer.</p>
+        <p class="story-summary">Tout a commencé par une rénovation qu'elle a menée elle-même — une passion devenue un métier, puis une entreprise pensée pour transmettre ce savoir-faire aux femmes qui veulent se lancer.</p>
       </div>
     </section>
 
     <section class="social-proof" id="temoignages">
       <p class="social-proof-stat"><span class="social-proof-number">+100</span> clientes satisfaites</p>
       <div class="social-proof-videos">
-        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@une.oummi.qui.bricole/video/7630761416399686935" data-video-id="7630761416399686935" style="max-width: 605px;min-width: 325px;">
-          <section>
-            <a target="_blank" title="@une.oummi.qui.bricole" href="https://www.tiktok.com/@une.oummi.qui.bricole?refer=embed">@une.oummi.qui.bricole</a> Ce petit chantier a été réalisé par ma cliente via un accompagnement bravo à elle comme quoi tout est possible, vous voyez, il suffit d'être bien accompagné et avoir les bons outils. Comme on dit les choses sur lesquelles on se prend le moins la tête sont les plus belles. Donc ce réel a été fait de façon spontanée. Gros bisous <a title="d" target="_blank" href="https://www.tiktok.com/tag/d?refer=embed">#d</a><a title="decot" target="_blank" href="https://www.tiktok.com/tag/decot?refer=embed">#decot</a><a title="travauxd" target="_blank" href="https://www.tiktok.com/tag/travauxd?refer=embed">#travauxd</a><a title="decorationmuraleb" target="_blank" href="https://www.tiktok.com/tag/decorationmuraleb?refer=embed">#decorationmuraleb</a><a title="bricolagel" target="_blank" href="https://www.tiktok.com/tag/bricolagel?refer=embed">#bricolageL</a>@LEROY MERLIN FRANCE <a target="_blank" title="♬ son original - Une oummi qui bricole" href="https://www.tiktok.com/music/son-original-7630761416370932502?refer=embed">♬ son original - Une oummi qui bricole</a>
-          </section>
-        </blockquote>
-        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@une.oummi.qui.bricole/video/7668802544239529249" data-video-id="7668802544239529249" style="max-width: 605px;min-width: 325px;">
-          <section>
-            <a target="_blank" title="@une.oummi.qui.bricole" href="https://www.tiktok.com/@une.oummi.qui.bricole?refer=embed">@une.oummi.qui.bricole</a> Quand on aime les livres, ils méritent une vraie place dans la maison. 📚 Pour cette chambre, nous avons imaginé un espace doux et fonctionnel avec une bibliothèque sur mesure, afin que chaque livre soit à portée de main. Une nouvelle ambiance, des couleurs apaisantes et des finitions soignées… pour créer un cocon propice à la lecture et à la détente. ✨. @Les Mains de Mymy ❤️ <a title="deco" target="_blank" href="https://www.tiktok.com/tag/deco?refer=embed">#deco</a> <a title="bricolage" target="_blank" href="https://www.tiktok.com/tag/bricolage?refer=embed">#bricolage</a> <a title="bibliothèque" target="_blank" href="https://www.tiktok.com/tag/biblioth%C3%A8que?refer=embed">#bibliothèque</a> <a title="leds" target="_blank" href="https://www.tiktok.com/tag/leds?refer=embed">#leds</a> <a title="livresaddict" target="_blank" href="https://www.tiktok.com/tag/livresaddict?refer=embed">#livresaddict</a> @amazon.fr @LEROY MERLIN FRANCE @actionfrance @IKEA France <a target="_blank" title="♬ son original - Une oummi qui bricole" href="https://www.tiktok.com/music/son-original-7668802565798120224?refer=embed">♬ son original - Une oummi qui bricole</a>
-          </section>
-        </blockquote>
-        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@une.oummi.qui.bricole/video/7616660269032279318" data-video-id="7616660269032279318" style="max-width: 605px;min-width: 325px;">
-          <section>
-            <a target="_blank" title="@une.oummi.qui.bricole" href="https://www.tiktok.com/@une.oummi.qui.bricole?refer=embed">@une.oummi.qui.bricole</a> Voici comment @Les Mains de Mymy a réalisé cette déco murale en fausse roche avec LED intégrée. Elle s'est inspirée du tuto Instagram de @Kendra Nicole merci à elle pour l'inspiration. Ça vous plaît ? Qui va le reproduire ? @LEROY MERLIN FRANCE @leroymerlinofficiel @Amazon @BricoDépôt <a title="salon" target="_blank" href="https://www.tiktok.com/tag/salon?refer=embed">#salon</a> <a title="led" target="_blank" href="https://www.tiktok.com/tag/led?refer=embed">#led</a> <a title="diy" target="_blank" href="https://www.tiktok.com/tag/diy?refer=embed">#diy</a> <a title="decorationmurale" target="_blank" href="https://www.tiktok.com/tag/decorationmurale?refer=embed">#decorationmurale</a> <a title="walldecor" target="_blank" href="https://www.tiktok.com/tag/walldecor?refer=embed">#walldecor</a> <a target="_blank" title="♬ son original - Une oummi qui bricole" href="https://www.tiktok.com/music/son-original-7616660276628261654?refer=embed">♬ son original - Une oummi qui bricole</a>
-          </section>
-        </blockquote>
+        <a class="social-proof-card" href="https://www.tiktok.com/@une.oummi.qui.bricole/video/7630761416399686935" target="_blank" rel="noopener">
+          <img src="projet-salon-mur-tv.jpg" alt="" />
+          <span class="social-proof-play">▶</span>
+        </a>
+        <a class="social-proof-card" href="https://www.tiktok.com/@une.oummi.qui.bricole/video/7668802544239529249" target="_blank" rel="noopener">
+          <img src="projet-tete-de-lit.jpg" alt="" />
+          <span class="social-proof-play">▶</span>
+        </a>
+        <a class="social-proof-card" href="https://www.tiktok.com/@une.oummi.qui.bricole/video/7616660269032279318" target="_blank" rel="noopener">
+          <img src="salon-photo.jpg" alt="" />
+          <span class="social-proof-play">▶</span>
+        </a>
       </div>
+      <a class="social-proof-link" href="https://www.tiktok.com/@une.oummi.qui.bricole" target="_blank" rel="noopener">Voir plus sur TikTok @une.oummi.qui.bricole</a>
     </section>
 
     <div class="gallery">
@@ -886,6 +893,5 @@
   setTimeout(hideIntroControls, 3900);
 
 </script>
-<script async src="https://www.tiktok.com/embed.js"></script>
 </body>
 </html>
