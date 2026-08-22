@@ -211,7 +211,7 @@
   }
   .story-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .story-title {
-    position: relative; z-index: 1; font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
+    position: relative; z-index: 1; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
     font-size: clamp(2.1rem, 4.2vw, 3.1rem); line-height: 1.25; color: var(--paper); margin: 0 auto 1.5rem; max-width: 38rem;
   }
   .story-text { position: relative; z-index: 1; max-width: 32rem; margin: 0 auto; }
@@ -235,7 +235,7 @@
   /* ================= AVIS / VIDEOS TIKTOK ================= */
   .social-proof { background: var(--cream); padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 6vw, 5rem); text-align: center; }
   .social-proof-stat {
-    font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-weight: 400; font-style: italic;
+    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-weight: 400; font-style: italic;
     font-size: clamp(1.9rem, 3.6vw, 2.6rem); color: var(--fg); margin: 0 0 0.9rem;
   }
   .social-proof-number { font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal; color: var(--gold); font-weight: 300; font-size: 1.3em; margin-right: 0.15em; }
@@ -281,7 +281,7 @@
   .manifesto-inner { max-width: 42rem; margin: 0 auto; text-align: center; }
   .manifesto-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .manifesto-title {
-    font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
+    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
     font-size: clamp(2.8rem, 7vw, 3.8rem); margin: 0 0 0.85rem; color: var(--fg);
   }
   .manifesto-hook { font-size: 1.05rem; line-height: 1.6; color: var(--fg-muted); margin: 0 auto; max-width: 28rem; }
@@ -306,6 +306,7 @@
   .univers-accordion.in-view .univers-panel:nth-child(3) { animation-delay: 0.2s; }
   .univers-accordion.in-view .univers-panel:nth-child(4) { animation-delay: 0.3s; }
   .univers-accordion.in-view .univers-panel:nth-child(5) { animation-delay: 0.4s; }
+  .univers-badge { display: none; }
   .univers-panel-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
   .univers-panel-scrim {
     position: absolute; inset: 0;
@@ -317,7 +318,7 @@
     text-align: center;
   }
   .univers-panel-name {
-    font-family: 'Cormorant', 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; color: var(--paper);
+    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; color: var(--paper);
     font-size: 1.6rem; white-space: nowrap; width: fit-content; text-shadow: 0 1px 4px rgba(0,0,0,0.6), 0 4px 14px rgba(0,0,0,0.5);
     writing-mode: vertical-rl; transform: rotate(180deg);
   }
@@ -327,15 +328,17 @@
   }
   @media (min-width: 721px) {
     /* option C : quatre cartes de meme largeur, toujours lisibles, leger zoom au survol */
-    .univers-panel, .univers-panel.is-active { flex: 1 1 0; }
-    .univers-panel-name, .univers-panel.is-active .univers-panel-name {
-      writing-mode: horizontal-tb; transform: none; font-size: 1.4rem;
+    .univers-panel, .univers-panel.is-active { flex: 1 1 0; display: flex; flex-direction: column; }
+    .univers-panel-photo { position: relative; flex: 1 1 auto; overflow: hidden; }
+    .univers-panel-label { display: none; }
+    .univers-badge {
+      display: block; flex: none; text-align: center; padding: 0.85rem 0.5rem;
+      font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
+      font-size: 1.2rem; color: var(--fg); background: var(--sand);
     }
     .univers-panel-bg { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .univers-panel-name { display: inline-block; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
     .univers-panel:hover { transform: translateY(-10px); box-shadow: 0 24px 44px -16px color-mix(in srgb, var(--espresso) 45%, transparent); }
     .univers-panel:hover .univers-panel-bg { transform: scale(1.1); }
-    .univers-panel:hover .univers-panel-name { transform: translateY(-4px); }
   }
 
   .gallery { padding: 0 clamp(1.25rem, 6vw, 5rem) 2.5rem; }
@@ -565,39 +568,54 @@
     <section class="univers" id="univers">
       <div class="univers-accordion">
         <button class="univers-panel is-active" data-panel="1">
-          <span class="univers-panel-bg u-a"></span>
-          <span class="univers-panel-scrim"></span>
+          <span class="univers-panel-photo">
+            <span class="univers-panel-bg u-a"></span>
+            <span class="univers-panel-scrim"></span>
+          </span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Peinture <span class="plain-amp">&amp;</span> finitions</span>
           </span>
+          <span class="univers-badge">Peinture <span class="plain-amp">&amp;</span> finitions</span>
         </button>
         <button class="univers-panel" data-panel="2">
-          <span class="univers-panel-bg p-b"></span>
-          <span class="univers-panel-scrim"></span>
+          <span class="univers-panel-photo">
+            <span class="univers-panel-bg p-b"></span>
+            <span class="univers-panel-scrim"></span>
+          </span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Déco</span>
           </span>
+          <span class="univers-badge">Déco</span>
         </button>
         <button class="univers-panel" data-panel="3">
-          <span class="univers-panel-bg u-c"></span>
-          <span class="univers-panel-scrim"></span>
+          <span class="univers-panel-photo">
+            <span class="univers-panel-bg u-c"></span>
+            <span class="univers-panel-scrim"></span>
+          </span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Atelier</span>
           </span>
+          <span class="univers-badge">Atelier</span>
         </button>
         <button class="univers-panel" data-panel="4">
-          <span class="univers-panel-bg u-d"></span>
-          <span class="univers-panel-scrim"></span>
+          <span class="univers-panel-photo">
+            <span class="univers-panel-bg u-d"></span>
+            <span class="univers-panel-scrim"></span>
+          </span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Associatif</span>
           </span>
+          <span class="univers-badge">Associatif</span>
         </button>
         <button class="univers-panel" data-panel="5">
-          <span class="univers-panel-bg u-e"></span>
-          <span class="univers-panel-scrim"></span>
+          <span class="univers-panel-photo">
+            <span class="univers-panel-bg u-e"></span>
+            <span class="univers-panel-scrim"></span>
+          </span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Petits travaux</span>
           </span>
+          <span class="univers-badge">Petits travaux</span>
         </button>
       </div>
     </section>
