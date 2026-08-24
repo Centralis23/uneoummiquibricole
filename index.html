@@ -104,7 +104,7 @@
   .nav.is-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   /* photo de fond en bannière, texte centré par-dessus */
-  .hero-main { position: relative; width: 100%; min-height: 74vh; overflow: hidden; background: var(--espresso); }
+  .hero-main { position: relative; width: 100%; min-height: 92vh; overflow: hidden; background: var(--espresso); }
   .hero-photo { position: absolute; inset: 0; opacity: 0; }
   .run .hero-photo { animation: rise-in 0.55s ease-out 1.9s forwards; }
   .skip .hero-photo { opacity: 1 !important; animation: none !important; }
@@ -230,7 +230,7 @@
   .tarifs-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .tarifs-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--fg); margin: 0 0 0.85rem; }
   .tarifs-note { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-size: 0.95rem; line-height: 1.6; color: var(--fg-muted); max-width: 36rem; margin: 0 auto clamp(2.5rem, 5vw, 3.5rem); }
-  .tarifs-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: clamp(1.5rem, 3vw, 2rem); text-align: left; max-width: 74rem; margin: 0 auto; }
+  .tarifs-groups { display: grid; align-items: start; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: clamp(1.5rem, 3vw, 2rem); text-align: left; max-width: 74rem; margin: 0 auto; }
   .tarifs-group {
     background: var(--paper); border: 1px solid var(--hairline); border-radius: 18px;
     padding: clamp(1.75rem, 3vw, 2.25rem); box-shadow: 0 1.5rem 3rem -2rem rgba(0,0,0,0.2);
@@ -253,7 +253,7 @@
   .tarifs-item-amount { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-weight: 600; font-size: 1.05rem; color: var(--gold); white-space: nowrap; }
   .tarifs-item-amount.is-devis { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-weight: 500; font-size: 0.85rem; color: var(--fg-muted); }
   .tarifs-footnote { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-size: 0.85rem; line-height: 1.6; color: var(--fg-muted); max-width: 40rem; margin: clamp(2rem, 4vw, 2.75rem) auto 0; }
-  .tarifs-cta { display: inline-block; margin-top: clamp(1.75rem, 4vw, 2.5rem); font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); border: none; padding: 0.95rem 2rem; border-radius: 2px; cursor: pointer; }
+  .tarifs-cta { display: inline-block; margin-top: clamp(1.75rem, 4vw, 2.5rem); font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); border: none; padding: 0.95rem 2rem; border-radius: 999px; cursor: pointer; }
 
   /* bloc de contenu sous la photo, sur fond clair */
   .hero-content { padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(1.5rem, 4vw, 2.5rem); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
@@ -522,10 +522,12 @@
   @media (max-width: 720px) {
     .nav { flex-wrap: wrap; }
     .brand { font-size: 1.2rem; }
-    .hero-main { min-height: auto; height: 78vh; }
+    .hero-main { min-height: auto; height: 94vh; }
     .story { padding: 3.5rem 1.5rem; }
+    .story-bg { background-position: 20% 25%; }
     .story-photo { width: 5.5rem; height: 5.5rem; }
     .story-title { font-size: 1.55rem; }
+    .manifesto-title { font-size: 2.2rem; }
     .social-proof-card:not(:first-child) { display: none; }
     .social-proof-card { max-width: 18rem; margin: 0 auto; }
 
@@ -667,7 +669,7 @@
 
     <section class="tarifs" id="tarifs">
       <p class="tarifs-eyebrow">Nos tarifs</p>
-      <h2 class="tarifs-title">Des prestations claires, à la carte</h2>
+      <h2 class="tarifs-title">Des prestations à la carte</h2>
       <p class="tarifs-note">Un accompagnement sur mesure, quel que soit votre besoin — du simple conseil au projet clé en main.</p>
 
       <div class="tarifs-groups">
