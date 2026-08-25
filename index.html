@@ -313,20 +313,50 @@
   }
   .devis-field textarea { resize: vertical; min-height: 6rem; font-family: ui-sans-serif, system-ui, sans-serif; }
   .devis-field input:focus, .devis-field textarea:focus { outline: none; border-color: var(--gold); }
-  .devis-radio-group { display: flex; flex-direction: column; gap: 0.65rem; }
-  .devis-radio { display: flex; align-items: center; gap: 0.6rem; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.92rem; color: var(--fg); cursor: pointer; }
-  .devis-radio input { accent-color: var(--gold); width: 1.05rem; height: 1.05rem; flex: none; }
   .devis-consent {
     display: flex; align-items: flex-start; gap: 0.7rem; font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: 0.82rem; line-height: 1.5; color: var(--fg-muted); margin-bottom: 1.75rem; cursor: pointer;
+    font-size: 0.82rem; line-height: 1.5; color: var(--fg-muted); margin-bottom: 0.5rem; cursor: pointer;
   }
   .devis-consent input { accent-color: var(--gold); width: 1.05rem; height: 1.05rem; flex: none; margin-top: 0.15rem; }
-  .devis-submit {
-    display: block; width: 100%; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem;
-    letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent);
-    border: none; padding: 1rem 2rem; border-radius: 999px; cursor: pointer;
-  }
   .devis-status { text-align: center; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.88rem; color: var(--fg-muted); margin-top: 1rem; }
+
+  /* ---- assistant en étapes ---- */
+  .devis-progress { height: 5px; border-radius: 999px; background: var(--hairline); overflow: hidden; margin-bottom: 0.75rem; }
+  .devis-progress-bar { display: block; height: 100%; width: 20%; background: var(--gold); border-radius: 999px; transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .devis-step-label { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-muted); margin: 0 0 1.75rem; }
+  .devis-step { display: none; animation: devis-step-in 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+  .devis-step.is-active { display: block; }
+  @keyframes devis-step-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+  .devis-step-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 500; font-size: 1.4rem; color: var(--fg); margin: 0 0 1.25rem; }
+  .devis-step-subtitle { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; font-size: 0.88rem; color: var(--fg); margin: 0 0 0.9rem; }
+  .devis-choice-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
+  .devis-choice {
+    position: relative; display: flex; align-items: center; gap: 0.65rem;
+    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.9rem; color: var(--fg);
+    background: var(--cream); border: 1.5px solid var(--hairline); border-radius: 12px;
+    padding: 0.9rem 1rem; cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  }
+  .devis-choice input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .devis-choice::before {
+    content: ''; flex: none; width: 1.1rem; height: 1.1rem; border-radius: 50%;
+    border: 1.5px solid var(--hairline); background: var(--paper); transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .devis-choice:has(input:checked) { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 12%, var(--cream)); font-weight: 600; }
+  .devis-choice:has(input:checked)::before { border-color: var(--gold); background: var(--gold); box-shadow: inset 0 0 0 3px var(--paper); }
+  @media (hover: hover) {
+    .devis-choice:hover { border-color: var(--gold); transform: translateY(-1px); }
+  }
+  .devis-nav { display: flex; gap: 0.85rem; margin-top: 0.5rem; }
+  .devis-btn {
+    display: none; flex: 1; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem;
+    letter-spacing: 0.04em; text-transform: uppercase; border: none; padding: 1rem 1.5rem; border-radius: 999px; cursor: pointer;
+  }
+  .devis-btn-prev { display: block; background: transparent; border: 1.5px solid var(--hairline); color: var(--fg-muted); flex: 0 0 auto; }
+  .devis-btn-next { display: block; background: var(--accent); color: var(--accent-ink); }
+  .devis-submit { display: none; background: var(--accent); color: var(--accent-ink); }
+  .devis-nav.is-first .devis-btn-prev { display: none; }
+  .devis-nav.is-last .devis-btn-next { display: none; }
+  .devis-nav.is-last .devis-submit { display: block; }
 
   /* bloc de contenu sous la photo, sur fond clair */
   .hero-content { padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 6vw, 5rem) clamp(1.5rem, 4vw, 2.5rem); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
@@ -849,69 +879,84 @@
       <h2 class="devis-title">Discutons de votre projet</h2>
       <p class="devis-note">Remplissez ce formulaire, nous vous répondons sous 48h.</p>
 
-      <form class="devis-form" id="devisForm">
-        <div class="devis-row">
-          <div class="devis-field">
-            <label for="devis-nom">Nom complet <span class="req">*</span></label>
-            <input type="text" id="devis-nom" name="nom" placeholder="Ex : Fatima Zahra" required>
+      <form class="devis-form" id="devisForm" novalidate>
+        <div class="devis-progress"><span class="devis-progress-bar" id="devisProgressBar"></span></div>
+        <p class="devis-step-label">Étape <span id="devisStepNum">1</span> / 5</p>
+
+        <div class="devis-step is-active" data-step="0">
+          <h3 class="devis-step-title">Vos coordonnées</h3>
+          <div class="devis-row">
+            <div class="devis-field">
+              <label for="devis-nom">Nom complet <span class="req">*</span></label>
+              <input type="text" id="devis-nom" name="nom" placeholder="Ex : Fatima Zahra" required>
+            </div>
+            <div class="devis-field">
+              <label for="devis-email">Email <span class="req">*</span></label>
+              <input type="email" id="devis-email" name="email" placeholder="Ex : vous@email.com" required>
+            </div>
           </div>
           <div class="devis-field">
-            <label for="devis-email">Email <span class="req">*</span></label>
-            <input type="email" id="devis-email" name="email" placeholder="Ex : vous@email.com" required>
+            <label for="devis-tel">Téléphone <span class="req">*</span></label>
+            <input type="tel" id="devis-tel" name="telephone" placeholder="Ex : 06 00 00 00 00" required>
           </div>
         </div>
 
-        <div class="devis-field">
-          <label for="devis-tel">Téléphone <span class="req">*</span></label>
-          <input type="tel" id="devis-tel" name="telephone" placeholder="Ex : 06 00 00 00 00" required>
-        </div>
-
-        <div class="devis-field">
-          <span class="devis-label">Votre demande concerne <span class="req">*</span></span>
-          <div class="devis-radio-group">
-            <label class="devis-radio"><input type="radio" name="demande" value="Peinture & finitions" required><span>Peinture &amp; finitions</span></label>
-            <label class="devis-radio"><input type="radio" name="demande" value="Déco / Aménagement intérieur"><span>Déco / Aménagement intérieur</span></label>
-            <label class="devis-radio"><input type="radio" name="demande" value="Atelier / petits travaux"><span>Atelier / petits travaux</span></label>
-            <label class="devis-radio"><input type="radio" name="demande" value="Optimisation Airbnb"><span>Optimisation Airbnb</span></label>
-            <label class="devis-radio"><input type="radio" name="demande" value="Associatif"><span>Associatif</span></label>
-            <label class="devis-radio"><input type="radio" name="demande" value="Autre demande"><span>Autre demande</span></label>
+        <div class="devis-step" data-step="1">
+          <h3 class="devis-step-title">Votre demande concerne <span class="req">*</span></h3>
+          <div class="devis-choice-group">
+            <label class="devis-choice"><input type="radio" name="demande" value="Peinture & finitions" required><span>Peinture &amp; finitions</span></label>
+            <label class="devis-choice"><input type="radio" name="demande" value="Déco / Aménagement intérieur"><span>Déco / Aménagement intérieur</span></label>
+            <label class="devis-choice"><input type="radio" name="demande" value="Atelier / petits travaux"><span>Atelier / petits travaux</span></label>
+            <label class="devis-choice"><input type="radio" name="demande" value="Optimisation Airbnb"><span>Optimisation Airbnb</span></label>
+            <label class="devis-choice"><input type="radio" name="demande" value="Associatif"><span>Associatif</span></label>
+            <label class="devis-choice"><input type="radio" name="demande" value="Autre demande"><span>Autre demande</span></label>
           </div>
         </div>
 
-        <div class="devis-field">
-          <label for="devis-projet">Décrivez votre projet ou votre besoin <span class="req">*</span></label>
-          <textarea id="devis-projet" name="projet" rows="4" placeholder="Décrivez votre projet, vos besoins ou vos questions. Vous pourrez ensuite nous envoyer vos photos, plans ou inspirations par e-mail ou WhatsApp." required></textarea>
-        </div>
-
-        <div class="devis-field">
-          <span class="devis-label">Quel est le budget envisagé pour votre projet ou votre prestation&nbsp;? <span class="req">*</span></span>
-          <div class="devis-radio-group">
-            <label class="devis-radio"><input type="radio" name="budget" value="Je ne sais pas encore" required><span>Je ne sais pas encore</span></label>
-            <label class="devis-radio"><input type="radio" name="budget" value="Moins de 500€"><span>Moins de 500&nbsp;€</span></label>
-            <label class="devis-radio"><input type="radio" name="budget" value="500€ à 1500€"><span>500&nbsp;€ à 1500&nbsp;€</span></label>
-            <label class="devis-radio"><input type="radio" name="budget" value="1500€ à 3000€"><span>1500&nbsp;€ à 3000&nbsp;€</span></label>
-            <label class="devis-radio"><input type="radio" name="budget" value="3000€ à 5000€"><span>3000&nbsp;€ à 5000&nbsp;€</span></label>
-            <label class="devis-radio"><input type="radio" name="budget" value="Plus de 5000€"><span>Plus de 5000&nbsp;€</span></label>
-          </div>
-        </div>
-
-        <div class="devis-row">
+        <div class="devis-step" data-step="2">
+          <h3 class="devis-step-title">Décrivez votre projet ou votre besoin <span class="req">*</span></h3>
           <div class="devis-field">
-            <label for="devis-ville">Ville ou code postal <span class="req">*</span></label>
-            <input type="text" id="devis-ville" name="ville" placeholder="Ex : Paris (75000)" required>
-          </div>
-          <div class="devis-field">
-            <label for="devis-date">Date souhaitée (facultatif)</label>
-            <input type="date" id="devis-date" name="date">
+            <textarea id="devis-projet" name="projet" rows="6" placeholder="Décrivez votre projet, vos besoins ou vos questions. Vous pourrez ensuite nous envoyer vos photos, plans ou inspirations par e-mail ou WhatsApp." required></textarea>
           </div>
         </div>
 
-        <label class="devis-consent">
-          <input type="checkbox" name="consentement" required>
-          <span>J'ai lu la politique de confidentialité et j'accepte que Une Oummi qui bricole utilise mes informations afin de répondre à ma demande. <span class="req">*</span></span>
-        </label>
+        <div class="devis-step" data-step="3">
+          <h3 class="devis-step-title">Budget &amp; localisation</h3>
+          <p class="devis-step-subtitle">Quel est le budget envisagé pour votre projet ou votre prestation&nbsp;? <span class="req">*</span></p>
+          <div class="devis-choice-group">
+            <label class="devis-choice"><input type="radio" name="budget" value="Je ne sais pas encore" required><span>Je ne sais pas encore</span></label>
+            <label class="devis-choice"><input type="radio" name="budget" value="Moins de 500€"><span>Moins de 500&nbsp;€</span></label>
+            <label class="devis-choice"><input type="radio" name="budget" value="500€ à 1500€"><span>500&nbsp;€ à 1500&nbsp;€</span></label>
+            <label class="devis-choice"><input type="radio" name="budget" value="1500€ à 3000€"><span>1500&nbsp;€ à 3000&nbsp;€</span></label>
+            <label class="devis-choice"><input type="radio" name="budget" value="3000€ à 5000€"><span>3000&nbsp;€ à 5000&nbsp;€</span></label>
+            <label class="devis-choice"><input type="radio" name="budget" value="Plus de 5000€"><span>Plus de 5000&nbsp;€</span></label>
+          </div>
+          <div class="devis-row">
+            <div class="devis-field">
+              <label for="devis-ville">Ville ou code postal <span class="req">*</span></label>
+              <input type="text" id="devis-ville" name="ville" placeholder="Ex : Paris (75000)" required>
+            </div>
+            <div class="devis-field">
+              <label for="devis-date">Date souhaitée (facultatif)</label>
+              <input type="date" id="devis-date" name="date">
+            </div>
+          </div>
+        </div>
 
-        <button type="submit" class="devis-submit">Envoyer ma demande</button>
+        <div class="devis-step" data-step="4">
+          <h3 class="devis-step-title">Presque fini !</h3>
+          <p class="devis-step-subtitle">Vérifiez votre demande puis envoyez-la, nous revenons vers vous sous 48h.</p>
+          <label class="devis-consent">
+            <input type="checkbox" name="consentement" required>
+            <span>J'ai lu la politique de confidentialité et j'accepte que Une Oummi qui bricole utilise mes informations afin de répondre à ma demande. <span class="req">*</span></span>
+          </label>
+        </div>
+
+        <div class="devis-nav">
+          <button type="button" class="devis-btn devis-btn-prev" id="devisPrev">← Précédent</button>
+          <button type="button" class="devis-btn devis-btn-next" id="devisNext">Suivant →</button>
+          <button type="submit" class="devis-btn devis-submit" id="devisSubmitBtn">Envoyer ma demande</button>
+        </div>
         <p class="devis-status" id="devisStatus"></p>
       </form>
     </section>
@@ -1302,8 +1347,65 @@
 <script>
   var devisForm = document.getElementById('devisForm');
   if (devisForm) {
+    var devisSteps = Array.prototype.slice.call(devisForm.querySelectorAll('.devis-step'));
+    var devisNav = devisForm.querySelector('.devis-nav');
+    var devisProgressBar = document.getElementById('devisProgressBar');
+    var devisStepNum = document.getElementById('devisStepNum');
+    var devisCurrent = 0;
+
+    function devisShowStep(index) {
+      devisSteps.forEach(function (step, i) {
+        step.classList.toggle('is-active', i === index);
+      });
+      devisNav.classList.toggle('is-first', index === 0);
+      devisNav.classList.toggle('is-last', index === devisSteps.length - 1);
+      devisProgressBar.style.width = (((index + 1) / devisSteps.length) * 100) + '%';
+      devisStepNum.textContent = index + 1;
+      devisCurrent = index;
+    }
+
+    function devisValidateStep(index) {
+      var fields = devisSteps[index].querySelectorAll('[required]');
+      var radioNames = {};
+      for (var i = 0; i < fields.length; i++) {
+        var field = fields[i];
+        if (field.type === 'radio') {
+          radioNames[field.name] = radioNames[field.name] || devisForm.querySelector('input[name="' + field.name + '"]:checked');
+          if (!radioNames[field.name]) { field.closest('.devis-choice-group').scrollIntoView({ behavior: 'smooth', block: 'center' }); return false; }
+        } else if (!field.checkValidity()) {
+          field.reportValidity();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    document.getElementById('devisNext').addEventListener('click', function () {
+      if (!devisValidateStep(devisCurrent)) return;
+      if (devisCurrent < devisSteps.length - 1) devisShowStep(devisCurrent + 1);
+    });
+    document.getElementById('devisPrev').addEventListener('click', function () {
+      if (devisCurrent > 0) devisShowStep(devisCurrent - 1);
+    });
+
+    // avance automatiquement quand une étape ne contient qu'un choix unique
+    devisSteps.forEach(function (step, index) {
+      var isOnlyChoice = step.querySelectorAll('.devis-choice-group').length === 1 && !step.querySelector('textarea, input[type="text"], input[type="email"], input[type="tel"], input[type="date"]');
+      if (!isOnlyChoice) return;
+      step.querySelectorAll('.devis-choice input').forEach(function (input) {
+        input.addEventListener('change', function () {
+          setTimeout(function () {
+            if (devisCurrent === index && index < devisSteps.length - 1) devisShowStep(index + 1);
+          }, 350);
+        });
+      });
+    });
+
+    devisShowStep(0);
+
     devisForm.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (!devisValidateStep(devisCurrent)) return;
       var status = document.getElementById('devisStatus');
       status.textContent = "L'envoi du formulaire n'est pas encore activé — contactez-nous par WhatsApp ou téléphone en attendant.";
     });
