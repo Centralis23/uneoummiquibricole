@@ -644,12 +644,22 @@
     .hero-actions-inline { width: 100%; gap: 0.6rem; }
     .hero-actions-inline .btn-hero-primary, .hero-actions-inline .btn-hero-ghost { flex: 1; text-align: center; padding: 0.7rem 0.5rem; font-size: 0.72rem; }
 
-    .univers { padding: 0.5rem 1.1rem 2.5rem; }
-    .univers-accordion { flex-direction: column; height: auto; gap: 0.6rem; }
-    .univers-panel { flex: 0 0 3.75rem; transition: flex-basis 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
-    .univers-panel.is-active { flex-basis: 14rem; }
-    .univers-panel-name { writing-mode: horizontal-tb !important; transform: none !important; font-size: 1.3rem !important; }
-    .univers-panel.is-active .univers-panel-name { font-size: 1.6rem !important; }
+    .univers { padding: 0.5rem 0 2.5rem; }
+    .univers-accordion {
+      flex-direction: row; height: 20rem; gap: 1rem;
+      overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 1.5rem;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .univers-accordion::-webkit-scrollbar { display: none; }
+    .univers-panel { flex: 0 0 78vw; scroll-snap-align: center; display: flex; flex-direction: column; transition: none; }
+    .univers-panel-photo { position: absolute; top: 0; left: 0; right: 0; bottom: 3.2rem; overflow: hidden; }
+    .univers-panel-label { display: none; }
+    .univers-badge {
+      display: block; position: absolute; left: 0; right: 0; bottom: 0; height: 3.2rem;
+      line-height: 3.2rem; text-align: center;
+      font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
+      font-size: 1.05rem; color: var(--fg); background: var(--sand);
+    }
 
     .gallery { padding: 0 1.1rem 2rem; }
     .gallery-row { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
