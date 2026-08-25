@@ -440,6 +440,7 @@
   .univers-accordion.in-view .univers-panel:nth-child(4) { animation-delay: 0.3s; }
   .univers-accordion.in-view .univers-panel:nth-child(5) { animation-delay: 0.4s; }
   .univers-badge { display: none; }
+  .univers-deck-hint { display: none; }
   .univers-panel-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
   .univers-panel-scrim {
     position: absolute; inset: 0;
@@ -646,12 +647,14 @@
 
     .univers { padding: 0.5rem 0 2.5rem; }
     .univers-accordion {
-      flex-direction: row; height: 20rem; gap: 1rem;
-      overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 1.5rem;
-      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      position: relative; display: block; height: 21rem; width: 84vw; max-width: 22rem; margin: 0 auto;
     }
-    .univers-accordion::-webkit-scrollbar { display: none; }
-    .univers-panel { flex: 0 0 78vw; scroll-snap-align: center; display: flex; flex-direction: column; transition: none; }
+    .univers-panel {
+      position: absolute; inset: 0; width: 100%; height: 100%; display: flex; flex-direction: column;
+      touch-action: pan-y; will-change: transform; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    }
+    .univers-panel.is-dragging { transition: none; }
+    .univers-panel { box-shadow: 0 1.5rem 3rem -1.25rem rgba(0,0,0,0.35); }
     .univers-panel-photo { position: absolute; top: 0; left: 0; right: 0; bottom: 3.2rem; overflow: hidden; }
     .univers-panel-label { display: none; }
     .univers-badge {
@@ -659,6 +662,10 @@
       line-height: 3.2rem; text-align: center;
       font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
       font-size: 1.05rem; color: var(--fg); background: var(--sand);
+    }
+    .univers-deck-hint {
+      display: block; text-align: center; margin: 0.9rem 0 0; font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-muted);
     }
 
     .gallery { padding: 0 1.1rem 2rem; }
@@ -767,6 +774,7 @@
           <span class="univers-badge">Petits travaux</span>
         </button>
       </div>
+      <p class="univers-deck-hint">← Glissez pour découvrir →</p>
     </section>
 
     <section class="story" id="histoire">
@@ -1458,6 +1466,95 @@
       panel.classList.add('is-active');
     });
   });
+
+  (function () {
+    var deckContainer = document.querySelector('.univers-accordion');
+    if (!deckContainer) return;
+    var deckPanels = Array.prototype.slice.call(deckContainer.querySelectorAll('.univers-panel'));
+    var deckOrder = deckPanels.map(function (_, i) { return i; });
+
+    function isMobileDeck() { return window.matchMedia('(max-width: 720px)').matches; }
+
+    function applyDeckStack() {
+      if (!isMobileDeck()) return;
+      deckOrder.forEach(function (panelIndex, stackPos) {
+        var panel = deckPanels[panelIndex];
+        panel.style.zIndex = String(deckOrder.length - stackPos);
+        if (stackPos === 0) {
+          panel.style.transform = 'translateY(0) scale(1)';
+          panel.style.opacity = '1';
+          panel.style.pointerEvents = 'auto';
+        } else if (stackPos <= 3) {
+          var scale = 1 - stackPos * 0.05;
+          var offsetY = stackPos * 10;
+          panel.style.transform = 'translateY(' + offsetY + 'px) scale(' + scale + ')';
+          panel.style.opacity = String(1 - stackPos * 0.22);
+          panel.style.pointerEvents = 'none';
+        } else {
+          panel.style.transform = 'translateY(30px) scale(0.85)';
+          panel.style.opacity = '0';
+          panel.style.pointerEvents = 'none';
+        }
+      });
+    }
+
+    function sendToBack(panelIndex) {
+      var pos = deckOrder.indexOf(panelIndex);
+      deckOrder.splice(pos, 1);
+      deckOrder.push(panelIndex);
+    }
+
+    deckPanels.forEach(function (panel, panelIndex) {
+      var startX = 0, startY = 0, currentX = 0, dragging = false;
+
+      function onDown(e) {
+        if (!isMobileDeck() || deckOrder[0] !== panelIndex) return;
+        dragging = true;
+        startX = (e.touches ? e.touches[0].clientX : e.clientX);
+        startY = (e.touches ? e.touches[0].clientY : e.clientY);
+        panel.classList.add('is-dragging');
+      }
+      function onMove(e) {
+        if (!dragging) return;
+        var x = (e.touches ? e.touches[0].clientX : e.clientX);
+        var y = (e.touches ? e.touches[0].clientY : e.clientY);
+        var dx = x - startX, dy = y - startY;
+        if (Math.abs(dx) > Math.abs(dy) && e.cancelable) e.preventDefault();
+        currentX = dx;
+        panel.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx / 18) + 'deg)';
+      }
+      function onUp() {
+        if (!dragging) return;
+        dragging = false;
+        panel.classList.remove('is-dragging');
+        var threshold = 90;
+        if (Math.abs(currentX) > threshold) {
+          var flyX = currentX > 0 ? window.innerWidth : -window.innerWidth;
+          panel.style.transform = 'translateX(' + flyX + 'px) rotate(' + (currentX / 10) + 'deg)';
+          panel.style.opacity = '0';
+          setTimeout(function () {
+            sendToBack(panelIndex);
+            panel.style.transition = 'none';
+            applyDeckStack();
+            requestAnimationFrame(function () { panel.style.transition = ''; });
+          }, 350);
+        } else {
+          applyDeckStack();
+        }
+        currentX = 0;
+      }
+
+      panel.addEventListener('touchstart', onDown, { passive: true });
+      panel.addEventListener('touchmove', onMove, { passive: false });
+      panel.addEventListener('touchend', onUp);
+      panel.addEventListener('mousedown', onDown);
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+
+    applyDeckStack();
+    window.addEventListener('resize', applyDeckStack);
+  })();
 
   var universAccordion = document.querySelector('.univers-accordion');
   if (universAccordion && 'IntersectionObserver' in window) {
