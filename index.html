@@ -288,10 +288,17 @@
   }
 
   /* ================= FORMULAIRE DE DEVIS ================= */
-  .devis { background: var(--cream); padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); text-align: center; }
-  .devis-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
-  .devis-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--fg); margin: 0 0 0.85rem; }
-  .devis-note { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.95rem; line-height: 1.6; color: var(--fg-muted); max-width: 32rem; margin: 0 auto clamp(2.5rem, 5vw, 3rem); }
+  .devis {
+    position: relative; overflow: hidden; padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); text-align: center;
+  }
+  .devis-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(color-mix(in srgb, var(--espresso) 70%, transparent), color-mix(in srgb, var(--espresso) 78%, transparent)), url(atelier-bureau.jpg) center 20% / cover no-repeat;
+  }
+  .devis-eyebrow { position: relative; z-index: 1; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-hi); margin: 0 0 1rem; }
+  .devis-title { position: relative; z-index: 1; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--paper); margin: 0 0 0.85rem; }
+  .devis-note { position: relative; z-index: 1; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.95rem; line-height: 1.6; color: color-mix(in srgb, var(--paper) 82%, transparent); max-width: 32rem; margin: 0 auto clamp(2.5rem, 5vw, 3rem); }
+  .devis-form { position: relative; z-index: 1; }
   .devis-form {
     text-align: left; max-width: 40rem; margin: 0 auto; background: var(--paper);
     border: 1px solid var(--hairline); border-radius: 20px; padding: clamp(1.75rem, 4vw, 2.75rem);
@@ -950,6 +957,7 @@
     </section>
 
     <section class="devis" id="devis">
+      <div class="devis-bg"></div>
       <p class="devis-eyebrow">Demande de devis</p>
       <h2 class="devis-title">Discutons de votre projet</h2>
       <p class="devis-note">Remplissez ce formulaire, nous vous répondons sous 48h.</p>
