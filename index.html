@@ -484,11 +484,20 @@
 
   .gallery { padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); text-align: center; background: var(--cream); }
   .gallery-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
-  .gallery-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.6vw, 2.9rem); color: var(--fg); margin: 0 0 clamp(2rem, 5vw, 3rem); max-width: 34rem; margin-left: auto; margin-right: auto; }
-  .ba-note-top { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-size: 0.9rem; color: var(--fg-muted); margin: 0 0 1.75rem; }
+  .gallery-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.6vw, 2.9rem); color: var(--fg); margin: 0 0 clamp(2.5rem, 5vw, 3.5rem); max-width: 34rem; margin-left: auto; margin-right: auto; }
+
+  .gallery-showcase {
+    display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 4vw, 3.5rem); align-items: center; text-align: left;
+    max-width: 66rem; margin: 0 auto;
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .gallery-showcase.in-view { opacity: 1; transform: none; }
+
   .ba-wrap {
-    position: relative; max-width: 40rem; margin: 0 auto; aspect-ratio: 3/4; border-radius: 18px; overflow: hidden;
-    box-shadow: 0 1.5rem 3rem -1.25rem rgba(0,0,0,0.35); cursor: ew-resize; user-select: none;
+    position: relative; width: 100%; max-width: 26rem; margin: 0 auto; aspect-ratio: 4/5; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 2rem 3.5rem -1.5rem rgba(0,0,0,0.4); cursor: ew-resize; user-select: none;
   }
   .ba-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
   .ba-after-clip { position: absolute; inset: 0; overflow: hidden; width: 50%; }
@@ -507,13 +516,39 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F3A23' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 7l-5 5 5 5M16 7l5 5-5 5'/%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: center; background-size: 1.3rem;
   }
-
-  .ba-dots { display: flex; justify-content: center; gap: 0.6rem; margin: 1.5rem 0 0; }
-  .ba-dot {
-    width: 0.55rem; height: 0.55rem; border-radius: 50%; border: none; padding: 0;
-    background: var(--hairline); cursor: pointer; transition: background 0.2s, transform 0.2s;
+  .ba-hint {
+    position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%); z-index: 2;
+    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #fff; background: rgba(20,14,9,0.55); padding: 0.45rem 1rem; border-radius: 999px;
+    pointer-events: none; transition: opacity 0.4s; animation: ba-hint-pulse 1.8s ease-in-out infinite;
   }
-  .ba-dot.is-active { background: var(--gold); transform: scale(1.3); }
+  .ba-hint.is-hidden { opacity: 0; }
+  @keyframes ba-hint-pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.06); }
+  }
+
+  .gallery-info { display: flex; flex-direction: column; align-items: flex-start; gap: 0.85rem; }
+  .gallery-info-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin: 0; }
+  .gallery-info-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(1.5rem, 2.6vw, 1.9rem); color: var(--fg); margin: 0; }
+  .gallery-info-text { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.95rem; line-height: 1.65; color: var(--fg-muted); margin: 0; max-width: 28rem; }
+
+  .gallery-tabs { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.3rem; }
+  .gallery-tab {
+    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem;
+    padding: 0.55rem 1.15rem; border-radius: 999px; border: 1px solid var(--hairline); background: transparent;
+    color: var(--fg-muted); cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .gallery-tab.is-active { background: var(--espresso); color: var(--paper); border-color: var(--espresso); }
+  .gallery-tab:hover:not(.is-active) { border-color: var(--gold); color: var(--fg); }
+
+  .gallery-cta {
+    display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;
+    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600;
+    color: var(--espresso); text-decoration: none; border-bottom: 1.5px solid var(--gold); padding-bottom: 0.2rem;
+    transition: gap 0.2s;
+  }
+  .gallery-cta:hover { gap: 0.85rem; }
 
   .wave-band { position: relative; background: var(--teal); color: var(--paper); padding: 2.5rem clamp(1.25rem, 6vw, 6rem) 3rem; margin-top: 1rem; }
   .wave-band svg.edge { position: absolute; top: -1px; left: 0; width: 100%; height: 40px; display: block; }
@@ -694,6 +729,11 @@
     }
 
     .gallery { padding: 2.5rem 1.1rem 2.5rem; }
+    .gallery-showcase { grid-template-columns: 1fr; text-align: center; }
+    .gallery-info { align-items: center; }
+    .gallery-info-text { max-width: none; }
+    .gallery-tabs { justify-content: center; }
+    .ba-wrap { max-width: 22rem; }
 
     .wave-band { padding: 2rem 1.1rem 2.25rem; }
     .wave-inner { font-size: 1.05rem; gap: 1rem; }
@@ -817,19 +857,39 @@
     <section class="gallery" id="realisations">
       <p class="gallery-eyebrow">Nos réalisations</p>
       <h2 class="gallery-title">La transformation, en un geste</h2>
-      <p class="ba-note-top">Faites glisser le curseur pour comparer</p>
-      <div class="ba-wrap" id="baWrap">
-        <img src="avant-atelier.jpg" alt="Avant : espace encombré" id="baBeforeImg">
-        <div class="ba-after-clip" id="baAfterClip">
-          <img src="apres-atelier.jpg" alt="Après : atelier de couture rangé" id="baAfterImg">
+
+      <div class="gallery-showcase" id="galleryShowcase">
+        <div class="ba-wrap" id="baWrap">
+          <img src="avant-atelier.jpg" alt="Avant : espace encombré" id="baBeforeImg">
+          <div class="ba-after-clip" id="baAfterClip">
+            <img src="apres-atelier.jpg" alt="Après : atelier de couture rangé" id="baAfterImg">
+          </div>
+          <span class="ba-label ba-before">Avant</span>
+          <span class="ba-label ba-after">Après</span>
+          <div class="ba-handle" id="baHandle"></div>
+          <p class="ba-hint" id="baHint">Faites glisser <span aria-hidden="true">↔</span></p>
         </div>
-        <span class="ba-label ba-before">Avant</span>
-        <span class="ba-label ba-after">Après</span>
-        <div class="ba-handle" id="baHandle"></div>
-      </div>
-      <div class="ba-dots" id="baDots">
-        <button type="button" class="ba-dot is-active" data-before="avant-atelier.jpg" data-after="apres-atelier.jpg" data-before-alt="Avant : espace encombré" data-after-alt="Après : atelier de couture rangé" aria-label="Atelier couture"></button>
-        <button type="button" class="ba-dot" data-before="avant-toilettes.jpg" data-after="projet-toilettes.jpg" data-before-alt="Avant : toilettes brutes, murs bruts" data-after-alt="Après : toilettes avec papier peint graphique et suspension" aria-label="Toilettes"></button>
+
+        <div class="gallery-info">
+          <p class="gallery-info-eyebrow">Projet</p>
+          <h3 class="gallery-info-title" id="baInfoTitle">Atelier de couture</h3>
+          <p class="gallery-info-text" id="baInfoText">Un coin de rangement encombré, transformé en atelier de couture organisé avec pegboard et poste de travail dédié.</p>
+
+          <div class="gallery-tabs" id="baDots">
+            <button type="button" class="gallery-tab is-active"
+              data-before="avant-atelier.jpg" data-after="apres-atelier.jpg"
+              data-before-alt="Avant : espace encombré" data-after-alt="Après : atelier de couture rangé"
+              data-title="Atelier de couture"
+              data-text="Un coin de rangement encombré, transformé en atelier de couture organisé avec pegboard et poste de travail dédié.">Atelier couture</button>
+            <button type="button" class="gallery-tab"
+              data-before="avant-toilettes.jpg" data-after="projet-toilettes.jpg"
+              data-before-alt="Avant : toilettes brutes, murs bruts" data-after-alt="Après : toilettes avec papier peint graphique et suspension"
+              data-title="Petits toilettes"
+              data-text="Des murs bruts et une pièce sans caractère, habillés d'un papier peint graphique et d'une suspension en fibres naturelles.">Toilettes</button>
+          </div>
+
+          <a href="#devis" class="gallery-cta">Un projet similaire ? <span aria-hidden="true">→</span></a>
+        </div>
       </div>
     </section>
 
@@ -1497,7 +1557,10 @@
     if (!wrap || !clip || !handle) return;
     var beforeImg = document.getElementById('baBeforeImg');
     var img = clip.querySelector('img');
-    var dots = document.querySelectorAll('.ba-dot');
+    var hint = document.getElementById('baHint');
+    var infoTitle = document.getElementById('baInfoTitle');
+    var infoText = document.getElementById('baInfoText');
+    var tabs = document.querySelectorAll('.gallery-tab');
 
     function setPos(clientX) {
       var rect = wrap.getBoundingClientRect();
@@ -1505,6 +1568,7 @@
       clip.style.width = pct + '%';
       handle.style.left = pct + '%';
       img.style.width = rect.width + 'px';
+      if (hint) hint.classList.add('is-hidden');
     }
     function toClientX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
     function reset() {
@@ -1523,14 +1587,32 @@
     window.addEventListener('resize', reset);
     setTimeout(reset, 50);
 
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () {
-        dots.forEach(function (d) { d.classList.remove('is-active'); });
-        dot.classList.add('is-active');
-        beforeImg.src = dot.getAttribute('data-before');
-        beforeImg.alt = dot.getAttribute('data-before-alt');
-        img.src = dot.getAttribute('data-after');
-        img.alt = dot.getAttribute('data-after-alt');
+    var galleryShowcase = document.getElementById('galleryShowcase');
+    if (galleryShowcase && 'IntersectionObserver' in window) {
+      var galleryObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            galleryShowcase.classList.add('in-view');
+            galleryObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      galleryObserver.observe(galleryShowcase);
+    } else if (galleryShowcase) {
+      galleryShowcase.classList.add('in-view');
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        beforeImg.src = tab.getAttribute('data-before');
+        beforeImg.alt = tab.getAttribute('data-before-alt');
+        img.src = tab.getAttribute('data-after');
+        img.alt = tab.getAttribute('data-after-alt');
+        if (infoTitle) infoTitle.textContent = tab.getAttribute('data-title');
+        if (infoText) infoText.textContent = tab.getAttribute('data-text');
+        if (hint) hint.classList.remove('is-hidden');
         reset();
       });
     });
