@@ -483,7 +483,7 @@
   }
 
   .gallery { padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); text-align: center; background: var(--cream); }
-  .gallery-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
+  .gallery-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 clamp(2rem, 4vw, 2.75rem); }
   .gallery-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.6vw, 2.9rem); color: var(--fg); margin: 0 0 clamp(2.5rem, 5vw, 3.5rem); max-width: 34rem; margin-left: auto; margin-right: auto; }
 
   .gallery-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin: 0 0 clamp(2rem, 4vw, 2.75rem); }
@@ -819,15 +819,13 @@
     </section>
 
     <section class="gallery" id="realisations">
-      <p class="gallery-eyebrow">Nos réalisations</p>
-      <h2 class="gallery-title">Un aperçu de nos chantiers</h2>
+      <p class="gallery-eyebrow">Quelques réalisations</p>
 
       <div class="gallery-filters" id="galleryFilters">
         <button type="button" class="gallery-filter is-active" data-filter="all">Tous</button>
         <button type="button" class="gallery-filter" data-filter="chambre">Chambre</button>
         <button type="button" class="gallery-filter" data-filter="salon">Salon</button>
         <button type="button" class="gallery-filter" data-filter="sdb">Salle de bain</button>
-        <button type="button" class="gallery-filter" data-filter="atelier">Atelier</button>
       </div>
 
       <div class="gallery-bento">
@@ -840,20 +838,16 @@
           <span class="bento-label"><span class="bento-tag">Salon</span>Salon, mur TV</span>
         </div>
         <div class="bento-tile" data-cat="sdb">
-          <img src="projet-salle-de-bain.jpg" alt="Salle de bain">
-          <span class="bento-label"><span class="bento-tag">Salle de bain</span>Salle de bain</span>
-        </div>
-        <div class="bento-tile is-tall" data-cat="sdb">
-          <img src="projet-toilettes.jpg" alt="Petits toilettes">
-          <span class="bento-label"><span class="bento-tag">Salle de bain</span>Petits toilettes</span>
+          <img src="projet-salle-de-bain.jpg" alt="Meuble de salle de bain">
+          <span class="bento-label"><span class="bento-tag">Salle de bain</span>Meuble</span>
         </div>
         <div class="bento-tile" data-cat="chambre">
           <img src="projet-tete-de-lit.jpg" alt="Tête de lit sur-mesure">
           <span class="bento-label"><span class="bento-tag">Chambre</span>Tête de lit</span>
         </div>
-        <div class="bento-tile" data-cat="atelier">
-          <img src="apres-atelier.jpg" alt="Atelier de couture">
-          <span class="bento-label"><span class="bento-tag">Atelier</span>Atelier de couture</span>
+        <div class="bento-tile" data-cat="sdb">
+          <img src="projet-toilettes.jpg" alt="Petits toilettes">
+          <span class="bento-label"><span class="bento-tag">Salle de bain</span>Petits toilettes</span>
         </div>
       </div>
     </section>
