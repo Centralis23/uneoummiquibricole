@@ -483,7 +483,7 @@
   }
 
   .gallery { padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); text-align: center; background: var(--cream); }
-  .gallery-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 clamp(2rem, 4vw, 2.75rem); }
+  .gallery-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .gallery-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.6vw, 2.9rem); color: var(--fg); margin: 0 0 clamp(2.5rem, 5vw, 3.5rem); max-width: 34rem; margin-left: auto; margin-right: auto; }
 
   .gallery-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin: 0 0 clamp(2rem, 4vw, 2.75rem); }
@@ -496,17 +496,16 @@
   .gallery-filter:hover:not(.is-active) { border-color: var(--gold); color: var(--fg); }
 
   .gallery-bento {
-    display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 11rem; gap: 0.9rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem;
     max-width: 62rem; margin: 0 auto;
   }
   .bento-tile {
-    position: relative; border-radius: 14px; overflow: hidden;
+    position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 3/4;
     box-shadow: 0 1rem 2rem -1rem rgba(0,0,0,0.25);
     animation: bento-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
-  .bento-tile.is-tall { grid-row: span 2; }
   .bento-tile.is-hidden { display: none; }
-  .bento-tile img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(1.1) saturate(1.05); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  .bento-tile img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; filter: brightness(1.1) saturate(1.05); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
   .bento-tile:hover img { transform: scale(1.06); }
   .bento-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(20,14,9,0.65) 100%); }
   .bento-label {
@@ -696,7 +695,7 @@
     }
 
     .gallery { padding: 2.5rem 1.1rem 2.5rem; }
-    .gallery-bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 8.5rem; gap: 0.6rem; }
+    .gallery-bento { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
     .bento-label { font-size: 0.85rem; padding: 0.7rem 0.7rem 0.6rem; }
 
     .wave-band { padding: 2rem 1.1rem 2.25rem; }
@@ -819,7 +818,8 @@
     </section>
 
     <section class="gallery" id="realisations">
-      <p class="gallery-eyebrow">Quelques réalisations</p>
+      <p class="gallery-eyebrow">Nos réalisations</p>
+      <h2 class="gallery-title">Quelques réalisations</h2>
 
       <div class="gallery-filters" id="galleryFilters">
         <button type="button" class="gallery-filter is-active" data-filter="all">Tous</button>
@@ -829,7 +829,7 @@
       </div>
 
       <div class="gallery-bento">
-        <div class="bento-tile is-tall" data-cat="chambre">
+        <div class="bento-tile" data-cat="chambre">
           <img src="projet-chambre-enfants.jpg" alt="Chambre d'enfant">
           <span class="bento-label"><span class="bento-tag">Chambre</span>Chambre d'enfant</span>
         </div>
