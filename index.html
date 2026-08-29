@@ -515,8 +515,9 @@
     position: relative; overflow: hidden; text-align: center; background: var(--espresso);
     min-height: 30rem; display: flex; align-items: center; justify-content: center;
     padding: clamp(3rem, 6vw, 4.5rem) clamp(1.5rem, 6vw, 5rem);
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
   }
-  .video-cta-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .video-cta-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; z-index: 0; }
   .video-cta-scrim {
     position: absolute; inset: 0; z-index: 1;
     background: linear-gradient(180deg, color-mix(in srgb, var(--espresso) 55%, transparent), color-mix(in srgb, var(--espresso) 80%, transparent));
@@ -711,7 +712,7 @@
       transform: scale(0.42); transform-origin: top center;
       margin: 1.5rem 0 -210px;
     }
-    .video-cta { min-height: 22rem; padding: 3rem 1.5rem; }
+    .video-cta { min-height: 17rem; padding: 2.25rem 1.5rem; }
 
     .wave-band { padding: 2rem 1.1rem 2.25rem; }
     .wave-inner { font-size: 1.05rem; gap: 1rem; }
@@ -872,8 +873,8 @@
       <div class="video-cta-scrim"></div>
       <div class="video-cta-content">
         <p class="video-cta-eyebrow">En vidéo</p>
-        <h3 class="video-cta-title">Une transformation à découvrir en direct</h3>
-        <p class="video-cta-text">Suivez le déroulé d'un chantier, du premier coup de pinceau à la pièce terminée.</p>
+        <h3 class="video-cta-title">Le résultat, en mouvement</h3>
+        <p class="video-cta-text">Une porte qui s'ouvre sur un intérieur repensé avec soin, jusque dans les moindres détails.</p>
         <p class="video-cta-prompt">Vous souhaitez un projet similaire ? Contactez-nous !</p>
         <a class="btn-hero-primary" href="#devis">Contactez-nous</a>
       </div>
