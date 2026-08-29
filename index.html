@@ -503,12 +503,6 @@
   .fan-card:nth-child(5) { transform: rotate(9deg) translateY(0.5rem); z-index: 2; }
   .fan-card:nth-child(6) { transform: rotate(15deg) translateY(1.5rem); z-index: 1; }
   .fan-card:hover { transform: translateY(-1.75rem) rotate(0deg) scale(1.06) !important; z-index: 10 !important; }
-  .fan-num {
-    position: absolute; top: 0.6rem; left: 0.7rem; z-index: 2;
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: 0.85rem;
-    color: #fff; background: rgba(20,14,9,0.45); border-radius: 999px; width: 1.6rem; height: 1.6rem;
-    display: flex; align-items: center; justify-content: center;
-  }
   .fan-photo { aspect-ratio: 3/4; overflow: hidden; }
   .fan-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(1.08) saturate(1.05); }
   .fan-plate {
@@ -696,12 +690,13 @@
     }
 
     .gallery { padding: 2.5rem 1.1rem 2.5rem; }
-    .fan-wrap { flex-wrap: wrap; gap: 1.25rem; max-width: 22rem; }
-    .fan-card, .fan-card:nth-child(1), .fan-card:nth-child(2), .fan-card:nth-child(3),
-    .fan-card:nth-child(4), .fan-card:nth-child(5), .fan-card:nth-child(6) {
-      width: calc(50% - 0.65rem); margin: 0; transform: none;
+    .fan-wrap {
+      justify-content: flex-start; max-width: 100%; margin: 2rem 0 0;
+      overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity; padding: 0.5rem 1.5rem 1.5rem;
     }
-    .fan-card:hover { transform: scale(1.03) !important; }
+    .fan-wrap::-webkit-scrollbar { display: none; }
+    .fan-card { scroll-snap-align: center; }
 
     .wave-band { padding: 2rem 1.1rem 2.25rem; }
     .wave-inner { font-size: 1.05rem; gap: 1rem; }
@@ -828,32 +823,26 @@
 
       <div class="fan-wrap">
         <figure class="fan-card">
-          <span class="fan-num">01</span>
           <div class="fan-photo"><img src="projet-chambre-enfants.jpg" alt="Chambre d'enfant" style="object-position: center 78%;"></div>
           <figcaption class="fan-plate"><span class="fan-tag">Chambre</span>Chambre d'enfant</figcaption>
         </figure>
         <figure class="fan-card">
-          <span class="fan-num">02</span>
           <div class="fan-photo"><img src="salon-sejour.jpg" alt="Salon et séjour, mur TV lumineux" style="object-position: center 45%;"></div>
           <figcaption class="fan-plate"><span class="fan-tag">Salon</span>Salon, mur TV</figcaption>
         </figure>
         <figure class="fan-card">
-          <span class="fan-num">03</span>
           <div class="fan-photo"><img src="projet-salle-de-bain.jpg" alt="Meuble de salle de bain" style="object-position: center 62%;"></div>
           <figcaption class="fan-plate"><span class="fan-tag">Salle de bain</span>Meuble</figcaption>
         </figure>
         <figure class="fan-card">
-          <span class="fan-num">04</span>
           <div class="fan-photo"><img src="chambre-alcove.jpg" alt="Chambre à alcôve" style="object-position: center 65%;"></div>
           <figcaption class="fan-plate"><span class="fan-tag">Chambre</span>Chambre à alcôve</figcaption>
         </figure>
         <figure class="fan-card">
-          <span class="fan-num">05</span>
           <div class="fan-photo"><img src="projet-toilettes.jpg" alt="Petits toilettes" style="object-position: center 38%;"></div>
           <figcaption class="fan-plate"><span class="fan-tag">Salle de bain</span>Petits toilettes</figcaption>
         </figure>
         <figure class="fan-card">
-          <span class="fan-num">06</span>
           <div class="fan-photo"><img src="chambre-bordeaux.jpg" alt="Chambre bordeaux, mur d'accent" style="object-position: center 45%;"></div>
           <figcaption class="fan-plate"><span class="fan-tag">Chambre</span>Mur d'accent</figcaption>
         </figure>
