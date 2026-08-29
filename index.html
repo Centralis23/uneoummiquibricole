@@ -511,6 +511,19 @@
   }
   .fan-tag { display: block; font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal; font-size: 0.58rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--espresso); opacity: 0.6; margin-bottom: 0.15rem; }
 
+  .gallery-video {
+    display: flex; align-items: center; justify-content: center; gap: clamp(2rem, 5vw, 4rem);
+    margin: clamp(2.5rem, 6vw, 4rem) auto 0; max-width: 56rem; text-align: left;
+  }
+  .gallery-video-player {
+    flex: 0 0 auto; width: min(60vw, 17rem); aspect-ratio: 464/832; border-radius: 16px; overflow: hidden; display: block;
+    box-shadow: 0 1.5rem 3rem -1.5rem rgba(20,14,9,0.4); background: #000; object-fit: cover;
+  }
+  .gallery-video-info { flex: 1 1 20rem; max-width: 24rem; }
+  .gallery-video-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 0.85rem; }
+  .gallery-video-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(1.3rem, 2.6vw, 1.7rem); color: var(--fg); margin: 0 0 0.75rem; text-wrap: balance; }
+  .gallery-video-text { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.95rem; line-height: 1.6; color: var(--fg-muted); margin: 0 0 1.5rem; }
+
   .wave-band { position: relative; background: var(--teal); color: var(--paper); padding: 2.5rem clamp(1.25rem, 6vw, 6rem) 3rem; margin-top: 1rem; }
   .wave-band svg.edge { position: absolute; top: -1px; left: 0; width: 100%; height: 40px; display: block; }
   .wave-inner { display: flex; justify-content: center; gap: clamp(1.25rem, 4vw, 3rem); flex-wrap: wrap; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; text-align: center; }
@@ -695,6 +708,9 @@
       transform: scale(0.42); transform-origin: top center;
       margin: 1.5rem 0 -210px;
     }
+    .gallery-video { flex-direction: column; text-align: center; gap: 1.5rem; }
+    .gallery-video-player { width: min(75vw, 17rem); }
+    .gallery-video-info { max-width: 22rem; }
 
     .wave-band { padding: 2rem 1.1rem 2.25rem; }
     .wave-inner { font-size: 1.05rem; gap: 1rem; }
@@ -844,6 +860,18 @@
           <div class="fan-photo"><img src="chambre-bordeaux.jpg" alt="Chambre bordeaux, mur d'accent" style="object-position: center 45%;"></div>
           <figcaption class="fan-plate"><span class="fan-tag">Chambre</span>Mur d'accent</figcaption>
         </figure>
+      </div>
+
+      <div class="gallery-video">
+        <video class="gallery-video-player" controls playsinline preload="metadata" poster="video-realisation-poster.jpg">
+          <source src="video-realisation.mp4" type="video/mp4">
+        </video>
+        <div class="gallery-video-info">
+          <p class="gallery-video-eyebrow">En vidéo</p>
+          <h3 class="gallery-video-title">Une transformation à découvrir en direct</h3>
+          <p class="gallery-video-text">Suivez le déroulé d'un chantier, du premier coup de pinceau à la pièce terminée.</p>
+          <a class="btn-hero-primary" href="#devis">Demander mon devis</a>
+        </div>
       </div>
     </section>
 
