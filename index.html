@@ -495,26 +495,37 @@
   .gallery-filter.is-active { background: var(--espresso); color: var(--paper); border-color: var(--espresso); }
   .gallery-filter:hover:not(.is-active) { border-color: var(--gold); color: var(--fg); }
 
-  .gallery-bento {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem;
-    max-width: 44rem; margin: 0 auto;
+  .gallery-collage {
+    display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.5rem 1.25rem;
+    max-width: 54rem; margin: 0 auto; padding: 0.5rem 0 1rem;
   }
-  .bento-tile {
-    position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 3/4;
-    box-shadow: 0 1rem 2rem -1rem rgba(0,0,0,0.25);
-    animation: bento-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  .collage-item {
+    margin: 0; position: relative; z-index: 1;
+    animation: collage-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    transition: transform 0.35s ease, z-index 0s;
   }
-  .bento-tile.is-hidden { display: none; }
-  .bento-tile img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; filter: brightness(1.1) saturate(1.05); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-  .bento-tile:hover img { transform: scale(1.06); }
-  .bento-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(20,14,9,0.65) 100%); }
-  .bento-label {
-    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 0.9rem 1rem 0.8rem; text-align: left;
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; color: #fff; font-size: 1rem;
-    display: flex; flex-direction: column; gap: 0.25rem;
+  .collage-item.is-hidden { display: none; }
+  .collage-item:nth-child(1) { grid-column: span 5; transform: rotate(-2deg); }
+  .collage-item:nth-child(2) { grid-column: span 7; transform: rotate(1.5deg); margin-top: 2.5rem; }
+  .collage-item:nth-child(3) { grid-column: span 7; transform: rotate(1deg); margin-top: -1.25rem; }
+  .collage-item:nth-child(4) { grid-column: span 5; transform: rotate(-1.5deg); margin-top: 1.5rem; }
+  .collage-item:nth-child(5) { grid-column: span 5; transform: rotate(1.75deg); margin-top: -0.5rem; }
+  .collage-item:nth-child(6) { grid-column: span 7; transform: rotate(-1deg); margin-top: 1rem; }
+  .collage-item:hover { transform: rotate(0deg) scale(1.045) !important; z-index: 5; }
+  .collage-photo {
+    aspect-ratio: 3/4; overflow: hidden; border-radius: 2px;
+    border: 0.45rem solid var(--paper); box-shadow: 0 1.5rem 2.5rem -1rem rgba(20,14,9,0.35);
+    transition: box-shadow 0.35s ease;
   }
-  .bento-tag { font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-hi); }
-  @keyframes bento-in { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
+  .collage-item:hover .collage-photo { box-shadow: 0 2rem 3.25rem -1rem rgba(20,14,9,0.45); }
+  .collage-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(1.08) saturate(1.05); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  .collage-item:hover .collage-photo img { transform: scale(1.06); }
+  .collage-caption {
+    margin: 0.7rem 0.3rem 0; text-align: center;
+    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: 1rem; color: var(--fg);
+  }
+  .collage-tag { display: block; font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
+  @keyframes collage-in { from { opacity: 0; } to { opacity: 1; } }
 
   .wave-band { position: relative; background: var(--teal); color: var(--paper); padding: 2.5rem clamp(1.25rem, 6vw, 6rem) 3rem; margin-top: 1rem; }
   .wave-band svg.edge { position: absolute; top: -1px; left: 0; width: 100%; height: 40px; display: block; }
@@ -695,7 +706,12 @@
     }
 
     .gallery { padding: 2.5rem 1.1rem 2.5rem; }
-    .gallery-bento { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+    .gallery-collage { grid-template-columns: repeat(2, 1fr); gap: 1.75rem 0.9rem; }
+    .collage-item, .collage-item:nth-child(1), .collage-item:nth-child(2), .collage-item:nth-child(3),
+    .collage-item:nth-child(4), .collage-item:nth-child(5), .collage-item:nth-child(6) {
+      grid-column: span 1; margin-top: 0; transform: none;
+    }
+    .collage-item:hover { transform: scale(1.03) !important; }
     .bento-label { font-size: 0.85rem; padding: 0.7rem 0.7rem 0.6rem; }
 
     .wave-band { padding: 2rem 1.1rem 2.25rem; }
@@ -828,31 +844,31 @@
         <button type="button" class="gallery-filter" data-filter="sdb">Salle de bain</button>
       </div>
 
-      <div class="gallery-bento">
-        <div class="bento-tile" data-cat="chambre">
-          <img src="projet-chambre-enfants.jpg" alt="Chambre d'enfant" style="object-position: center 78%;">
-          <span class="bento-label"><span class="bento-tag">Chambre</span>Chambre d'enfant</span>
-        </div>
-        <div class="bento-tile" data-cat="salon">
-          <img src="salon-sejour.jpg" alt="Salon et séjour, mur TV lumineux" style="object-position: center 45%;">
-          <span class="bento-label"><span class="bento-tag">Salon</span>Salon, mur TV</span>
-        </div>
-        <div class="bento-tile" data-cat="sdb">
-          <img src="projet-salle-de-bain.jpg" alt="Meuble de salle de bain" style="object-position: center 62%;">
-          <span class="bento-label"><span class="bento-tag">Salle de bain</span>Meuble</span>
-        </div>
-        <div class="bento-tile" data-cat="chambre">
-          <img src="chambre-alcove.jpg" alt="Chambre à alcôve" style="object-position: center 65%;">
-          <span class="bento-label"><span class="bento-tag">Chambre</span>Chambre à alcôve</span>
-        </div>
-        <div class="bento-tile" data-cat="sdb">
-          <img src="projet-toilettes.jpg" alt="Petits toilettes" style="object-position: center 38%;">
-          <span class="bento-label"><span class="bento-tag">Salle de bain</span>Petits toilettes</span>
-        </div>
-        <div class="bento-tile" data-cat="chambre">
-          <img src="chambre-bordeaux.jpg" alt="Chambre bordeaux, mur d'accent" style="object-position: center 45%;">
-          <span class="bento-label"><span class="bento-tag">Chambre</span>Mur d'accent</span>
-        </div>
+      <div class="gallery-collage">
+        <figure class="collage-item" data-cat="chambre">
+          <div class="collage-photo"><img src="projet-chambre-enfants.jpg" alt="Chambre d'enfant" style="object-position: center 78%;"></div>
+          <figcaption class="collage-caption"><span class="collage-tag">Chambre</span>Chambre d'enfant</figcaption>
+        </figure>
+        <figure class="collage-item" data-cat="salon">
+          <div class="collage-photo"><img src="salon-sejour.jpg" alt="Salon et séjour, mur TV lumineux" style="object-position: center 45%;"></div>
+          <figcaption class="collage-caption"><span class="collage-tag">Salon</span>Salon, mur TV</figcaption>
+        </figure>
+        <figure class="collage-item" data-cat="sdb">
+          <div class="collage-photo"><img src="projet-salle-de-bain.jpg" alt="Meuble de salle de bain" style="object-position: center 62%;"></div>
+          <figcaption class="collage-caption"><span class="collage-tag">Salle de bain</span>Meuble</figcaption>
+        </figure>
+        <figure class="collage-item" data-cat="chambre">
+          <div class="collage-photo"><img src="chambre-alcove.jpg" alt="Chambre à alcôve" style="object-position: center 65%;"></div>
+          <figcaption class="collage-caption"><span class="collage-tag">Chambre</span>Chambre à alcôve</figcaption>
+        </figure>
+        <figure class="collage-item" data-cat="sdb">
+          <div class="collage-photo"><img src="projet-toilettes.jpg" alt="Petits toilettes" style="object-position: center 38%;"></div>
+          <figcaption class="collage-caption"><span class="collage-tag">Salle de bain</span>Petits toilettes</figcaption>
+        </figure>
+        <figure class="collage-item" data-cat="chambre">
+          <div class="collage-photo"><img src="chambre-bordeaux.jpg" alt="Chambre bordeaux, mur d'accent" style="object-position: center 45%;"></div>
+          <figcaption class="collage-caption"><span class="collage-tag">Chambre</span>Mur d'accent</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -1515,7 +1531,7 @@
 
   (function () {
     var filters = document.querySelectorAll('.gallery-filter');
-    var tiles = document.querySelectorAll('.bento-tile');
+    var tiles = document.querySelectorAll('.collage-item');
     if (!filters.length || !tiles.length) return;
     filters.forEach(function (btn) {
       btn.addEventListener('click', function () {
