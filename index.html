@@ -486,46 +486,38 @@
   .gallery-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .gallery-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.6vw, 2.9rem); color: var(--fg); margin: 0 0 clamp(2.5rem, 5vw, 3.5rem); max-width: 34rem; margin-left: auto; margin-right: auto; }
 
-  .gallery-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin: 0 0 clamp(2rem, 4vw, 2.75rem); }
-  .gallery-filter {
-    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem;
-    padding: 0.5rem 1.1rem; border-radius: 999px; border: 1px solid var(--hairline); background: transparent;
-    color: var(--fg-muted); cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s;
+  .gallery-scrollx {
+    position: relative; width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
+    height: 380vh;
   }
-  .gallery-filter.is-active { background: var(--espresso); color: var(--paper); border-color: var(--espresso); }
-  .gallery-filter:hover:not(.is-active) { border-color: var(--gold); color: var(--fg); }
-
-  .gallery-collage {
-    display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.5rem 1.25rem;
-    max-width: 54rem; margin: 0 auto; padding: 0.5rem 0 1rem;
+  .gallery-scrollx-stage {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden;
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
   }
-  .collage-item {
-    margin: 0; position: relative; z-index: 1;
-    animation: collage-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-    transition: transform 0.35s ease, z-index 0s;
+  .scrollx-hint { align-self: center; }
+  .scrollx-hint {
+    font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-size: 0.85rem; color: var(--fg-muted);
+    margin: 0 0 1.5rem; opacity: 0.8;
   }
-  .collage-item.is-hidden { display: none; }
-  .collage-item:nth-child(1) { grid-column: span 5; transform: rotate(-2deg); }
-  .collage-item:nth-child(2) { grid-column: span 7; transform: rotate(1.5deg); margin-top: 2.5rem; }
-  .collage-item:nth-child(3) { grid-column: span 7; transform: rotate(1deg); margin-top: -1.25rem; }
-  .collage-item:nth-child(4) { grid-column: span 5; transform: rotate(-1.5deg); margin-top: 1.5rem; }
-  .collage-item:nth-child(5) { grid-column: span 5; transform: rotate(1.75deg); margin-top: -0.5rem; }
-  .collage-item:nth-child(6) { grid-column: span 7; transform: rotate(-1deg); margin-top: 1rem; }
-  .collage-item:hover { transform: rotate(0deg) scale(1.045) !important; z-index: 5; }
-  .collage-photo {
-    aspect-ratio: 3/4; overflow: hidden; border-radius: 2px;
-    border: 0.45rem solid var(--paper); box-shadow: 0 1.5rem 2.5rem -1rem rgba(20,14,9,0.35);
-    transition: box-shadow 0.35s ease;
+  .gallery-scrollx-track {
+    display: flex; align-items: center; gap: clamp(1.5rem, 3vw, 3rem);
+    padding-left: 8vw; padding-right: 8vw; will-change: transform;
   }
-  .collage-item:hover .collage-photo { box-shadow: 0 2rem 3.25rem -1rem rgba(20,14,9,0.45); }
-  .collage-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(1.08) saturate(1.05); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-  .collage-item:hover .collage-photo img { transform: scale(1.06); }
-  .collage-caption {
-    margin: 0.7rem 0.3rem 0; text-align: center;
-    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: 1rem; color: var(--fg);
+  .scrollx-card { flex: 0 0 auto; width: min(56vw, 28rem); text-align: left; }
+  .scrollx-photo {
+    aspect-ratio: 3/4; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 2rem 3.5rem -1.5rem rgba(20,14,9,0.4);
   }
-  .collage-tag { display: block; font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
-  @keyframes collage-in { from { opacity: 0; } to { opacity: 1; } }
+  .scrollx-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(1.08) saturate(1.05); }
+  .scrollx-caption { display: flex; align-items: baseline; gap: 0.9rem; margin: 1.1rem 0 0; }
+  .scrollx-num { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.3rem; color: var(--gold); }
+  .scrollx-text { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.15rem; color: var(--fg); }
+  .scrollx-tag { display: block; font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 0.2rem; }
+  .scrollx-progress {
+    position: absolute; left: 50%; bottom: clamp(1.5rem, 4vh, 3rem); transform: translateX(-50%);
+    width: min(60vw, 24rem); height: 2px; background: var(--hairline); border-radius: 2px; overflow: hidden;
+  }
+  .scrollx-progress-fill { height: 100%; width: 0%; background: var(--gold); }
 
   .wave-band { position: relative; background: var(--teal); color: var(--paper); padding: 2.5rem clamp(1.25rem, 6vw, 6rem) 3rem; margin-top: 1rem; }
   .wave-band svg.edge { position: absolute; top: -1px; left: 0; width: 100%; height: 40px; display: block; }
@@ -706,13 +698,12 @@
     }
 
     .gallery { padding: 2.5rem 1.1rem 2.5rem; }
-    .gallery-collage { grid-template-columns: repeat(2, 1fr); gap: 1.75rem 0.9rem; }
-    .collage-item, .collage-item:nth-child(1), .collage-item:nth-child(2), .collage-item:nth-child(3),
-    .collage-item:nth-child(4), .collage-item:nth-child(5), .collage-item:nth-child(6) {
-      grid-column: span 1; margin-top: 0; transform: none;
-    }
-    .collage-item:hover { transform: scale(1.03) !important; }
-    .bento-label { font-size: 0.85rem; padding: 0.7rem 0.7rem 0.6rem; }
+    .gallery-scrollx { height: auto; }
+    .gallery-scrollx-stage { position: static; height: auto; overflow: visible; display: block; }
+    .scrollx-hint { display: none; }
+    .gallery-scrollx-track { display: flex; flex-direction: column; padding: 0; gap: 2rem; }
+    .scrollx-card { width: 100%; }
+    .scrollx-progress { display: none; }
 
     .wave-band { padding: 2rem 1.1rem 2.25rem; }
     .wave-inner { font-size: 1.05rem; gap: 1rem; }
@@ -837,38 +828,37 @@
       <p class="gallery-eyebrow">Nos réalisations</p>
       <h2 class="gallery-title">Quelques réalisations</h2>
 
-      <div class="gallery-filters" id="galleryFilters">
-        <button type="button" class="gallery-filter is-active" data-filter="all">Tous</button>
-        <button type="button" class="gallery-filter" data-filter="chambre">Chambre</button>
-        <button type="button" class="gallery-filter" data-filter="salon">Salon</button>
-        <button type="button" class="gallery-filter" data-filter="sdb">Salle de bain</button>
-      </div>
-
-      <div class="gallery-collage">
-        <figure class="collage-item" data-cat="chambre">
-          <div class="collage-photo"><img src="projet-chambre-enfants.jpg" alt="Chambre d'enfant" style="object-position: center 78%;"></div>
-          <figcaption class="collage-caption"><span class="collage-tag">Chambre</span>Chambre d'enfant</figcaption>
-        </figure>
-        <figure class="collage-item" data-cat="salon">
-          <div class="collage-photo"><img src="salon-sejour.jpg" alt="Salon et séjour, mur TV lumineux" style="object-position: center 45%;"></div>
-          <figcaption class="collage-caption"><span class="collage-tag">Salon</span>Salon, mur TV</figcaption>
-        </figure>
-        <figure class="collage-item" data-cat="sdb">
-          <div class="collage-photo"><img src="projet-salle-de-bain.jpg" alt="Meuble de salle de bain" style="object-position: center 62%;"></div>
-          <figcaption class="collage-caption"><span class="collage-tag">Salle de bain</span>Meuble</figcaption>
-        </figure>
-        <figure class="collage-item" data-cat="chambre">
-          <div class="collage-photo"><img src="chambre-alcove.jpg" alt="Chambre à alcôve" style="object-position: center 65%;"></div>
-          <figcaption class="collage-caption"><span class="collage-tag">Chambre</span>Chambre à alcôve</figcaption>
-        </figure>
-        <figure class="collage-item" data-cat="sdb">
-          <div class="collage-photo"><img src="projet-toilettes.jpg" alt="Petits toilettes" style="object-position: center 38%;"></div>
-          <figcaption class="collage-caption"><span class="collage-tag">Salle de bain</span>Petits toilettes</figcaption>
-        </figure>
-        <figure class="collage-item" data-cat="chambre">
-          <div class="collage-photo"><img src="chambre-bordeaux.jpg" alt="Chambre bordeaux, mur d'accent" style="object-position: center 45%;"></div>
-          <figcaption class="collage-caption"><span class="collage-tag">Chambre</span>Mur d'accent</figcaption>
-        </figure>
+      <div class="gallery-scrollx" id="galleryScrollX">
+        <div class="gallery-scrollx-stage">
+          <p class="scrollx-hint">Faites défiler</p>
+          <div class="gallery-scrollx-track" id="scrollXTrack">
+            <figure class="scrollx-card">
+              <div class="scrollx-photo"><img src="projet-chambre-enfants.jpg" alt="Chambre d'enfant" style="object-position: center 78%;"></div>
+              <figcaption class="scrollx-caption"><span class="scrollx-num">01</span><span class="scrollx-text"><span class="scrollx-tag">Chambre</span>Chambre d'enfant</span></figcaption>
+            </figure>
+            <figure class="scrollx-card">
+              <div class="scrollx-photo"><img src="salon-sejour.jpg" alt="Salon et séjour, mur TV lumineux" style="object-position: center 45%;"></div>
+              <figcaption class="scrollx-caption"><span class="scrollx-num">02</span><span class="scrollx-text"><span class="scrollx-tag">Salon</span>Salon, mur TV</span></figcaption>
+            </figure>
+            <figure class="scrollx-card">
+              <div class="scrollx-photo"><img src="projet-salle-de-bain.jpg" alt="Meuble de salle de bain" style="object-position: center 62%;"></div>
+              <figcaption class="scrollx-caption"><span class="scrollx-num">03</span><span class="scrollx-text"><span class="scrollx-tag">Salle de bain</span>Meuble</span></figcaption>
+            </figure>
+            <figure class="scrollx-card">
+              <div class="scrollx-photo"><img src="chambre-alcove.jpg" alt="Chambre à alcôve" style="object-position: center 65%;"></div>
+              <figcaption class="scrollx-caption"><span class="scrollx-num">04</span><span class="scrollx-text"><span class="scrollx-tag">Chambre</span>Chambre à alcôve</span></figcaption>
+            </figure>
+            <figure class="scrollx-card">
+              <div class="scrollx-photo"><img src="projet-toilettes.jpg" alt="Petits toilettes" style="object-position: center 38%;"></div>
+              <figcaption class="scrollx-caption"><span class="scrollx-num">05</span><span class="scrollx-text"><span class="scrollx-tag">Salle de bain</span>Petits toilettes</span></figcaption>
+            </figure>
+            <figure class="scrollx-card">
+              <div class="scrollx-photo"><img src="chambre-bordeaux.jpg" alt="Chambre bordeaux, mur d'accent" style="object-position: center 45%;"></div>
+              <figcaption class="scrollx-caption"><span class="scrollx-num">06</span><span class="scrollx-text"><span class="scrollx-tag">Chambre</span>Mur d'accent</span></figcaption>
+            </figure>
+          </div>
+          <div class="scrollx-progress"><div class="scrollx-progress-fill" id="scrollXProgressFill"></div></div>
+        </div>
       </div>
     </section>
 
@@ -1530,20 +1520,54 @@
   }
 
   (function () {
-    var filters = document.querySelectorAll('.gallery-filter');
-    var tiles = document.querySelectorAll('.collage-item');
-    if (!filters.length || !tiles.length) return;
-    filters.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        filters.forEach(function (b) { b.classList.remove('is-active'); });
-        btn.classList.add('is-active');
-        var cat = btn.getAttribute('data-filter');
-        tiles.forEach(function (tile) {
-          var show = cat === 'all' || tile.getAttribute('data-cat') === cat;
-          tile.classList.toggle('is-hidden', !show);
-        });
-      });
-    });
+    var section = document.getElementById('galleryScrollX');
+    var stage = section ? section.querySelector('.gallery-scrollx-stage') : null;
+    var track = document.getElementById('scrollXTrack');
+    var progressFill = document.getElementById('scrollXProgressFill');
+    if (!section || !stage || !track || !progressFill) return;
+
+    var ticking = false;
+    var mq = window.matchMedia('(max-width: 720px)');
+
+    function update() {
+      ticking = false;
+      if (mq.matches) return;
+      var rect = section.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var scrollable = rect.height - vh;
+      if (scrollable <= 0) return;
+
+      if (rect.top > 0) {
+        stage.style.position = 'absolute';
+        stage.style.top = '0';
+        stage.style.left = '0';
+        stage.style.width = '100%';
+      } else if (rect.bottom <= vh) {
+        stage.style.position = 'absolute';
+        stage.style.top = (rect.height - vh) + 'px';
+        stage.style.left = '0';
+        stage.style.width = '100%';
+      } else {
+        stage.style.position = 'fixed';
+        stage.style.top = '0';
+        stage.style.left = '0';
+        stage.style.width = '100vw';
+      }
+
+      var progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
+      var maxShift = Math.max(track.scrollWidth - window.innerWidth, 0);
+      track.style.transform = 'translateX(' + (-progress * maxShift) + 'px)';
+      progressFill.style.width = (progress * 100) + '%';
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
   })();
 
   var universPanels = document.querySelectorAll('.univers-panel');
