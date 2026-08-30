@@ -225,6 +225,43 @@
     font-size: 0.95rem; letter-spacing: 0.02em; color: var(--gold-hi); margin: 1.25rem 0 0;
   }
 
+  /* ================= EXPLAIN BANDS ================= */
+  .explain-bands { display: flex; flex-direction: column; }
+  .explain-band {
+    display: block; width: 100%; border: none; cursor: pointer; text-align: left;
+    padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 6vw, 5rem); font: inherit;
+  }
+  .explain-band-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+  .explain-band-title {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif; font-weight: 600; font-style: normal;
+    text-transform: uppercase; letter-spacing: 0.02em; font-size: clamp(1.5rem, 4vw, 2.4rem);
+  }
+  .explain-band-icon {
+    position: relative; flex: 0 0 auto; width: 2.25rem; height: 2.25rem; border-radius: 50%;
+    border: 1.5px solid currentColor; transition: transform 0.3s ease;
+  }
+  .explain-band-icon::before, .explain-band-icon::after {
+    content: ''; position: absolute; top: 50%; left: 50%; background: currentColor;
+    transform: translate(-50%, -50%);
+  }
+  .explain-band-icon::before { width: 0.9rem; height: 1.5px; }
+  .explain-band-icon::after { width: 1.5px; height: 0.9rem; transition: opacity 0.25s ease; }
+  .explain-band.is-open .explain-band-icon { transform: rotate(90deg); }
+  .explain-band.is-open .explain-band-icon::after { opacity: 0; }
+  .explain-band-panel {
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .explain-band.is-open .explain-band-panel { grid-template-rows: 1fr; }
+  .explain-band-text {
+    display: block; overflow: hidden; font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 1rem; line-height: 1.6; max-width: 34rem; padding-top: 1.25rem;
+  }
+  .explain-band:nth-child(1) { background: var(--sand); color: var(--espresso); }
+  .explain-band:nth-child(2) { background: var(--gold-hi); color: var(--espresso); }
+  .explain-band:nth-child(3) { background: var(--gold); color: var(--espresso); }
+  .explain-band:nth-child(4) { background: var(--mauve); color: var(--paper); }
+  .explain-band:nth-child(5) { background: var(--espresso); color: var(--paper); }
+
   /* ================= TARIFS ================= */
   .tarifs { background: var(--cream); padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); text-align: center; }
   .tarifs-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
@@ -874,6 +911,54 @@
         <p class="video-cta-prompt">Vous souhaitez un projet similaire ? Contactez-nous !</p>
         <a class="btn-hero-primary" href="#devis">Contactez-nous</a>
       </div>
+    </section>
+
+    <section class="explain-bands" id="explainBands">
+      <button type="button" class="explain-band" data-index="0">
+        <span class="explain-band-inner">
+          <span class="explain-band-title">Peinture &amp; finitions</span>
+          <span class="explain-band-icon" aria-hidden="true"></span>
+        </span>
+        <span class="explain-band-panel">
+          <span class="explain-band-text">Des murs qui changent tout : peinture classique, mur TV sur mesure, décors muraux et petites finitions soignées jusqu'au dernier détail.</span>
+        </span>
+      </button>
+      <button type="button" class="explain-band" data-index="1">
+        <span class="explain-band-inner">
+          <span class="explain-band-title">Déco</span>
+          <span class="explain-band-icon" aria-hidden="true"></span>
+        </span>
+        <span class="explain-band-panel">
+          <span class="explain-band-text">Home staging, optimisation des espaces et mise en beauté de vos meubles existants pour révéler le potentiel de chaque pièce.</span>
+        </span>
+      </button>
+      <button type="button" class="explain-band" data-index="2">
+        <span class="explain-band-inner">
+          <span class="explain-band-title">Atelier</span>
+          <span class="explain-band-icon" aria-hidden="true"></span>
+        </span>
+        <span class="explain-band-panel">
+          <span class="explain-band-text">Couture, tapisserie, retouches sur mesure — un savoir-faire artisanal mis au service de vos projets textiles.</span>
+        </span>
+      </button>
+      <button type="button" class="explain-band" data-index="3">
+        <span class="explain-band-inner">
+          <span class="explain-band-title">Associatif</span>
+          <span class="explain-band-icon" aria-hidden="true"></span>
+        </span>
+        <span class="explain-band-panel">
+          <span class="explain-band-text">Un accompagnement pensé pour transmettre, conseiller et donner à chacune les clés pour se lancer à son tour.</span>
+        </span>
+      </button>
+      <button type="button" class="explain-band" data-index="4">
+        <span class="explain-band-inner">
+          <span class="explain-band-title">Petits travaux</span>
+          <span class="explain-band-icon" aria-hidden="true"></span>
+        </span>
+        <span class="explain-band-panel">
+          <span class="explain-band-text">Montage de meubles, petites réparations, aménagements du quotidien : les gestes utiles qui simplifient la vie à la maison.</span>
+        </span>
+      </button>
     </section>
 
     <section class="tarifs" id="tarifs">
@@ -1541,6 +1626,15 @@
         var wasActive = card.classList.contains('is-active');
         fanCards.forEach(function (c) { c.classList.remove('is-active'); });
         if (!wasActive) card.classList.add('is-active');
+      });
+    });
+  })();
+
+  (function () {
+    var bands = document.querySelectorAll('.explain-band');
+    bands.forEach(function (band) {
+      band.addEventListener('click', function () {
+        band.classList.toggle('is-open');
       });
     });
   })();
