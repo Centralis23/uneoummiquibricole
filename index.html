@@ -470,6 +470,7 @@
   .univers-accordion { display: flex; gap: 0.5rem; height: clamp(20rem, 42vw, 30rem); }
   .univers-panel {
     position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; border-radius: 20px;
+    -webkit-mask-image: -webkit-radial-gradient(white, black); transform: translateZ(0);
     border: none; padding: 0; margin: 0; cursor: pointer; background: var(--sand); text-align: left;
     transition: flex-grow 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s ease, box-shadow 0.4s ease;
     opacity: 0;
@@ -573,7 +574,7 @@
   .footer-col a:hover { color: var(--gold-hi); border-color: var(--gold-hi); }
   .footer-bottom {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;
-    padding: 1.5rem 0; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.78rem;
+    padding: 1.5rem 0 5.5rem; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.78rem;
     color: color-mix(in srgb, var(--paper) 60%, transparent);
   }
   .footer-signature { font-style: italic; color: var(--gold-hi); }
