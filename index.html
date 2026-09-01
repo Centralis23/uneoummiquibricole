@@ -177,9 +177,9 @@
     color: var(--espresso); background: var(--gold); border: none; padding: 0.95rem 2rem; border-radius: 999px; cursor: pointer; text-decoration: none;
   }
   .btn-hero-ghost {
-    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
+    display: inline-block; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--paper); background: transparent; border: 1px solid color-mix(in srgb, var(--paper) 55%, transparent);
-    padding: 0.9rem 1.75rem; border-radius: 999px; cursor: pointer;
+    padding: 0.9rem 1.75rem; border-radius: 999px; cursor: pointer; text-decoration: none;
     position: relative; transition: border-color 0.25s ease, background 0.25s ease;
   }
   .btn-hero-ghost::after { content: '→'; margin-left: 0.5rem; transition: margin-left 0.25s ease; display: inline-block; }
@@ -555,6 +555,43 @@
   .wave-inner span::after { content: '·'; margin-left: clamp(1.25rem, 4vw, 3rem); color: var(--gold-hi); font-family: ui-sans-serif, sans-serif; }
   .wave-inner span:last-child::after { content: ''; margin: 0; }
 
+  /* ================= FOOTER ================= */
+  .site-footer { background: var(--espresso); color: color-mix(in srgb, var(--paper) 82%, transparent); padding: clamp(3rem, 6vw, 4.5rem) clamp(1.5rem, 6vw, 5rem) 0; }
+  .footer-top {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: clamp(2.5rem, 5vw, 3.5rem); border-bottom: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
+    text-align: left;
+  }
+  .footer-logo { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-weight: 400; font-size: 1.6rem; color: var(--paper); margin: 0 0 0.85rem; }
+  .footer-logo-italic { font-style: italic; color: var(--gold-hi); }
+  .footer-tagline { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.92rem; line-height: 1.6; max-width: 22rem; margin: 0 0 1.5rem; }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .footer-social a {
+    display: flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--paper) 30%, transparent); color: var(--paper); transition: background 0.2s, border-color 0.2s;
+  }
+  .footer-social a:hover { background: var(--gold); border-color: var(--gold); color: var(--espresso); }
+  .footer-social svg { width: 1.1rem; height: 1.1rem; fill: currentColor; flex: none; }
+  .footer-social a[aria-label="WhatsApp"] svg { fill: none; stroke: currentColor; stroke-width: 1.6; }
+  .footer-col-title { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold-hi); margin: 0 0 1.1rem; }
+  .footer-col { display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-col a { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.92rem; color: inherit; text-decoration: none; width: fit-content; border-bottom: 1px solid transparent; transition: border-color 0.2s, color 0.2s; }
+  .footer-col a:hover { color: var(--gold-hi); border-color: var(--gold-hi); }
+  .footer-bottom {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;
+    padding: 1.5rem 0; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.78rem;
+    color: color-mix(in srgb, var(--paper) 60%, transparent);
+  }
+  .footer-signature { font-style: italic; color: var(--gold-hi); }
+  @media (max-width: 720px) {
+    .site-footer { padding: 3rem 1.25rem 0; text-align: center; }
+    .footer-top { grid-template-columns: 1fr; text-align: center; gap: 2.25rem; }
+    .footer-tagline { margin-left: auto; margin-right: auto; }
+    .footer-social { justify-content: center; }
+    .footer-col { align-items: center; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+
   .run .nav          { animation: rise-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) 2.25s forwards; }
   .run .eyebrow      { animation: rise-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) 2.7s forwards; }
   .run .hero-rule { animation: rise-in 0.25s ease-out 2.5s forwards; }
@@ -769,7 +806,7 @@
         <p class="hero-quote">Un accompagnement sur mesure, du premier coup de crayon à la dernière finition.</p>
         <div class="hero-actions-inline">
           <a class="btn-hero-primary" href="#devis">Devis</a>
-          <button class="btn-hero-ghost">Prestation</button>
+          <a class="btn-hero-ghost" href="#univers">Prestation</a>
         </div>
       </div>
     </div>
@@ -1259,6 +1296,46 @@
       <div class="wave-inner"><span>Passion</span><span>Création</span><span>Transformation</span></div>
     </div>
   </div>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p class="footer-logo">Une <span class="footer-logo-italic">Oummi</span> qui bricole</p>
+        <p class="footer-tagline">L'art de transformer chaque intérieur, avec soin et savoir-faire.</p>
+        <div class="footer-social">
+          <a href="https://wa.me/33765752888" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-4.7 7.6 8.5 8.5 0 0 1-8.6-.4L3 20l1.3-4.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5h.3a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/une_oummi_qui_bricole/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.982c2.937 0 3.285.011 4.445.064 1.07.049 1.645.218 2.03.362.51.198.876.436 1.258.818.383.383.62.749.818 1.258.144.385.313.96.362 2.03.053 1.16.064 1.508.064 4.445s-.011 3.285-.064 4.445c-.049 1.07-.218 1.645-.362 2.03a3.48 3.48 0 0 1-.818 1.258 3.48 3.48 0 0 1-1.258.818c-.385.144-.96.313-2.03.362-1.16.053-1.508.064-4.445.064s-3.285-.011-4.445-.064c-1.07-.049-1.645-.218-2.03-.362a3.48 3.48 0 0 1-1.258-.818 3.48 3.48 0 0 1-.818-1.258c-.144-.385-.313-.96-.362-2.03-.053-1.16-.064-1.508-.064-4.445s.011-3.285.064-4.445c.049-1.07.218-1.645.362-2.03.198-.51.436-.876.818-1.258a3.48 3.48 0 0 1 1.258-.818c.385-.144.96-.313 2.03-.362 1.16-.053 1.508-.064 4.445-.064M12 1c-2.987 0-3.362.013-4.535.066-1.17.054-1.97.24-2.67.512a5.46 5.46 0 0 0-1.976 1.287 5.46 5.46 0 0 0-1.287 1.976c-.272.7-.458 1.5-.512 2.67C1.013 8.638 1 9.013 1 12s.013 3.362.066 4.535c.054 1.17.24 1.97.512 2.67a5.46 5.46 0 0 0 1.287 1.976 5.46 5.46 0 0 0 1.976 1.287c.7.272 1.5.458 2.67.512C8.638 22.987 9.013 23 12 23s3.362-.013 4.535-.066c1.17-.054 1.97-.24 2.67-.512a5.46 5.46 0 0 0 1.976-1.287 5.46 5.46 0 0 0 1.287-1.976c.272-.7.458-1.5.512-2.67.053-1.173.066-1.548.066-4.535s-.013-3.362-.066-4.535c-.054-1.17-.24-1.97-.512-2.67a5.46 5.46 0 0 0-1.287-1.976A5.46 5.46 0 0 0 19.205.578c-.7-.272-1.5-.458-2.67-.512C15.362 1.013 14.987 1 12 1zm0 5.351A5.649 5.649 0 1 0 12 17.649 5.649 5.649 0 0 0 12 6.351zm0 9.316a3.667 3.667 0 1 1 0-7.334 3.667 3.667 0 0 1 0 7.334zm5.884-9.54a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@une.oummi.qui.bricole" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82c-1.1-1.02-1.72-2.45-1.72-3.97h-3.35v14.6c0 1.7-1.38 3.08-3.08 3.08a3.08 3.08 0 0 1 0-6.16c.28 0 .55.04.8.11V10.2a6.44 6.44 0 0 0-.8-.05A6.43 6.43 0 0 0 2 16.58 6.43 6.43 0 0 0 8.43 23a6.43 6.43 0 0 0 6.43-6.42V9.4a9.03 9.03 0 0 0 5.14 1.6V7.66c-1.19 0-2.29-.38-3.4-1.84z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Explorer</p>
+        <a href="#univers">Nos activités</a>
+        <a href="#realisations">Nos réalisations</a>
+        <a href="#tarifs">Nos tarifs</a>
+        <a href="#devis">Demande de devis</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Nous contacter</p>
+        <a href="https://wa.me/33765752888" target="_blank" rel="noopener">WhatsApp — 07 65 75 28 88</a>
+        <a href="https://www.instagram.com/une_oummi_qui_bricole/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@une.oummi.qui.bricole" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Une Oummi qui bricole. Tous droits réservés.</p>
+      <p class="footer-signature">Entreprise par des femmes, pour des femmes.</p>
+    </div>
+  </footer>
 
   <div class="entrance" id="entrance">
     <div class="card-scene">
