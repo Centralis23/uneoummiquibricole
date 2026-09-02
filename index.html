@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<script>if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }</script>
+<script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  if (window.location.hash) {
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Une Oummi qui bricole</title>
@@ -319,6 +324,7 @@
   }
   .whatsapp-float:hover { transform: translateY(-0.15rem); box-shadow: 0 1rem 2rem -0.5rem rgba(0,0,0,0.45); }
   .whatsapp-float svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: currentColor; stroke-width: 1.6; flex: none; }
+  .whatsapp-float.is-hidden { opacity: 0; pointer-events: none; transform: translateY(0.5rem); }
   @media (max-width: 720px) {
     .whatsapp-float { padding: 0.75rem 1.1rem; font-size: 0.8rem; bottom: 1.1rem; right: 1.1rem; }
     .whatsapp-float svg { width: 1.15rem; height: 1.15rem; }
@@ -1700,6 +1706,17 @@
     universObserver.observe(universAccordion);
   } else if (universAccordion) {
     universAccordion.classList.add('in-view');
+  }
+
+  var whatsappFloat = document.querySelector('.whatsapp-float');
+  var devisSection = document.getElementById('devis');
+  if (whatsappFloat && devisSection && 'IntersectionObserver' in window) {
+    var devisFloatObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        whatsappFloat.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { threshold: 0.05 });
+    devisFloatObserver.observe(devisSection);
   }
 
   var heroPhotoForScroll = document.querySelector('.hero-photo');
