@@ -272,10 +272,11 @@
   .tarifs-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .tarifs-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--fg); margin: 0 0 0.85rem; }
   .tarifs-note { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-size: 0.95rem; line-height: 1.6; color: var(--fg-muted); max-width: 36rem; margin: 0 auto clamp(2.5rem, 5vw, 3.5rem); }
-  .tarifs-groups { display: grid; align-items: start; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: clamp(1.5rem, 3vw, 2rem); text-align: left; max-width: 74rem; margin: 0 auto; }
+  .tarifs-groups { columns: 3 20rem; column-gap: clamp(1.5rem, 3vw, 2rem); text-align: left; max-width: 74rem; margin: 0 auto; }
   .tarifs-group {
     background: var(--paper); border: 1px solid var(--hairline); border-radius: 18px;
     padding: clamp(1.75rem, 3vw, 2.25rem); box-shadow: 0 1.5rem 3rem -2rem rgba(0,0,0,0.2);
+    break-inside: avoid; margin-bottom: clamp(1.5rem, 3vw, 2rem);
   }
   .tarifs-group-summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
   .tarifs-group-summary::-webkit-details-marker { display: none; }
