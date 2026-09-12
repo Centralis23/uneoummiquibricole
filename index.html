@@ -260,13 +260,34 @@
   }
   .explain-band.is-open .explain-band-panel { grid-template-rows: 1fr; }
   .explain-band-content { overflow: hidden; }
+  .explain-band-body {
+    display: flex; flex-wrap: wrap; align-items: flex-start;
+    gap: clamp(1.5rem, 4vw, 3rem); padding-top: 1.25rem;
+  }
+  .explain-band-main { flex: 1 1 20rem; min-width: 0; }
   .explain-band-text {
     display: block; font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: 1rem; line-height: 1.65; max-width: 42rem; padding-top: 1.25rem;
+    font-size: 1rem; line-height: 1.65; max-width: 38rem;
   }
-  .explain-band-gallery { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; perspective: 800px; }
+  .explain-band-features {
+    list-style: none; margin: 1.35rem 0 0; padding: 0; max-width: 38rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.6rem 1.5rem;
+  }
+  .explain-band-features li {
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; line-height: 1.4;
+  }
+  .explain-band-features li::before {
+    content: ''; flex: none; width: 0.4rem; height: 0.4rem; margin-top: 0.5rem;
+    border-radius: 50%; background: currentColor; opacity: 0.55;
+  }
+  .explain-band-gallery {
+    flex: 1 1 16rem; max-width: 22rem; display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem; margin-top: 0; perspective: 800px;
+  }
+  .explain-band-gallery img:first-child { grid-column: 1 / -1; height: 9.5rem; }
   .explain-band-gallery img {
-    width: 6.5rem; height: 6.5rem; border-radius: 10px; object-fit: cover; cursor: zoom-in;
+    width: 100%; height: 6.75rem; border-radius: 12px; object-fit: cover; cursor: zoom-in;
     box-shadow: 0 0.5rem 1.25rem -0.5rem rgba(0,0,0,0.35); transition: transform 0.15s ease-out, box-shadow 0.2s ease;
     will-change: transform;
   }
@@ -1162,13 +1183,23 @@
         </span>
         <span class="explain-band-panel">
           <span class="explain-band-content">
-            <span class="explain-band-text">Offrez à vos murs une seconde vie : peinture soignée, finitions impeccables et conseils de teintes adaptés à votre intérieur. Du simple rafraîchissement au mur d'accent qui change tout, chaque projet est réalisé avec précision pour un résultat qui dure dans le temps.</span>
-            <span class="explain-band-gallery">
-              <img src="peinture-photo.jpg" alt="" loading="lazy">
-              <img src="chambre-bordeaux.jpg" alt="" loading="lazy">
-              <img src="chambre-alcove.jpg" alt="" loading="lazy">
+            <span class="explain-band-body">
+              <span class="explain-band-main">
+                <span class="explain-band-text">Offrez à vos murs une seconde vie : peinture soignée, finitions impeccables et conseils de teintes adaptés à votre intérieur. Du simple rafraîchissement au mur d'accent qui change tout, chaque projet est réalisé avec précision pour un résultat qui dure dans le temps.</span>
+                <ul class="explain-band-features">
+                  <li>Peinture intérieure &amp; extérieure</li>
+                  <li>Enduits, ragréage &amp; rebouchage</li>
+                  <li>Conseils teintes &amp; matières</li>
+                  <li>Finitions soignées, chantier protégé</li>
+                </ul>
+                <a class="explain-band-cta" href="#devis" data-demande="Peinture &amp; finitions">Demander un devis <span aria-hidden="true">→</span></a>
+              </span>
+              <span class="explain-band-gallery">
+                <img src="peinture-photo.jpg" alt="" loading="lazy">
+                <img src="chambre-bordeaux.jpg" alt="" loading="lazy">
+                <img src="chambre-alcove.jpg" alt="" loading="lazy">
+              </span>
             </span>
-            <a class="explain-band-cta" href="#devis" data-demande="Peinture &amp; finitions">Demander un devis <span aria-hidden="true">→</span></a>
           </span>
         </span>
       </div>
@@ -1179,13 +1210,23 @@
         </span>
         <span class="explain-band-panel">
           <span class="explain-band-content">
-            <span class="explain-band-text">Sublimez votre intérieur sans tout racheter. Home staging, réagencement, choix des couleurs et des matières : nous vous aidons à révéler tout le potentiel de votre espace avec des solutions concrètes, adaptées à votre budget et à votre style de vie.</span>
-            <span class="explain-band-gallery">
-              <img src="salon-sejour.jpg" alt="" loading="lazy">
-              <img src="projet-salon-mur-tv.jpg" alt="" loading="lazy">
-              <img src="projet-tete-de-lit.jpg" alt="" loading="lazy">
+            <span class="explain-band-body">
+              <span class="explain-band-main">
+                <span class="explain-band-text">Sublimez votre intérieur sans tout racheter. Home staging, réagencement, choix des couleurs et des matières : nous vous aidons à révéler tout le potentiel de votre espace avec des solutions concrètes, adaptées à votre budget et à votre style de vie.</span>
+                <ul class="explain-band-features">
+                  <li>Home staging &amp; réagencement</li>
+                  <li>Choix couleurs, matières &amp; luminaires</li>
+                  <li>Têtes de lit, murs TV &amp; petites transformations</li>
+                  <li>Conseils déco personnalisés</li>
+                </ul>
+                <a class="explain-band-cta" href="#devis" data-demande="Déco / Aménagement intérieur">Demander un devis <span aria-hidden="true">→</span></a>
+              </span>
+              <span class="explain-band-gallery">
+                <img src="salon-sejour.jpg" alt="" loading="lazy">
+                <img src="projet-salon-mur-tv.jpg" alt="" loading="lazy">
+                <img src="projet-tete-de-lit.jpg" alt="" loading="lazy">
+              </span>
             </span>
-            <a class="explain-band-cta" href="#devis" data-demande="Déco / Aménagement intérieur">Demander un devis <span aria-hidden="true">→</span></a>
           </span>
         </span>
       </div>
@@ -1196,8 +1237,18 @@
         </span>
         <span class="explain-band-panel">
           <span class="explain-band-content">
-            <span class="explain-band-text">Le bricolage n'est pas toujours compliqué : souvent, il suffit de connaître le bon geste. Petites astuces, techniques simples et conseils pratiques pour le quotidien — nous partageons ici ce que nous avons appris sur le terrain, pour que vous puissiez, vous aussi, gagner en confiance dans vos projets à la maison.</span>
-            <a class="explain-band-cta" href="#atelier">Inscription <span aria-hidden="true">→</span></a>
+            <span class="explain-band-body">
+              <span class="explain-band-main">
+                <span class="explain-band-text">Le bricolage n'est pas toujours compliqué : souvent, il suffit de connaître le bon geste. Petites astuces, techniques simples et conseils pratiques pour le quotidien — nous partageons ici ce que nous avons appris sur le terrain, pour que vous puissiez, vous aussi, gagner en confiance dans vos projets à la maison.</span>
+                <ul class="explain-band-features">
+                  <li>Astuces &amp; bons gestes du quotidien</li>
+                  <li>Ateliers pratiques (bientôt disponibles)</li>
+                  <li>Contenus partagés sur les réseaux</li>
+                  <li>Accompagnement pas à pas</li>
+                </ul>
+                <a class="explain-band-cta" href="#atelier">Inscription <span aria-hidden="true">→</span></a>
+              </span>
+            </span>
           </span>
         </span>
       </div>
@@ -1208,13 +1259,23 @@
         </span>
         <span class="explain-band-panel">
           <span class="explain-band-content">
-            <span class="explain-band-text">Montage de meubles, petites réparations, aménagements du quotidien : gagnez du temps et évitez les tracas. Nous nous occupons de tout avec le même soin et le même sérieux, quelle que soit la taille du projet.</span>
-            <span class="explain-band-gallery">
-              <img src="projet-salle-de-bain.jpg" alt="" loading="lazy">
-              <img src="projet-toilettes.jpg" alt="" loading="lazy">
-              <img src="projet-chambre-enfants.jpg" alt="" loading="lazy">
+            <span class="explain-band-body">
+              <span class="explain-band-main">
+                <span class="explain-band-text">Montage de meubles, petites réparations, aménagements du quotidien : gagnez du temps et évitez les tracas. Nous nous occupons de tout avec le même soin et le même sérieux, quelle que soit la taille du projet.</span>
+                <ul class="explain-band-features">
+                  <li>Montage de meubles</li>
+                  <li>Petites réparations</li>
+                  <li>Aménagements du quotidien</li>
+                  <li>Interventions rapides &amp; soignées</li>
+                </ul>
+                <a class="explain-band-cta" href="#devis" data-demande="Atelier / petits travaux">Demander un devis <span aria-hidden="true">→</span></a>
+              </span>
+              <span class="explain-band-gallery">
+                <img src="projet-salle-de-bain.jpg" alt="" loading="lazy">
+                <img src="projet-toilettes.jpg" alt="" loading="lazy">
+                <img src="projet-chambre-enfants.jpg" alt="" loading="lazy">
+              </span>
             </span>
-            <a class="explain-band-cta" href="#devis" data-demande="Atelier / petits travaux">Demander un devis <span aria-hidden="true">→</span></a>
           </span>
         </span>
       </div>
@@ -1225,7 +1286,17 @@
         </span>
         <span class="explain-band-panel">
           <span class="explain-band-content">
-            <span class="explain-band-text">Envie de vous lancer dans le bricolage ou la rénovation ? Nous vous accompagnons pas à pas avec des conseils concrets et un vrai soutien, pour vous donner la confiance et les clés nécessaires pour réussir vos propres projets.</span>
+            <span class="explain-band-body">
+              <span class="explain-band-main">
+                <span class="explain-band-text">Envie de vous lancer dans le bricolage ou la rénovation ? Nous vous accompagnons pas à pas avec des conseils concrets et un vrai soutien, pour vous donner la confiance et les clés nécessaires pour réussir vos propres projets.</span>
+                <ul class="explain-band-features">
+                  <li>Accompagnement des débutant·e·s</li>
+                  <li>Conseils concrets, sans jugement</li>
+                  <li>Transmission de savoir-faire</li>
+                  <li>Confiance &amp; autonomie</li>
+                </ul>
+              </span>
+            </span>
           </span>
         </span>
       </div>
