@@ -557,17 +557,20 @@
   .blog-teaser-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .blog-teaser-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.6vw, 2.9rem); color: var(--fg); margin: 0 0 0.85rem; }
   .blog-teaser-subtitle { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.95rem; line-height: 1.6; color: var(--fg-muted); max-width: 32rem; margin: 0 auto clamp(2.5rem, 5vw, 3.5rem); }
-  .blog-teaser-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 0; max-width: 68rem; margin: 0 auto clamp(2.5rem, 5vw, 3rem); text-align: left; border-top: 1px solid var(--hairline); }
-  .blog-teaser-card {
-    display: block; text-decoration: none; color: inherit; padding: 1.75rem clamp(0.5rem, 2vw, 1.5rem);
-    border-bottom: 1px solid var(--hairline); border-right: 1px solid var(--hairline);
-  }
-  .blog-teaser-grid .blog-teaser-card:last-child { border-right: none; }
+  .blog-teaser-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.75rem; max-width: 74rem; margin: 0 auto clamp(2.5rem, 5vw, 3rem); text-align: left; }
+  .blog-teaser-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; border-radius: 16px; overflow: hidden; background: var(--cream); border: 1px solid var(--hairline); box-shadow: 0 1.5rem 3rem -2rem rgba(0,0,0,0.2); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; }
+  .blog-teaser-card:hover { transform: translateY(-0.5rem); box-shadow: 0 2rem 3.5rem -1.75rem rgba(0,0,0,0.3); }
+  .blog-teaser-media { display: block; position: relative; overflow: hidden; aspect-ratio: 4/3; }
+  .blog-teaser-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  @media (hover: hover) { .blog-teaser-card:hover .blog-teaser-media img { transform: scale(1.08); } }
+  .blog-teaser-body { display: block; padding: 1.5rem; }
   .blog-teaser-tag { display: block; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin: 0 0 0.6rem; }
   .blog-teaser-card-title { display: block; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 500; font-size: 1.25rem; color: var(--fg); margin: 0 0 0.6rem; transition: color 0.2s ease; }
   .blog-teaser-card:hover .blog-teaser-card-title { color: var(--mauve-deep); }
   .blog-teaser-excerpt { display: block; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.6; color: var(--fg-muted); margin: 0; }
-  .blog-teaser-arrow { display: block; margin-top: 0.9rem; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; color: var(--mauve-deep); }
+  .blog-teaser-arrow { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.9rem; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; color: var(--mauve-deep); }
+  .blog-teaser-card:hover .blog-teaser-arrow span { transform: translateX(0.3rem); }
+  .blog-teaser-arrow span { display: inline-block; transition: transform 0.25s ease; }
   .blog-teaser-cta {
     display: inline-block; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--espresso); background: var(--gold); border: 1px solid var(--gold); padding: 0.9rem 1.75rem; border-radius: 999px;
@@ -1731,22 +1734,31 @@
       <p class="blog-teaser-subtitle">Astuces bricolage, idées déco et conseils pratiques pour vos projets.</p>
       <div class="blog-teaser-grid">
         <a class="blog-teaser-card" href="blog-astuces-peinture.html">
-          <span class="blog-teaser-tag">Peinture</span>
-          <span class="blog-teaser-card-title">5 astuces pour une peinture impeccable</span>
-          <span class="blog-teaser-excerpt">Les gestes simples qui font toute la différence sur un mur fraîchement repeint.</span>
-          <span class="blog-teaser-arrow">Lire l'article</span>
+          <span class="blog-teaser-media"><img src="peinture-photo.jpg" alt="" loading="lazy"></span>
+          <span class="blog-teaser-body">
+            <span class="blog-teaser-tag">Peinture</span>
+            <span class="blog-teaser-card-title">5 astuces pour une peinture impeccable</span>
+            <span class="blog-teaser-excerpt">Les gestes simples qui font toute la différence sur un mur fraîchement repeint.</span>
+            <span class="blog-teaser-arrow">Lire l'article <span aria-hidden="true">&rarr;</span></span>
+          </span>
         </a>
         <a class="blog-teaser-card" href="blog-optimiser-petit-espace.html">
-          <span class="blog-teaser-tag">Déco</span>
-          <span class="blog-teaser-card-title">Comment optimiser un petit espace</span>
-          <span class="blog-teaser-excerpt">Quelques principes simples pour donner de l'air à une pièce, sans pousser les murs.</span>
-          <span class="blog-teaser-arrow">Lire l'article</span>
+          <span class="blog-teaser-media"><img src="galerie-etagere.jpg" alt="" loading="lazy"></span>
+          <span class="blog-teaser-body">
+            <span class="blog-teaser-tag">Déco</span>
+            <span class="blog-teaser-card-title">Comment optimiser un petit espace</span>
+            <span class="blog-teaser-excerpt">Quelques principes simples pour donner de l'air à une pièce, sans pousser les murs.</span>
+            <span class="blog-teaser-arrow">Lire l'article <span aria-hidden="true">&rarr;</span></span>
+          </span>
         </a>
         <a class="blog-teaser-card" href="blog-choisir-artisan.html">
-          <span class="blog-teaser-tag">Conseils</span>
-          <span class="blog-teaser-card-title">Bien préparer sa demande de devis</span>
-          <span class="blog-teaser-excerpt">Les informations à réunir avant de contacter un artisan pour un chiffrage rapide et fiable.</span>
-          <span class="blog-teaser-arrow">Lire l'article</span>
+          <span class="blog-teaser-media"><img src="atelier-bureau.jpg" alt="" loading="lazy"></span>
+          <span class="blog-teaser-body">
+            <span class="blog-teaser-tag">Conseils</span>
+            <span class="blog-teaser-card-title">Bien préparer sa demande de devis</span>
+            <span class="blog-teaser-excerpt">Les informations à réunir avant de contacter un artisan pour un chiffrage rapide et fiable.</span>
+            <span class="blog-teaser-arrow">Lire l'article <span aria-hidden="true">&rarr;</span></span>
+          </span>
         </a>
       </div>
       <a class="blog-teaser-cta" href="blog.html">Voir tous les articles</a>
