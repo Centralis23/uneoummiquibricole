@@ -1009,7 +1009,7 @@
   <div class="hero">
     <nav class="nav">
       <div class="brand"><img src="logo.png" alt="Une Oummi qui bricole" /></div>
-      <ul class="pillars"><li><a href="#univers">Peinture <span class="plain-amp">&amp;</span> finitions</a></li><li><a href="#univers">Déco</a></li><li><a href="#univers">Atelier</a></li><li><a href="#univers">Associatif</a></li><li><a href="#univers">Petits travaux</a></li><li><a href="blog.html">Blog</a></li><li class="pillars-cta"><a class="cta-nav" href="#devis">Nous contacter</a></li></ul>
+      <ul class="pillars"><li><a href="#band-peinture">Peinture <span class="plain-amp">&amp;</span> finitions</a></li><li><a href="#band-deco">Déco</a></li><li><a href="#band-atelier">Atelier</a></li><li><a href="#band-associatif">Associatif</a></li><li><a href="#band-petits-travaux">Petits travaux</a></li><li><a href="blog.html">Blog</a></li><li class="pillars-cta"><a class="cta-nav" href="#devis">Nous contacter</a></li></ul>
       <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
 
@@ -1044,7 +1044,7 @@
 
     <section class="univers" id="univers">
       <div class="univers-accordion">
-        <button class="univers-panel is-active" data-panel="1">
+        <button class="univers-panel is-active" data-panel="1" data-band="band-peinture">
           <span class="univers-panel-photo">
             <span class="univers-panel-bg u-a"></span>
             <span class="univers-panel-scrim"></span>
@@ -1054,7 +1054,7 @@
           </span>
           <span class="univers-badge">Peinture <span class="plain-amp">&amp;</span> finitions</span>
         </button>
-        <button class="univers-panel" data-panel="2">
+        <button class="univers-panel" data-panel="2" data-band="band-deco">
           <span class="univers-panel-photo">
             <span class="univers-panel-bg p-b"></span>
             <span class="univers-panel-scrim"></span>
@@ -1064,7 +1064,7 @@
           </span>
           <span class="univers-badge">Déco</span>
         </button>
-        <button class="univers-panel" data-panel="3">
+        <button class="univers-panel" data-panel="3" data-band="band-atelier">
           <span class="univers-panel-photo">
             <span class="univers-panel-bg u-c"></span>
             <span class="univers-panel-scrim"></span>
@@ -1074,7 +1074,7 @@
           </span>
           <span class="univers-badge">Atelier</span>
         </button>
-        <button class="univers-panel" data-panel="4">
+        <button class="univers-panel" data-panel="4" data-band="band-associatif">
           <span class="univers-panel-photo">
             <span class="univers-panel-bg u-d"></span>
             <span class="univers-panel-scrim"></span>
@@ -1085,7 +1085,7 @@
           </span>
           <span class="univers-badge">Associatif</span>
         </button>
-        <button class="univers-panel" data-panel="5">
+        <button class="univers-panel" data-panel="5" data-band="band-petits-travaux">
           <span class="univers-panel-photo">
             <span class="univers-panel-bg u-e"></span>
             <span class="univers-panel-scrim"></span>
@@ -1176,7 +1176,7 @@
     </section>
 
     <section class="explain-bands" id="explainBands">
-      <div class="explain-band" data-index="0" role="button" tabindex="0">
+      <div class="explain-band" id="band-peinture" data-index="0" role="button" tabindex="0">
         <span class="explain-band-inner">
           <span class="explain-band-title">Peinture &amp; finitions</span>
           <span class="explain-band-icon" aria-hidden="true"></span>
@@ -1203,7 +1203,7 @@
           </span>
         </span>
       </div>
-      <div class="explain-band" data-index="1" role="button" tabindex="0">
+      <div class="explain-band" id="band-deco" data-index="1" role="button" tabindex="0">
         <span class="explain-band-inner">
           <span class="explain-band-title">Déco</span>
           <span class="explain-band-icon" aria-hidden="true"></span>
@@ -1230,7 +1230,7 @@
           </span>
         </span>
       </div>
-      <div class="explain-band" data-index="2" role="button" tabindex="0">
+      <div class="explain-band" id="band-atelier" data-index="2" role="button" tabindex="0">
         <span class="explain-band-inner">
           <span class="explain-band-title">Atelier</span>
           <span class="explain-band-icon" aria-hidden="true"></span>
@@ -1252,7 +1252,7 @@
           </span>
         </span>
       </div>
-      <div class="explain-band" data-index="3" role="button" tabindex="0">
+      <div class="explain-band" id="band-petits-travaux" data-index="3" role="button" tabindex="0">
         <span class="explain-band-inner">
           <span class="explain-band-title">Petits travaux</span>
           <span class="explain-band-icon" aria-hidden="true"></span>
@@ -1279,7 +1279,7 @@
           </span>
         </span>
       </div>
-      <div class="explain-band" data-index="4" role="button" tabindex="0">
+      <div class="explain-band" id="band-associatif" data-index="4" role="button" tabindex="0">
         <span class="explain-band-inner">
           <span class="explain-band-title">Associatif</span>
           <span class="explain-band-icon" aria-hidden="true"></span>
@@ -2320,6 +2320,32 @@
         }
       });
     });
+
+    function openBand(id) {
+      var band = document.getElementById(id);
+      if (!band) return;
+      band.classList.add('is-open');
+      setTimeout(function () {
+        band.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+
+    document.querySelectorAll('a[href^="#band-"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openBand(link.getAttribute('href').slice(1));
+      });
+    });
+
+    document.querySelectorAll('.univers-panel[data-band]').forEach(function (panel) {
+      panel.addEventListener('click', function () {
+        openBand(panel.dataset.band);
+      });
+    });
+
+    if (window.location.hash && window.location.hash.indexOf('#band-') === 0) {
+      openBand(window.location.hash.slice(1));
+    }
 
     document.querySelectorAll('.explain-band-cta').forEach(function (cta) {
       cta.addEventListener('click', function () {
