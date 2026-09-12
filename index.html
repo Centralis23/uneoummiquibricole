@@ -510,11 +510,11 @@
     writing-mode: vertical-rl; transform: rotate(180deg);
   }
   .univers-panel.is-active .univers-panel-name { writing-mode: horizontal-tb; transform: none; font-size: clamp(2rem, 3.4vw, 2.9rem); }
-  .univers-discover { display: none; }
-  .univers-panel.is-active .univers-panel-label .univers-discover {
-    display: inline-block; font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal;
-    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-hi);
-    border: 1px solid color-mix(in srgb, var(--paper) 45%, transparent); border-radius: 999px; padding: 0.4rem 0.9rem;
+  .univers-panel-desc { display: none; }
+  .univers-panel.is-active .univers-panel-label .univers-panel-desc {
+    display: block; font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal;
+    font-size: 0.88rem; line-height: 1.5; color: color-mix(in srgb, var(--paper) 92%, transparent);
+    max-width: 26rem; text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
   @media (hover: hover) and (max-width: 720px) {
     .univers-panel:not(.is-active):hover { flex-grow: 1.6; }
@@ -523,17 +523,23 @@
     /* option C : quatre cartes de meme largeur, toujours lisibles, leger zoom au survol */
     .univers-panel, .univers-panel.is-active { flex: 1 1 0; }
     .univers-panel-photo { position: absolute; top: 0; left: 0; right: 0; bottom: 3.4rem; overflow: hidden; }
+    .univers-panel.is-active .univers-panel-photo { bottom: 6.5rem; }
     .univers-panel-label { display: none; }
     .univers-badge {
-      display: block; position: absolute; left: 0; right: 0; bottom: 0; height: 3.4rem;
-      line-height: 3.4rem; text-align: center;
+      display: flex; flex-direction: column; justify-content: center; gap: 0.4rem;
+      position: absolute; left: 0; right: 0; bottom: 0; min-height: 3.4rem; padding: 0.6rem 1.25rem;
+      text-align: center; background: var(--sand); transition: min-height 0.3s ease;
+    }
+    .univers-badge-name {
       font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
-      font-size: 1.2rem; color: var(--fg); background: var(--sand);
+      font-size: 1.2rem; line-height: 1; color: var(--fg);
     }
-    .univers-panel.is-active .univers-badge .univers-discover {
-      display: inline-block; font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal;
-      font-size: 0.72rem; letter-spacing: 0.04em; text-transform: none; color: var(--gold); margin-left: 0.3rem;
+    .univers-panel.is-active .univers-badge { min-height: 6.5rem; }
+    .univers-badge .univers-panel-desc {
+      display: none; font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal;
+      font-size: 0.85rem; line-height: 1.45; color: var(--fg-muted);
     }
+    .univers-panel.is-active .univers-badge .univers-panel-desc { display: block; }
     .univers-panel-bg { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
     .univers-panel:hover { transform: translateY(-10px); box-shadow: 0 24px 44px -16px color-mix(in srgb, var(--espresso) 45%, transparent); }
     .univers-panel:hover .univers-panel-bg { transform: scale(1.1); }
@@ -774,13 +780,23 @@
     .univers-accordion::-webkit-scrollbar { display: none; }
     .univers-panel { flex: 0 0 78vw; scroll-snap-align: center; display: flex; flex-direction: column; transition: none; }
     .univers-panel-photo { position: absolute; top: 0; left: 0; right: 0; bottom: 3.2rem; overflow: hidden; }
+    .univers-panel.is-active .univers-panel-photo { bottom: 7rem; }
     .univers-panel-label { display: none; }
     .univers-badge {
-      display: block; position: absolute; left: 0; right: 0; bottom: 0; height: 3.2rem;
-      line-height: 3.2rem; text-align: center;
-      font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
-      font-size: 1.05rem; color: var(--fg); background: var(--sand);
+      display: flex; flex-direction: column; justify-content: center; gap: 0.35rem;
+      position: absolute; left: 0; right: 0; bottom: 0; min-height: 3.2rem; padding: 0.6rem 1.1rem;
+      text-align: center; background: var(--sand); transition: min-height 0.3s ease;
     }
+    .univers-badge-name {
+      font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400;
+      font-size: 1.05rem; line-height: 1; color: var(--fg);
+    }
+    .univers-panel.is-active .univers-badge { min-height: 7rem; }
+    .univers-badge .univers-panel-desc {
+      display: none; font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal;
+      font-size: 0.8rem; line-height: 1.4; color: var(--fg-muted);
+    }
+    .univers-panel.is-active .univers-badge .univers-panel-desc { display: block; }
 
     .gallery { padding: 2.5rem 1.1rem 2.5rem; }
     .fan-wrap {
@@ -803,7 +819,7 @@
   <div class="hero">
     <nav class="nav">
       <div class="brand"><img src="logo.png" alt="Une Oummi qui bricole" /></div>
-      <ul class="pillars"><li><a href="peinture-finitions.html">Peinture <span class="plain-amp">&amp;</span> finitions</a></li><li><a href="deco.html">Déco</a></li><li><a href="atelier.html">Atelier</a></li><li><a href="associatif.html">Associatif</a></li><li><a href="petits-travaux.html">Petits travaux</a></li><li><a href="blog.html">Blog</a></li><li class="pillars-cta"><a class="cta-nav" href="#devis">Nous contacter</a></li></ul>
+      <ul class="pillars"><li><a href="#univers">Peinture <span class="plain-amp">&amp;</span> finitions</a></li><li><a href="#univers">Déco</a></li><li><a href="#univers">Atelier</a></li><li><a href="#univers">Associatif</a></li><li><a href="#univers">Petits travaux</a></li><li><a href="blog.html">Blog</a></li><li class="pillars-cta"><a class="cta-nav" href="#devis">Nous contacter</a></li></ul>
       <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
 
@@ -838,60 +854,75 @@
 
     <section class="univers" id="univers">
       <div class="univers-accordion">
-        <button class="univers-panel is-active" data-panel="1" data-href="peinture-finitions.html">
+        <button class="univers-panel is-active" data-panel="1">
           <span class="univers-panel-photo">
             <span class="univers-panel-bg u-a"></span>
             <span class="univers-panel-scrim"></span>
           </span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Peinture <span class="plain-amp">&amp;</span> finitions</span>
-            <span class="univers-discover">Découvrir <span aria-hidden="true">→</span></span>
+            <span class="univers-panel-desc">Peinture soignée, finitions impeccables et conseils de teintes adaptés à votre intérieur.</span>
           </span>
-          <span class="univers-badge">Peinture <span class="plain-amp">&amp;</span> finitions <span class="univers-discover">· Découvrir <span aria-hidden="true">→</span></span></span>
+          <span class="univers-badge">
+            <span class="univers-badge-name">Peinture <span class="plain-amp">&amp;</span> finitions</span>
+            <span class="univers-panel-desc">Peinture soignée, finitions impeccables et conseils de teintes adaptés à votre intérieur.</span>
+          </span>
         </button>
-        <button class="univers-panel" data-panel="2" data-href="deco.html">
+        <button class="univers-panel" data-panel="2">
           <span class="univers-panel-photo">
             <span class="univers-panel-bg p-b"></span>
             <span class="univers-panel-scrim"></span>
           </span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Déco</span>
-            <span class="univers-discover">Découvrir <span aria-hidden="true">→</span></span>
+            <span class="univers-panel-desc">Home staging, réagencement, choix des couleurs et des matières pour révéler le potentiel de votre espace.</span>
           </span>
-          <span class="univers-badge">Déco <span class="univers-discover">· Découvrir <span aria-hidden="true">→</span></span></span>
+          <span class="univers-badge">
+            <span class="univers-badge-name">Déco</span>
+            <span class="univers-panel-desc">Home staging, réagencement, choix des couleurs et des matières pour révéler le potentiel de votre espace.</span>
+          </span>
         </button>
-        <button class="univers-panel" data-panel="3" data-href="atelier.html">
+        <button class="univers-panel" data-panel="3">
           <span class="univers-panel-photo">
             <span class="univers-panel-bg u-c"></span>
             <span class="univers-panel-scrim"></span>
           </span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Atelier</span>
-            <span class="univers-discover">Découvrir <span aria-hidden="true">→</span></span>
+            <span class="univers-panel-desc">Petites astuces et techniques simples de bricolage, pour gagner en confiance dans vos projets.</span>
           </span>
-          <span class="univers-badge">Atelier <span class="univers-discover">· Découvrir <span aria-hidden="true">→</span></span></span>
+          <span class="univers-badge">
+            <span class="univers-badge-name">Atelier</span>
+            <span class="univers-panel-desc">Petites astuces et techniques simples de bricolage, pour gagner en confiance dans vos projets.</span>
+          </span>
         </button>
-        <button class="univers-panel" data-panel="4" data-href="associatif.html">
+        <button class="univers-panel" data-panel="4">
           <span class="univers-panel-photo">
             <span class="univers-panel-bg u-d"></span>
             <span class="univers-panel-scrim"></span>
           </span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Associatif</span>
-            <span class="univers-discover">Découvrir <span aria-hidden="true">→</span></span>
+            <span class="univers-panel-desc">Un accompagnement pas à pas, avec des conseils concrets pour réussir vos propres projets.</span>
           </span>
-          <span class="univers-badge">Associatif <span class="univers-discover">· Découvrir <span aria-hidden="true">→</span></span></span>
+          <span class="univers-badge">
+            <span class="univers-badge-name">Associatif</span>
+            <span class="univers-panel-desc">Un accompagnement pas à pas, avec des conseils concrets pour réussir vos propres projets.</span>
+          </span>
         </button>
-        <button class="univers-panel" data-panel="5" data-href="petits-travaux.html">
+        <button class="univers-panel" data-panel="5">
           <span class="univers-panel-photo">
             <span class="univers-panel-bg u-e"></span>
             <span class="univers-panel-scrim"></span>
           </span>
           <span class="univers-panel-label">
             <span class="univers-panel-name">Petits travaux</span>
-            <span class="univers-discover">Découvrir <span aria-hidden="true">→</span></span>
+            <span class="univers-panel-desc">Montage de meubles, petites réparations, aménagements du quotidien — avec le même sérieux.</span>
           </span>
-          <span class="univers-badge">Petits travaux <span class="univers-discover">· Découvrir <span aria-hidden="true">→</span></span></span>
+          <span class="univers-badge">
+            <span class="univers-badge-name">Petits travaux</span>
+            <span class="univers-panel-desc">Montage de meubles, petites réparations, aménagements du quotidien — avec le même sérieux.</span>
+          </span>
         </button>
       </div>
     </section>
@@ -1784,10 +1815,6 @@
   var universPanels = document.querySelectorAll('.univers-panel');
   universPanels.forEach(function (panel) {
     panel.addEventListener('click', function () {
-      if (panel.classList.contains('is-active') && panel.dataset.href) {
-        window.location.href = panel.dataset.href;
-        return;
-      }
       universPanels.forEach(function (p) { p.classList.remove('is-active'); });
       panel.classList.add('is-active');
     });
