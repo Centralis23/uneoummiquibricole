@@ -154,7 +154,10 @@ a { color: inherit; }
   float: left; font-size: 3.4rem; line-height: 0.85; padding: 0.1rem 0.5rem 0 0;
 }
 
-.page-title-block { text-align: center; padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 6vw, 5rem) clamp(2rem, 4vw, 3rem); }
+.page-title-block {
+  text-align: center; padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 6vw, 5rem) clamp(2rem, 4vw, 3rem);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--gold-hi) 45%, var(--cream)) 0%, var(--cream) 100%);
+}
 .page-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
 .page-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--fg); margin: 0 0 0.85rem; }
 .page-subtitle { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-size: 0.95rem; line-height: 1.6; color: var(--fg-muted); max-width: 36rem; margin: 0 auto; }
