@@ -1212,7 +1212,8 @@
       <h2 class="atelier-signup-title">Les ateliers arrivent très prochainement</h2>
       <p class="atelier-signup-note">Couture, petites réalisations en bois, initiation bricolage&nbsp;: nos ateliers se préparent. Laissez-nous votre nom et votre email pour être averti·e en priorité dès l'ouverture des inscriptions.</p>
 
-      <form class="atelier-signup-form" id="atelierForm" novalidate>
+      <form class="atelier-signup-form" id="atelierForm" action="https://formspree.io/f/mbgjenbw" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Nouvelle inscription liste d'attente Ateliers">
         <div class="devis-row">
           <div class="devis-field">
             <label for="atelier-nom">Nom complet <span class="req">*</span></label>
@@ -1413,7 +1414,8 @@
       <h2 class="devis-title">Discutons de votre projet</h2>
       <p class="devis-note">Remplissez ce formulaire, nous vous répondons sous 48h.</p>
 
-      <form class="devis-form" id="devisForm" novalidate>
+      <form class="devis-form" id="devisForm" action="https://formspree.io/f/xdeovqjr" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Nouvelle demande de devis">
         <div class="devis-progress"><span class="devis-progress-bar" id="devisProgressBar"></span></div>
         <p class="devis-step-label">Étape <span id="devisStepNum">1</span> / 5</p>
 
@@ -1966,7 +1968,25 @@
       e.preventDefault();
       if (!devisValidateStep(devisCurrent)) return;
       var status = document.getElementById('devisStatus');
-      status.textContent = "L'envoi du formulaire n'est pas encore activé — contactez-nous par WhatsApp ou téléphone en attendant.";
+      var submitBtn = devisForm.querySelector('.devis-submit');
+      if (submitBtn) submitBtn.disabled = true;
+      status.textContent = "Envoi en cours...";
+      fetch(devisForm.action, {
+        method: 'POST',
+        body: new FormData(devisForm),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (response) {
+        if (response.ok) {
+          status.textContent = "Merci ! Votre demande a bien été envoyée, nous vous répondons sous 48h.";
+          devisForm.reset();
+        } else {
+          status.textContent = "Une erreur est survenue — contactez-nous par WhatsApp ou téléphone en attendant.";
+        }
+        if (submitBtn) submitBtn.disabled = false;
+      }).catch(function () {
+        status.textContent = "Une erreur est survenue — contactez-nous par WhatsApp ou téléphone en attendant.";
+        if (submitBtn) submitBtn.disabled = false;
+      });
     });
   }
 
@@ -1976,7 +1996,25 @@
       e.preventDefault();
       if (!atelierForm.checkValidity()) { atelierForm.reportValidity(); return; }
       var status = document.getElementById('atelierStatus');
-      status.textContent = "L'inscription n'est pas encore activée — contactez-nous par WhatsApp pour être ajouté·e à la liste d'attente.";
+      var submitBtn = atelierForm.querySelector('.atelier-signup-btn');
+      submitBtn.disabled = true;
+      status.textContent = "Envoi en cours...";
+      fetch(atelierForm.action, {
+        method: 'POST',
+        body: new FormData(atelierForm),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (response) {
+        if (response.ok) {
+          status.textContent = "Merci ! Vous êtes inscrit·e sur la liste d'attente, nous vous préviendrons dès l'ouverture.";
+          atelierForm.reset();
+        } else {
+          status.textContent = "Une erreur est survenue — contactez-nous par WhatsApp pour être ajouté·e à la liste d'attente.";
+        }
+        submitBtn.disabled = false;
+      }).catch(function () {
+        status.textContent = "Une erreur est survenue — contactez-nous par WhatsApp pour être ajouté·e à la liste d'attente.";
+        submitBtn.disabled = false;
+      });
     });
   }
 
