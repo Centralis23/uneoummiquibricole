@@ -114,7 +114,7 @@ a { color: inherit; }
 /* ================= RELATED ACTIVITIES ================= */
 .related { padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 6vw, 5rem); background: var(--cream); border-top: 1px solid var(--hairline); }
 .related-title { text-align: center; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin: 0 0 1.75rem; }
-.related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1.1rem; max-width: 74rem; margin: 0 auto; }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 12rem)); justify-content: center; gap: 1.1rem; max-width: 74rem; margin: 0 auto; }
 .related-card { position: relative; display: block; aspect-ratio: 3/4; border-radius: 14px; overflow: hidden; text-decoration: none; box-shadow: 0 1rem 2rem -1.2rem rgba(0,0,0,0.3); }
 .related-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .related-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--espresso) 75%, transparent) 100%); }

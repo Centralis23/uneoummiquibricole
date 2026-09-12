@@ -553,7 +553,7 @@
   .social-proof-link--outline { color: var(--fg); background: transparent; border-color: var(--hairline); }
 
   /* ================= BLOG (apercu) ================= */
-  .blog-teaser { padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); text-align: center; background: var(--paper); }
+  .blog-teaser { --blog-pad: clamp(1.25rem, 6vw, 5rem); padding: clamp(3.5rem, 7vw, 5.5rem) var(--blog-pad); text-align: center; background: var(--paper); }
   .blog-teaser-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .blog-teaser-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.6vw, 2.9rem); color: var(--fg); margin: 0 0 0.85rem; }
   .blog-teaser-subtitle { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.95rem; line-height: 1.6; color: var(--fg-muted); max-width: 32rem; margin: 0 auto clamp(2.5rem, 5vw, 3.5rem); }
@@ -963,6 +963,13 @@
     .atelier-signup-bg { background-position: 30% 40%; }
     .social-proof-card:not(:first-child) { display: none; }
     .social-proof-card { max-width: 18rem; margin: 0 auto; }
+    .blog-teaser-grid {
+      display: flex; flex-wrap: nowrap; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+      padding: 0 var(--blog-pad) 0.5rem; margin-left: calc(var(--blog-pad) * -1); margin-right: calc(var(--blog-pad) * -1); max-width: none;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .blog-teaser-grid::-webkit-scrollbar { display: none; }
+    .blog-teaser-card { flex: 0 0 78vw; scroll-snap-align: center; }
 
     .hero-copy { padding: 1.75rem 1.25rem 2rem; max-width: none; }
     .hero-quote { font-size: 0.85rem; }
