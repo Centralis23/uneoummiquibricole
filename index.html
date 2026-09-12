@@ -423,6 +423,35 @@
   .devis-consent input { accent-color: var(--gold); width: 1.05rem; height: 1.05rem; flex: none; margin-top: 0.15rem; }
   .devis-status { text-align: center; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.88rem; color: var(--fg-muted); margin-top: 1rem; }
 
+  /* ================= ATELIER (bientôt disponible) ================= */
+  .atelier-signup {
+    position: relative; overflow: hidden; padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); text-align: center;
+  }
+  .atelier-signup-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(color-mix(in srgb, var(--espresso) 55%, transparent), color-mix(in srgb, var(--espresso) 72%, transparent)), url(atelier-outils-couture.jpg) center 55% / cover no-repeat;
+  }
+  .atelier-signup-eyebrow { position: relative; z-index: 1; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-hi); margin: 0 0 1rem; }
+  .atelier-signup-badge {
+    position: relative; z-index: 1; display: inline-block; margin: 0 0 1.25rem;
+    background: var(--gold); color: var(--espresso);
+    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 0.55rem 1.2rem; border-radius: 999px;
+    box-shadow: 0 6px 16px -6px rgba(0,0,0,0.45);
+  }
+  .atelier-signup-title { position: relative; z-index: 1; font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--paper); margin: 0 0 0.85rem; }
+  .atelier-signup-note { position: relative; z-index: 1; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.95rem; line-height: 1.6; color: color-mix(in srgb, var(--paper) 82%, transparent); max-width: 32rem; margin: 0 auto clamp(2rem, 5vw, 2.5rem); }
+  .atelier-signup-form {
+    position: relative; z-index: 1; text-align: left; max-width: 34rem; margin: 0 auto; background: var(--paper);
+    border: 1px solid var(--hairline); border-radius: 20px; padding: clamp(1.75rem, 4vw, 2.25rem);
+    box-shadow: 0 1.5rem 3rem -2rem rgba(0,0,0,0.2);
+  }
+  .atelier-signup-btn {
+    display: block; width: 100%; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem;
+    letter-spacing: 0.04em; text-transform: uppercase; border: none; padding: 1rem 1.5rem; border-radius: 999px;
+    cursor: pointer; background: var(--accent); color: var(--accent-ink); margin-top: 0.25rem;
+  }
+
   /* ---- assistant en étapes ---- */
   .devis-progress { height: 5px; border-radius: 999px; background: var(--hairline); overflow: hidden; margin-bottom: 0.75rem; }
   .devis-progress-bar { display: block; height: 100%; width: 20%; background: var(--gold); border-radius: 999px; transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -883,6 +912,8 @@
     .manifesto-title { font-size: 2.2rem; }
     .tarifs-title { font-size: 1.85rem; }
     .devis-title { font-size: 1.85rem; }
+    .atelier-signup-title { font-size: 1.85rem; }
+    .atelier-signup-bg { background-position: 30% 40%; }
     .social-proof-card:not(:first-child) { display: none; }
     .social-proof-card { max-width: 18rem; margin: 0 auto; }
 
@@ -1171,6 +1202,29 @@
           </span>
         </span>
       </div>
+    </section>
+
+    <section class="atelier-signup" id="atelier">
+      <div class="atelier-signup-bg"></div>
+      <p class="atelier-signup-eyebrow">Ateliers créatifs</p>
+      <p class="atelier-signup-badge">Bientôt disponible</p>
+      <h2 class="atelier-signup-title">Les ateliers arrivent très prochainement</h2>
+      <p class="atelier-signup-note">Couture, petites réalisations en bois, initiation bricolage&nbsp;: nos ateliers se préparent. Laissez-nous votre nom et votre email pour être averti·e en priorité dès l'ouverture des inscriptions.</p>
+
+      <form class="atelier-signup-form" id="atelierForm" novalidate>
+        <div class="devis-row">
+          <div class="devis-field">
+            <label for="atelier-nom">Nom complet <span class="req">*</span></label>
+            <input type="text" id="atelier-nom" name="nom" placeholder="Ex : Fatima Zahra" required>
+          </div>
+          <div class="devis-field">
+            <label for="atelier-email">Email <span class="req">*</span></label>
+            <input type="email" id="atelier-email" name="email" placeholder="Ex : vous@email.com" required>
+          </div>
+        </div>
+        <button type="submit" class="atelier-signup-btn">Être averti·e du lancement</button>
+        <p class="devis-status" id="atelierStatus"></p>
+      </form>
     </section>
 
     <section class="tarifs" id="tarifs">
@@ -1912,6 +1966,16 @@
       if (!devisValidateStep(devisCurrent)) return;
       var status = document.getElementById('devisStatus');
       status.textContent = "L'envoi du formulaire n'est pas encore activé — contactez-nous par WhatsApp ou téléphone en attendant.";
+    });
+  }
+
+  var atelierForm = document.getElementById('atelierForm');
+  if (atelierForm) {
+    atelierForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!atelierForm.checkValidity()) { atelierForm.reportValidity(); return; }
+      var status = document.getElementById('atelierStatus');
+      status.textContent = "L'inscription n'est pas encore activée — contactez-nous par WhatsApp pour être ajouté·e à la liste d'attente.";
     });
   }
 
