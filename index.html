@@ -259,10 +259,25 @@
     display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .explain-band.is-open .explain-band-panel { grid-template-rows: 1fr; }
+  .explain-band-content { overflow: hidden; }
   .explain-band-text {
-    display: block; overflow: hidden; font-family: ui-sans-serif, system-ui, sans-serif;
+    display: block; font-family: ui-sans-serif, system-ui, sans-serif;
     font-size: 1rem; line-height: 1.65; max-width: 42rem; padding-top: 1.25rem;
   }
+  .explain-band-gallery { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+  .explain-band-gallery img {
+    width: 6.5rem; height: 6.5rem; border-radius: 10px; object-fit: cover; cursor: zoom-in;
+    box-shadow: 0 0.5rem 1.25rem -0.5rem rgba(0,0,0,0.35); transition: transform 0.25s ease;
+  }
+  @media (hover: hover) { .explain-band-gallery img:hover { transform: scale(1.06) translateY(-2px); } }
+  .explain-band-cta {
+    display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.5rem;
+    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.03em;
+    color: var(--espresso); background: var(--paper); text-decoration: none;
+    padding: 0.75rem 1.4rem; border-radius: 999px; transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0.4rem 1rem -0.5rem rgba(0,0,0,0.3);
+  }
+  .explain-band-cta:hover { transform: translateY(-2px); box-shadow: 0 0.6rem 1.25rem -0.5rem rgba(0,0,0,0.35); }
   .explain-band:nth-child(1) { background: color-mix(in srgb, var(--sand) 55%, var(--cream)); color: var(--espresso); }
   .explain-band:nth-child(2) { background: color-mix(in srgb, var(--gold-hi) 55%, var(--cream)); color: var(--espresso); }
   .explain-band:nth-child(3) { background: color-mix(in srgb, var(--gold) 45%, var(--cream)); color: var(--espresso); }
@@ -314,6 +329,21 @@
   .tarifs-item-amount.is-devis { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-weight: 500; font-size: 0.85rem; color: var(--fg-muted); }
   .tarifs-footnote { font-family: ui-sans-serif, system-ui, sans-serif; font-style: italic; font-size: 0.85rem; line-height: 1.6; color: var(--fg-muted); max-width: 40rem; margin: clamp(2rem, 4vw, 2.75rem) auto 0; }
   .tarifs-cta { display: inline-block; margin-top: clamp(1.75rem, 4vw, 2.5rem); font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); border: none; padding: 0.95rem 2rem; border-radius: 999px; cursor: pointer; text-decoration: none; }
+
+  /* ================= MINI LIGHTBOX (galeries des bandes) ================= */
+  .mini-lightbox {
+    position: fixed; inset: 0; z-index: 200; background: color-mix(in srgb, var(--espresso) 90%, black 10%);
+    display: flex; align-items: center; justify-content: center; padding: 2rem;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+  }
+  .mini-lightbox.is-open { opacity: 1; pointer-events: auto; }
+  .mini-lightbox img { max-width: min(90vw, 50rem); max-height: 85vh; object-fit: contain; border-radius: 6px; box-shadow: 0 2rem 4rem -1rem rgba(0,0,0,0.5); }
+  .mini-lightbox-close {
+    position: absolute; top: 1.5rem; right: 1.5rem; width: 2.75rem; height: 2.75rem; border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); background: transparent; color: var(--paper);
+    font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .mini-lightbox-close:hover { border-color: var(--gold); color: var(--gold); }
 
   /* ================= BOUTON CONTACT FLOTTANT ================= */
   .whatsapp-float {
@@ -972,51 +1002,81 @@
     </section>
 
     <section class="explain-bands" id="explainBands">
-      <button type="button" class="explain-band" data-index="0">
+      <div class="explain-band" data-index="0" role="button" tabindex="0">
         <span class="explain-band-inner">
           <span class="explain-band-title">Peinture &amp; finitions</span>
           <span class="explain-band-icon" aria-hidden="true"></span>
         </span>
         <span class="explain-band-panel">
-          <span class="explain-band-text">Offrez à vos murs une seconde vie : peinture soignée, finitions impeccables et conseils de teintes adaptés à votre intérieur. Du simple rafraîchissement au mur d'accent qui change tout, chaque projet est réalisé avec précision pour un résultat qui dure dans le temps.</span>
+          <span class="explain-band-content">
+            <span class="explain-band-text">Offrez à vos murs une seconde vie : peinture soignée, finitions impeccables et conseils de teintes adaptés à votre intérieur. Du simple rafraîchissement au mur d'accent qui change tout, chaque projet est réalisé avec précision pour un résultat qui dure dans le temps.</span>
+            <span class="explain-band-gallery">
+              <img src="peinture-photo.jpg" alt="" loading="lazy">
+              <img src="chambre-bordeaux.jpg" alt="" loading="lazy">
+              <img src="chambre-alcove.jpg" alt="" loading="lazy">
+            </span>
+            <a class="explain-band-cta" href="#devis" data-demande="Peinture &amp; finitions">Demander un devis <span aria-hidden="true">→</span></a>
+          </span>
         </span>
-      </button>
-      <button type="button" class="explain-band" data-index="1">
+      </div>
+      <div class="explain-band" data-index="1" role="button" tabindex="0">
         <span class="explain-band-inner">
           <span class="explain-band-title">Déco</span>
           <span class="explain-band-icon" aria-hidden="true"></span>
         </span>
         <span class="explain-band-panel">
-          <span class="explain-band-text">Sublimez votre intérieur sans tout racheter. Home staging, réagencement, choix des couleurs et des matières : nous vous aidons à révéler tout le potentiel de votre espace avec des solutions concrètes, adaptées à votre budget et à votre style de vie.</span>
+          <span class="explain-band-content">
+            <span class="explain-band-text">Sublimez votre intérieur sans tout racheter. Home staging, réagencement, choix des couleurs et des matières : nous vous aidons à révéler tout le potentiel de votre espace avec des solutions concrètes, adaptées à votre budget et à votre style de vie.</span>
+            <span class="explain-band-gallery">
+              <img src="salon-sejour.jpg" alt="" loading="lazy">
+              <img src="projet-salon-mur-tv.jpg" alt="" loading="lazy">
+              <img src="projet-tete-de-lit.jpg" alt="" loading="lazy">
+            </span>
+            <a class="explain-band-cta" href="#devis" data-demande="Déco / Aménagement intérieur">Demander un devis <span aria-hidden="true">→</span></a>
+          </span>
         </span>
-      </button>
-      <button type="button" class="explain-band" data-index="2">
+      </div>
+      <div class="explain-band" data-index="2" role="button" tabindex="0">
         <span class="explain-band-inner">
           <span class="explain-band-title">Atelier</span>
           <span class="explain-band-icon" aria-hidden="true"></span>
         </span>
         <span class="explain-band-panel">
-          <span class="explain-band-text">Le bricolage n'est pas toujours compliqué : souvent, il suffit de connaître le bon geste. Petites astuces, techniques simples et conseils pratiques pour le quotidien — nous partageons ici ce que nous avons appris sur le terrain, pour que vous puissiez, vous aussi, gagner en confiance dans vos projets à la maison.</span>
+          <span class="explain-band-content">
+            <span class="explain-band-text">Le bricolage n'est pas toujours compliqué : souvent, il suffit de connaître le bon geste. Petites astuces, techniques simples et conseils pratiques pour le quotidien — nous partageons ici ce que nous avons appris sur le terrain, pour que vous puissiez, vous aussi, gagner en confiance dans vos projets à la maison.</span>
+            <a class="explain-band-cta" href="#devis" data-demande="Atelier / petits travaux">Demander un devis <span aria-hidden="true">→</span></a>
+          </span>
         </span>
-      </button>
-      <button type="button" class="explain-band" data-index="3">
+      </div>
+      <div class="explain-band" data-index="3" role="button" tabindex="0">
         <span class="explain-band-inner">
           <span class="explain-band-title">Petits travaux</span>
           <span class="explain-band-icon" aria-hidden="true"></span>
         </span>
         <span class="explain-band-panel">
-          <span class="explain-band-text">Montage de meubles, petites réparations, aménagements du quotidien : gagnez du temps et évitez les tracas. Nous nous occupons de tout avec le même soin et le même sérieux, quelle que soit la taille du projet.</span>
+          <span class="explain-band-content">
+            <span class="explain-band-text">Montage de meubles, petites réparations, aménagements du quotidien : gagnez du temps et évitez les tracas. Nous nous occupons de tout avec le même soin et le même sérieux, quelle que soit la taille du projet.</span>
+            <span class="explain-band-gallery">
+              <img src="projet-salle-de-bain.jpg" alt="" loading="lazy">
+              <img src="projet-toilettes.jpg" alt="" loading="lazy">
+              <img src="projet-chambre-enfants.jpg" alt="" loading="lazy">
+            </span>
+            <a class="explain-band-cta" href="#devis" data-demande="Atelier / petits travaux">Demander un devis <span aria-hidden="true">→</span></a>
+          </span>
         </span>
-      </button>
-      <button type="button" class="explain-band" data-index="4">
+      </div>
+      <div class="explain-band" data-index="4" role="button" tabindex="0">
         <span class="explain-band-inner">
           <span class="explain-band-title">Associatif</span>
           <span class="explain-band-icon" aria-hidden="true"></span>
         </span>
         <span class="explain-band-panel">
-          <span class="explain-band-text">Envie de vous lancer dans le bricolage ou la rénovation ? Nous vous accompagnons pas à pas avec des conseils concrets et un vrai soutien, pour vous donner la confiance et les clés nécessaires pour réussir vos propres projets.</span>
+          <span class="explain-band-content">
+            <span class="explain-band-text">Envie de vous lancer dans le bricolage ou la rénovation ? Nous vous accompagnons pas à pas avec des conseils concrets et un vrai soutien, pour vous donner la confiance et les clés nécessaires pour réussir vos propres projets.</span>
+            <a class="explain-band-cta" href="#devis" data-demande="Associatif">Demander un devis <span aria-hidden="true">→</span></a>
+          </span>
         </span>
-      </button>
+      </div>
     </section>
 
     <section class="tarifs" id="tarifs">
@@ -1806,10 +1866,52 @@
   (function () {
     var bands = document.querySelectorAll('.explain-band');
     bands.forEach(function (band) {
-      band.addEventListener('click', function () {
+      band.addEventListener('click', function (e) {
+        if (e.target.closest('.explain-band-cta, .explain-band-gallery')) return;
         band.classList.toggle('is-open');
       });
+      band.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          band.classList.toggle('is-open');
+        }
+      });
     });
+
+    document.querySelectorAll('.explain-band-cta').forEach(function (cta) {
+      cta.addEventListener('click', function () {
+        var value = cta.dataset.demande;
+        var radio = document.querySelector('input[name="demande"][value="' + value + '"]');
+        if (radio) {
+          radio.checked = true;
+          radio.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
+    });
+
+    var bandGalleryImgs = document.querySelectorAll('.explain-band-gallery img');
+    if (bandGalleryImgs.length) {
+      var bandLightbox = document.createElement('div');
+      bandLightbox.className = 'mini-lightbox';
+      bandLightbox.innerHTML = '<button class="mini-lightbox-close" aria-label="Fermer">&times;</button><img alt="">';
+      document.body.appendChild(bandLightbox);
+      var bandLightboxImg = bandLightbox.querySelector('img');
+      bandGalleryImgs.forEach(function (img) {
+        img.addEventListener('click', function (e) {
+          e.stopPropagation();
+          bandLightboxImg.src = img.src;
+          bandLightbox.classList.add('is-open');
+        });
+      });
+      bandLightbox.addEventListener('click', function (e) {
+        if (e.target === bandLightbox || e.target.classList.contains('mini-lightbox-close')) {
+          bandLightbox.classList.remove('is-open');
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') bandLightbox.classList.remove('is-open');
+      });
+    }
   })();
 
   var universPanels = document.querySelectorAll('.univers-panel');
