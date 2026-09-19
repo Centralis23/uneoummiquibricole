@@ -2049,6 +2049,16 @@
 
 
 <script>
+  var entranceHideTimer = null;
+  try {
+    var __entranceFallback = document.getElementById('entrance');
+    if (__entranceFallback) {
+      entranceHideTimer = setTimeout(function () {
+        __entranceFallback.style.display = 'none';
+      }, 2500);
+    }
+  } catch (e) {}
+
   var devisForm = document.getElementById('devisForm');
   if (devisForm) {
     var devisSteps = Array.prototype.slice.call(devisForm.querySelectorAll('.devis-step'));
@@ -2165,15 +2175,24 @@
   var replay = document.getElementById('replay');
 
   replay.addEventListener('click', function () {
+    if (entranceHideTimer) clearTimeout(entranceHideTimer);
+    var entranceEl = document.getElementById('entrance');
+    if (entranceEl) entranceEl.style.display = '';
     stage.classList.remove('run', 'skip', 'controls-hidden');
     void stage.offsetWidth;
     stage.classList.add('run');
     setTimeout(hideIntroControls, 3900);
+    entranceHideTimer = setTimeout(function () {
+      if (entranceEl) entranceEl.style.display = 'none';
+    }, 2500);
   });
 
   var skipBtn = document.getElementById('skipBtn');
   skipBtn.addEventListener('click', function () {
+    if (entranceHideTimer) clearTimeout(entranceHideTimer);
     stage.classList.add('skip');
+    var entranceEl = document.getElementById('entrance');
+    if (entranceEl) entranceEl.style.display = 'none';
   });
 
   var navBurger = document.getElementById('navBurger');
