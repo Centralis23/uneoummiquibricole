@@ -750,13 +750,25 @@
   .before-after { margin-top: clamp(3rem, 6vw, 4.5rem); text-align: center; }
   .ba-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
   .ba-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--fg); margin: 0 0 clamp(1.75rem, 4vw, 2.5rem); }
-  .ba-slider {
-    position: relative; max-width: 82rem; margin: 0 auto; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden;
-    cursor: ew-resize; -webkit-mask-image: -webkit-radial-gradient(white, black);
-    box-shadow: 0 2rem 3.5rem -1.5rem rgba(0,0,0,0.4); touch-action: pan-y;
+  .ba-columns { display: flex; align-items: flex-start; justify-content: center; gap: clamp(1.5rem, 4vw, 3.5rem); max-width: 66rem; margin: 0 auto; }
+  .ba-col { margin: 0; flex: 1 1 20rem; max-width: 26rem; }
+  .ba-col img {
+    width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: 20px;
+    -webkit-mask-image: -webkit-radial-gradient(white, black); box-shadow: 0 1.5rem 3rem -1.5rem rgba(0,0,0,0.4);
   }
+  .ba-col figcaption {
+    margin-top: 1rem; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-muted);
+  }
+  .ba-arrow { flex: none; align-self: center; font-size: 1.75rem; color: var(--gold); margin-top: -1.5rem; }
+  .ba-slider { display: none; }
   @media (max-width: 720px) {
-    .ba-slider { aspect-ratio: 4 / 5; border-radius: 16px; }
+    .ba-columns { display: none; }
+    .ba-slider {
+      display: block; position: relative; max-width: 100%; margin: 0 auto; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden;
+      cursor: ew-resize; -webkit-mask-image: -webkit-radial-gradient(white, black);
+      box-shadow: 0 2rem 3.5rem -1.5rem rgba(0,0,0,0.4); touch-action: pan-y;
+    }
   }
   .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; }
   .ba-before-wrap { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); }
@@ -1219,6 +1231,19 @@
       <div class="before-after">
         <p class="ba-eyebrow">Avant / après</p>
         <h3 class="ba-title">Rénovation d'une salle de bain</h3>
+
+        <div class="ba-columns">
+          <figure class="ba-col">
+            <img src="salle-de-bain-avant.jpg" alt="Salle de bain avant rénovation">
+            <figcaption>Avant</figcaption>
+          </figure>
+          <span class="ba-arrow" aria-hidden="true">&rarr;</span>
+          <figure class="ba-col">
+            <img src="salle-de-bain-apres.jpg" alt="Salle de bain après rénovation">
+            <figcaption>Après</figcaption>
+          </figure>
+        </div>
+
         <div class="ba-slider" id="baSlider">
           <img class="ba-img ba-after" src="salle-de-bain-apres.jpg" alt="Salle de bain après rénovation">
           <div class="ba-before-wrap" id="baBeforeWrap">
