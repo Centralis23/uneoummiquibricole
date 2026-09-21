@@ -746,6 +746,35 @@
     .media-reel-nav { display: none; }
   }
 
+  /* ================= AVANT / APRÈS ================= */
+  .before-after { margin-top: clamp(3rem, 6vw, 4.5rem); text-align: center; }
+  .ba-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
+  .ba-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--fg); margin: 0 0 clamp(1.75rem, 4vw, 2.5rem); }
+  .ba-slider {
+    position: relative; max-width: 24rem; margin: 0 auto; aspect-ratio: 3 / 4; border-radius: 20px; overflow: hidden;
+    cursor: ew-resize; -webkit-mask-image: -webkit-radial-gradient(white, black);
+    box-shadow: 0 2rem 3.5rem -1.5rem rgba(0,0,0,0.4); touch-action: pan-y;
+  }
+  .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; }
+  .ba-before-wrap { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); }
+  .ba-handle {
+    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--paper);
+    transform: translateX(-50%); box-shadow: 0 0 0.5rem rgba(0,0,0,0.3);
+  }
+  .ba-handle-knob {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--paper); color: var(--espresso);
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    box-shadow: 0 0.5rem 1.25rem -0.4rem rgba(0,0,0,0.5);
+  }
+  .ba-label {
+    position: absolute; bottom: 0.85rem; z-index: 2; font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper);
+    background: color-mix(in srgb, var(--espresso) 55%, transparent); padding: 0.35rem 0.75rem; border-radius: 999px;
+  }
+  .ba-label-before { left: 0.85rem; }
+  .ba-label-after { right: 0.85rem; }
+
   .media-lightbox {
     position: fixed; inset: 0; z-index: 200; background: color-mix(in srgb, var(--espresso) 92%, black 8%);
     display: flex; align-items: center; justify-content: center; padding: 2rem;
@@ -1182,6 +1211,22 @@
         <button type="button" class="media-reel-nav media-reel-next" aria-label="Suivant">&rarr;</button>
         </div>
         <div class="media-reel-dots"></div>
+      </div>
+
+      <div class="before-after">
+        <p class="ba-eyebrow">Avant / après</p>
+        <h3 class="ba-title">Rénovation d'une salle de bain</h3>
+        <div class="ba-slider" id="baSlider">
+          <img class="ba-img ba-after" src="salle-de-bain-apres.jpg" alt="Salle de bain après rénovation">
+          <div class="ba-before-wrap" id="baBeforeWrap">
+            <img class="ba-img ba-before" src="salle-de-bain-avant.jpg" alt="Salle de bain avant rénovation">
+          </div>
+          <div class="ba-handle" id="baHandle">
+            <span class="ba-handle-knob">&harr;</span>
+          </div>
+          <span class="ba-label ba-label-before">Avant</span>
+          <span class="ba-label ba-label-after">Après</span>
+        </div>
       </div>
     </section>
 
@@ -2265,6 +2310,34 @@
       if (e.key === 'ArrowLeft') fanStep(-1);
       if (e.key === 'ArrowRight') fanStep(1);
     });
+  })();
+
+  (function () {
+    var baSlider = document.getElementById('baSlider');
+    if (!baSlider) return;
+    var baBeforeWrap = document.getElementById('baBeforeWrap');
+    var baHandle = document.getElementById('baHandle');
+    var dragging = false;
+
+    function setPosition(clientX) {
+      var rect = baSlider.getBoundingClientRect();
+      var pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      baBeforeWrap.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+      baHandle.style.left = pct + '%';
+    }
+
+    baSlider.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      baSlider.setPointerCapture(e.pointerId);
+      setPosition(e.clientX);
+    });
+    baSlider.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      setPosition(e.clientX);
+    });
+    baSlider.addEventListener('pointerup', function () { dragging = false; });
+    baSlider.addEventListener('pointercancel', function () { dragging = false; });
   })();
 
   (function () {
