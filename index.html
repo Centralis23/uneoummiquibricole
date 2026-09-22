@@ -117,7 +117,7 @@
   .skip .hero-photo { opacity: 1 !important; animation: none !important; }
   .hero-photo img {
     width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block;
-    filter: brightness(0.78);
+    filter: brightness(0.98);
   }
   .hero-video-tint {
     position: absolute; inset: 0; z-index: 1;
@@ -125,7 +125,7 @@
   }
   .hero-banner-scrim {
     position: absolute; inset: 0; z-index: 1;
-    background: radial-gradient(ellipse at center, color-mix(in srgb, var(--espresso) 25%, transparent) 0%, color-mix(in srgb, var(--espresso) 48%, transparent) 100%);
+    background: radial-gradient(ellipse at center, color-mix(in srgb, var(--espresso) 12%, transparent) 0%, color-mix(in srgb, var(--espresso) 32%, transparent) 100%);
   }
   .hero-copy {
     position: absolute; inset: 0; z-index: 2;
@@ -748,7 +748,8 @@
 
   /* ================= AVANT / APRÈS (carte du carrousel) ================= */
   .media-item.media-item-ba { cursor: ew-resize; touch-action: pan-y; background: var(--espresso); }
-  .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; }
+  .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; user-select: none; }
+  .media-item-ba, .lightbox-ba-slider { -webkit-user-select: none; user-select: none; }
   .ba-before-wrap { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); }
   .ba-handle {
     position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--paper); z-index: 2;
@@ -776,6 +777,15 @@
   .media-lightbox.is-open { opacity: 1; pointer-events: auto; }
   .media-lightbox img, .media-lightbox video { max-width: min(90vw, 55rem); max-height: 85vh; object-fit: contain; border-radius: 6px; box-shadow: 0 2rem 4rem -1rem rgba(0,0,0,0.5); display: none; }
   .media-lightbox.is-image img, .media-lightbox.is-video video { display: block; }
+  .lightbox-ba-slider {
+    display: none; position: relative; width: min(90vw, 40rem); aspect-ratio: 3 / 4; border-radius: 12px; overflow: hidden;
+    cursor: ew-resize; -webkit-mask-image: -webkit-radial-gradient(white, black); touch-action: pan-y;
+    box-shadow: 0 2rem 4rem -1rem rgba(0,0,0,0.5);
+  }
+  .media-lightbox.is-ba .lightbox-ba-slider { display: block; }
+  .media-lightbox.is-ba .ba-img {
+    display: block; max-width: none; max-height: none; border-radius: 0; box-shadow: none;
+  }
   .media-lightbox-close {
     position: absolute; top: 1.5rem; right: 1.5rem; width: 2.75rem; height: 2.75rem; border-radius: 50%;
     border: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); background: transparent; color: var(--paper);
@@ -1187,17 +1197,17 @@
           <button type="button" class="media-item" data-type="image" data-src="galerie-wc.jpg">
             <img src="galerie-wc.jpg" alt="Toilettes sous pente" loading="lazy">
           </button>
-          <div class="media-item media-item-ba" id="baSlider">
+          <button type="button" class="media-item media-item-ba" data-type="ba" data-before="salle-de-bain-avant.jpg" data-after="salle-de-bain-apres.jpg">
             <img class="ba-img ba-after" src="salle-de-bain-apres.jpg" alt="Salle de bain après rénovation">
-            <div class="ba-before-wrap" id="baBeforeWrap">
+            <div class="ba-before-wrap">
               <img class="ba-img ba-before" src="salle-de-bain-avant.jpg" alt="Salle de bain avant rénovation">
             </div>
-            <div class="ba-handle" id="baHandle">
+            <div class="ba-handle">
               <span class="ba-handle-knob">&harr;</span>
             </div>
             <span class="ba-label ba-label-before">Avant</span>
             <span class="ba-label ba-label-after">Après</span>
-          </div>
+          </button>
           <button type="button" class="media-item" data-type="video" data-src="galerie-video-3.mp4">
             <img src="galerie-video-3-poster.jpg" alt="" loading="lazy">
             <span class="media-play" aria-hidden="true">▶</span>
@@ -2300,33 +2310,6 @@
     });
   })();
 
-  (function () {
-    var baSlider = document.getElementById('baSlider');
-    if (!baSlider) return;
-    var baBeforeWrap = document.getElementById('baBeforeWrap');
-    var baHandle = document.getElementById('baHandle');
-    var dragging = false;
-
-    function setPosition(clientX) {
-      var rect = baSlider.getBoundingClientRect();
-      var pct = ((clientX - rect.left) / rect.width) * 100;
-      pct = Math.max(0, Math.min(100, pct));
-      baBeforeWrap.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
-      baHandle.style.left = pct + '%';
-    }
-
-    baSlider.addEventListener('pointerdown', function (e) {
-      dragging = true;
-      baSlider.setPointerCapture(e.pointerId);
-      setPosition(e.clientX);
-    });
-    baSlider.addEventListener('pointermove', function (e) {
-      if (!dragging) return;
-      setPosition(e.clientX);
-    });
-    baSlider.addEventListener('pointerup', function () { dragging = false; });
-    baSlider.addEventListener('pointercancel', function () { dragging = false; });
-  })();
 
   (function () {
     var mediaReel = document.querySelector('.media-reel');
@@ -2390,11 +2373,44 @@
       '<button class="media-lightbox-arrow media-lightbox-prev" aria-label="Précédent">&larr;</button>' +
       '<img alt="">' +
       '<video controls playsinline></video>' +
+      '<div class="ba-slider lightbox-ba-slider">' +
+        '<img class="ba-img ba-after" alt="">' +
+        '<div class="ba-before-wrap"><img class="ba-img ba-before" alt=""></div>' +
+        '<div class="ba-handle"><span class="ba-handle-knob">&harr;</span></div>' +
+        '<span class="ba-label ba-label-before">Avant</span>' +
+        '<span class="ba-label ba-label-after">Après</span>' +
+      '</div>' +
       '<button class="media-lightbox-arrow media-lightbox-next" aria-label="Suivant">&rarr;</button>';
     document.body.appendChild(mediaLightbox);
     var mlImg = mediaLightbox.querySelector('img');
     var mlVideo = mediaLightbox.querySelector('video');
+    var mlBaSlider = mediaLightbox.querySelector('.lightbox-ba-slider');
+    var mlBaAfter = mlBaSlider.querySelector('.ba-after');
+    var mlBaBefore = mlBaSlider.querySelector('.ba-before');
+    var mlBaBeforeWrap = mlBaSlider.querySelector('.ba-before-wrap');
+    var mlBaHandle = mlBaSlider.querySelector('.ba-handle');
     var mlIndex = 0;
+
+    function setBaPosition(clientX) {
+      var rect = mlBaSlider.getBoundingClientRect();
+      var pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      mlBaBeforeWrap.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+      mlBaHandle.style.left = pct + '%';
+    }
+    var baDragging = false;
+    mlBaSlider.addEventListener('pointerdown', function (e) {
+      e.preventDefault();
+      baDragging = true;
+      mlBaSlider.setPointerCapture(e.pointerId);
+      setBaPosition(e.clientX);
+    });
+    mlBaSlider.addEventListener('pointermove', function (e) {
+      if (!baDragging) return;
+      setBaPosition(e.clientX);
+    });
+    mlBaSlider.addEventListener('pointerup', function () { baDragging = false; });
+    mlBaSlider.addEventListener('pointercancel', function () { baDragging = false; });
 
     function openMedia(index) {
       mlIndex = index;
@@ -2403,11 +2419,17 @@
       mlVideo.pause();
       mediaLightbox.classList.toggle('is-image', type === 'image');
       mediaLightbox.classList.toggle('is-video', type === 'video');
+      mediaLightbox.classList.toggle('is-ba', type === 'ba');
       if (type === 'image') {
         mlImg.src = item.dataset.src;
-      } else {
+      } else if (type === 'video') {
         mlVideo.src = item.dataset.src;
         mlVideo.play();
+      } else if (type === 'ba') {
+        mlBaAfter.src = item.dataset.after;
+        mlBaBefore.src = item.dataset.before;
+        mlBaBeforeWrap.style.clipPath = 'inset(0 50% 0 0)';
+        mlBaHandle.style.left = '50%';
       }
       mediaLightbox.classList.add('is-open');
     }
@@ -2420,7 +2442,6 @@
     }
 
     mediaItems.forEach(function (item, i) {
-      if (item.classList.contains('media-item-ba')) return;
       item.addEventListener('click', function () { openMedia(i); });
     });
     mediaLightbox.querySelector('.media-lightbox-prev').addEventListener('click', function () { stepMedia(-1); });
