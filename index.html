@@ -693,20 +693,6 @@
   .fan-tag { display: block; font-family: ui-sans-serif, system-ui, sans-serif; font-style: normal; font-size: 0.58rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--espresso); opacity: 0.6; margin-bottom: 0.15rem; }
 
   /* ================= GALERIE MEDIA ================= */
-  .realisations-split { display: block; }
-  @media (min-width: 721px) {
-    .realisations-split {
-      display: grid; grid-template-columns: 1fr 1fr; align-items: center;
-      gap: clamp(2rem, 4vw, 3.5rem); max-width: 82rem; margin: 0 auto;
-    }
-    .realisations-split .media-gallery,
-    .realisations-split .before-after { margin-top: clamp(3rem, 6vw, 4.5rem); }
-    .realisations-split .media-reel-wrap { max-width: 100%; }
-    .realisations-split .media-gallery,
-    .realisations-split .before-after { min-width: 0; }
-    .realisations-split .ba-columns { max-width: 100%; }
-    .realisations-split .ba-col { max-width: none; }
-  }
   .media-gallery { margin-top: clamp(3rem, 6vw, 4.5rem); text-align: center; }
   .media-gallery-label { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.05rem; color: var(--fg-muted); margin: 0 0 clamp(1.75rem, 3.5vw, 2.5rem); }
   .media-reel-wrap { position: relative; max-width: 82rem; margin: 0 auto; }
@@ -760,49 +746,27 @@
     .media-reel-nav { display: none; }
   }
 
-  /* ================= AVANT / APRÈS ================= */
-  .before-after { margin-top: clamp(3rem, 6vw, 4.5rem); text-align: center; }
-  .ba-eyebrow { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
-  .ba-title { font-family: 'Playfair Display', ui-serif, Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--fg); margin: 0 0 clamp(1.75rem, 4vw, 2.5rem); }
-  .ba-columns { display: flex; align-items: flex-start; justify-content: center; gap: clamp(1.5rem, 4vw, 3.5rem); max-width: 66rem; margin: 0 auto; }
-  .ba-col { margin: 0; flex: 1 1 20rem; max-width: 26rem; }
-  .ba-col img {
-    width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: 20px;
-    -webkit-mask-image: -webkit-radial-gradient(white, black); box-shadow: 0 1.5rem 3rem -1.5rem rgba(0,0,0,0.4);
-  }
-  .ba-col figcaption {
-    margin-top: 1rem; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.78rem;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-muted);
-  }
-  .ba-arrow { flex: none; align-self: center; font-size: 1.75rem; color: var(--gold); margin-top: -1.5rem; }
-  .ba-slider { display: none; }
-  @media (max-width: 720px) {
-    .ba-columns { display: none; }
-    .ba-slider {
-      display: block; position: relative; max-width: 100%; margin: 0 auto; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden;
-      cursor: ew-resize; -webkit-mask-image: -webkit-radial-gradient(white, black);
-      box-shadow: 0 2rem 3.5rem -1.5rem rgba(0,0,0,0.4); touch-action: pan-y;
-    }
-  }
+  /* ================= AVANT / APRÈS (carte du carrousel) ================= */
+  .media-item.media-item-ba { cursor: ew-resize; touch-action: pan-y; background: var(--espresso); }
   .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; }
   .ba-before-wrap { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); }
   .ba-handle {
-    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--paper);
+    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--paper); z-index: 2;
     transform: translateX(-50%); box-shadow: 0 0 0.5rem rgba(0,0,0,0.3);
   }
   .ba-handle-knob {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--paper); color: var(--espresso);
-    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--paper); color: var(--espresso);
+    display: flex; align-items: center; justify-content: center; font-size: 1rem;
     box-shadow: 0 0.5rem 1.25rem -0.4rem rgba(0,0,0,0.5);
   }
   .ba-label {
-    position: absolute; bottom: 0.85rem; z-index: 2; font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper);
-    background: color-mix(in srgb, var(--espresso) 55%, transparent); padding: 0.35rem 0.75rem; border-radius: 999px;
+    position: absolute; bottom: 0.7rem; z-index: 2; font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper);
+    background: color-mix(in srgb, var(--espresso) 55%, transparent); padding: 0.3rem 0.65rem; border-radius: 999px;
   }
-  .ba-label-before { left: 0.85rem; }
-  .ba-label-after { right: 0.85rem; }
+  .ba-label-before { left: 0.7rem; }
+  .ba-label-after { right: 0.7rem; }
 
   .media-lightbox {
     position: fixed; inset: 0; z-index: 200; background: color-mix(in srgb, var(--espresso) 92%, black 8%);
@@ -1208,11 +1172,21 @@
         </figure>
       </div>
 
-      <div class="realisations-split">
       <div class="media-gallery" id="galerieMedias">
         <div class="media-reel-wrap">
         <button type="button" class="media-reel-nav media-reel-prev" aria-label="Précédent">&larr;</button>
         <div class="media-reel">
+          <div class="media-item media-item-ba" id="baSlider">
+            <img class="ba-img ba-after" src="salle-de-bain-apres.jpg" alt="Salle de bain après rénovation">
+            <div class="ba-before-wrap" id="baBeforeWrap">
+              <img class="ba-img ba-before" src="salle-de-bain-avant.jpg" alt="Salle de bain avant rénovation">
+            </div>
+            <div class="ba-handle" id="baHandle">
+              <span class="ba-handle-knob">&harr;</span>
+            </div>
+            <span class="ba-label ba-label-before">Avant</span>
+            <span class="ba-label ba-label-after">Après</span>
+          </div>
           <button type="button" class="media-item" data-type="image" data-src="galerie-chambre-arche.jpg">
             <img src="galerie-chambre-arche.jpg" alt="Chambre avec têtes de lit arrondies" loading="lazy">
           </button>
@@ -1241,33 +1215,6 @@
         <button type="button" class="media-reel-nav media-reel-next" aria-label="Suivant">&rarr;</button>
         </div>
         <div class="media-reel-dots"></div>
-      </div>
-
-      <div class="before-after">
-        <div class="ba-columns">
-          <figure class="ba-col">
-            <img src="salle-de-bain-avant.jpg" alt="Salle de bain avant rénovation">
-            <figcaption>Avant</figcaption>
-          </figure>
-          <span class="ba-arrow" aria-hidden="true">&rarr;</span>
-          <figure class="ba-col">
-            <img src="salle-de-bain-apres.jpg" alt="Salle de bain après rénovation">
-            <figcaption>Après</figcaption>
-          </figure>
-        </div>
-
-        <div class="ba-slider" id="baSlider">
-          <img class="ba-img ba-after" src="salle-de-bain-apres.jpg" alt="Salle de bain après rénovation">
-          <div class="ba-before-wrap" id="baBeforeWrap">
-            <img class="ba-img ba-before" src="salle-de-bain-avant.jpg" alt="Salle de bain avant rénovation">
-          </div>
-          <div class="ba-handle" id="baHandle">
-            <span class="ba-handle-knob">&harr;</span>
-          </div>
-          <span class="ba-label ba-label-before">Avant</span>
-          <span class="ba-label ba-label-after">Après</span>
-        </div>
-      </div>
       </div>
     </section>
 
@@ -2473,6 +2420,7 @@
     }
 
     mediaItems.forEach(function (item, i) {
+      if (item.classList.contains('media-item-ba')) return;
       item.addEventListener('click', function () { openMedia(i); });
     });
     mediaLightbox.querySelector('.media-lightbox-prev').addEventListener('click', function () { stepMedia(-1); });
