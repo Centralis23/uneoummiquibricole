@@ -3,6 +3,7 @@
 <head>
 <script>
   if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.__initialHash = window.location.hash;
   if (window.location.hash) {
     window.history.replaceState(null, '', window.location.pathname + window.location.search);
   }
@@ -2500,8 +2501,11 @@
       });
     });
 
-    if (window.location.hash && window.location.hash.indexOf('#band-') === 0) {
-      openBand(window.location.hash.slice(1));
+    if (window.__initialHash && window.__initialHash.indexOf('#band-') === 0) {
+      openBand(window.__initialHash.slice(1));
+    } else if (window.__initialHash) {
+      var initialTarget = document.getElementById(window.__initialHash.slice(1));
+      if (initialTarget) initialTarget.scrollIntoView({ block: 'start' });
     }
 
     document.querySelectorAll('.explain-band-cta').forEach(function (cta) {
